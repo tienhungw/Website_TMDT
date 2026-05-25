@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin thêm sản phẩm</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+    <style>
+        .modal-enter {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .modal-enter-active {
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+
+        .modal-exit {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .modal-exit-active {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+
+    </style>
+</head>
+<body class="flex flex-col justify-center items-center bg-[#F3F1EC] overflow-x-hidden">
+    <div class="navb flex flex-row h-[80px] w-[100vw] justify-between mb-[50px] bg-[#dea069] text-white shadow-[0_5px_15px_rgba(0,0,0,0.35)]">
+        <div class="infor-shop h-[80px] w-fit flex flex-row justify-center items-center ml-2">
+            <img class="w-[50px] h-[50px] rounded-[999px] ml-[20px]" src="/img/tienhungw.jpg" alt="">
+            <h2 class="text-[30px] font-medium ml-[10px] mt-[10px] font-['Kaushan_Script']">TH Shop</h2>
+        </div>
+
+        <div class="relative h-[80px] w-[50vw]">
+            <div class="flex flex-row absolute gap-[20px] right-[20px] bottom-[10px] text-lg font-normal">
+                <a id="gotoPage1" class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/admin/products">Sản phẩm</a>
+                <a id="gotoPage2" class="cursor-pointer" href="/admin/order">Đơn đặt hàng</a>
+                <a id="gotoPage3" class="cursor-pointer" href="/admin/customer">Khách hàng</a>
+                <a id="gotoPage4" class="cursor-pointer" href="/logout">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-[80vw] h-fit relative">
+        <p class="text-3xl font-normal text-[#dea069]">TRANG CỦA NGƯỜI QUẢN LÝ</p>
+        <div class="flex flex-row justify-between mt-8">
+            <p class="text-2xl font-normal text-black">Thông tin sản phẩm mới</p>
+            <button class="text-xl font-medium text-white w-[200px] h-[50px] bg-[#dea069] hover:bg-[#ffa801] rounded-xl mb-2 cursor-pointer" id="themLoaiSanPham">
+                Thêm loại sản phẩm
+            </button>
+        </div>
+
+        <div class="flex flex-col absolute w-[350px] h-[550px] bg-white rounded-lg left-[50%] -translate-x-[50%] mt-8">
+            <form method="post" action="/admin/new-products" enctype="multipart/form-data">
+                <div class="mt-4 mb-2">
+                    <p class="text-sm font-light ml-[35px] text-gray-800">Tên sản phẩm</p>
+                    <input class="w-[280px] h-[35px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2 placeholder-black" id="ten" name="ten" type="text" placeholder="Nhập tên sản phẩm">
+                </div>
+                <div class="mb-2">
+                    <p class="text-sm font-light ml-[35px] text-gray-800">Phân loại sản phẩm</p>
+                    <!-- <input class="w-[280px] h-[35px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2" type="text" placeholder="Chọn loại sản phẩm"> -->
+                    <select id="chonLoai" name="chonLoai" class="w-[280px] h-[35px] ml-[35px] border border-gray-600 rounded-sm outline-none">
+                        <option value="" disabled selected>Chọn loại sản phẩm</option>
+                        <!-- <p class="text-red-600">Chọn loại sản phẩm</p> -->
+                        <option th:each="category : ${categories}"
+                                th:value="${category.id}"
+                                th:text="${category.name}">
+                        </option>
+                    </select>
+                </div>
+<!--                <div class="mb-2">-->
+<!--                    <p class="text-sm font-light ml-[35px] text-gray-800">Hình ảnh</p>-->
+<!--                    <label for="fileInput" class="block w-[280px] h-[35px] ml-[35px] border border-gray-600 rounded-sm p-2 cursor-pointer text-black">-->
+<!--                        <span id="fileName">Tải hình ảnh lên</span>-->
+<!--                    </label>-->
+<!--                    <input id="fileInput" name="fileInput" type="file" accept="image/*" class="hidden">-->
+<!--                </div>-->
+                <div class="mb-2">
+                    <label for="fileInput" class="text-sm font-light ml-[35px] text-gray-800">Hình ảnh</label>
+                    <input class="w-[280px] h-[35px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2 placeholder-black" type="file" name="fileInput" id="fileInput" accept="image/*" required>
+                </div>
+                <div class="mb-2">
+                    <p class="text-sm font-light ml-[35px] text-gray-800">Giá bán</p>
+                    <input class="w-[280px] h-[35px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2 placeholder-black" id="giaban" name="giaban" type="number" placeholder="Nhập giá bán">
+                </div>
+                <div class="mb-2">
+                    <p class="text-sm font-light ml-[35px] text-gray-800">Tồn kho</p>
+                    <input class="w-[280px] h-[35px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2 placeholder-black" id="tonkho" name="tonkho" type="number" placeholder="Nhập số lượng sản phẩm">
+                </div>
+                <div class="mb-2">
+                    <p class="text-sm font-light ml-[35px] text-gray-800">Mô tả</p>
+                    <textarea class="w-[280px] h-[80px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2 resize-none text-black" id="mota" name="mota"></textarea>
+                </div>
+                <div class="">
+                    <button class="text-xl font-medium text-white w-[100px] h-[40px] bg-[#dea069] hover:bg-[#ffa801] rounded-lg mb-2 ml-[215px] mt-4 cursor-pointer" type="submit" id="them" name="them">
+                        Thêm
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="flex flex-col fixed w-[400px] h-[180px] border border-gray-500 rounded-xl bg-white left-[50%] -translate-x-[50%] top-[50%] -translate-y-[50%] text-center items-center z-10 hidden" id="nhapLoaiSanPham">
+        <p class="text-xl font-medium my-5">Thêm loại sản phẩm mới</p>
+        <form action="/admin/category/new" method="POST">
+            <input name="name" class="w-[300px] h-[40px] pl-2 outline-none border border-black rounded-sm" type="text" placeholder="Tên loại sản phẩm mới">
+
+            <button
+                    type="submit"
+                    class="text-xl font-medium text-white w-[120px] h-[50px] bg-[#dea069] hover:bg-[#ffa801] rounded-lg mb-1 ml-[180px] mt-2 cursor-pointer cancel">
+                Thêm
+            </button>
+        </form>
+        <box-icon class="cancel relative w-6 h-6 left-[45%] bottom-[80%] cursor-pointer" name='x' color='#232020' ></box-icon>
+    </div>
+    <div class="flex flex-col fixed w-[100vw] h-[100vh] bg-slate-200 top-[80px] opacity-[70%] hidden" id="doBong">
+    </div>
+
+    <div class="w-[60vw] h-[30px] mt-[600px] mb-5 ml-1">
+        <p class="text-lg font-nomarl text-gray-600 text-center">
+            © 2025 Bản quyền thuộc về TH Shop
+        </p>
+    </div>
+
+    <script>
+        document.getElementById("fileInput").addEventListener("change", function(event) {
+          const file = event.target.files[0];  
+          document.getElementById("fileName").textContent = file ? file.name : "Tải hình ảnh lên";
+        });
+
+        // Xử lý ẩn hiện div thêm loại sản phẩm
+        const btnThemLoaiSanPham = document.getElementById("themLoaiSanPham");
+        const modalNhapLoaiSanPham = document.getElementById("nhapLoaiSanPham");
+        const overlay = document.getElementById("doBong");
+        const btnClose = document.querySelectorAll(".cancel");
+
+
+        btnThemLoaiSanPham.addEventListener("click", function () {
+            
+            modalNhapLoaiSanPham.classList.remove("hidden", "modal-exit-active");
+            modalNhapLoaiSanPham.classList.add("modal-enter-active");
+            overlay.classList.remove("hidden");
+        });
+
+        btnClose.forEach((btn) => {
+            btn.addEventListener("click", function () {
+                modalNhapLoaiSanPham.classList.add("modal-exit-active");
+                setTimeout(() => {
+                    modalNhapLoaiSanPham.classList.add("hidden");
+                }, 1000);
+                overlay.classList.add("hidden");
+            });
+        });
+
+        // Khi bấm vào vùng tối bên ngoài modal, cũng đóng modal
+        overlay.addEventListener("click", function () {
+            modalNhapLoaiSanPham.classList.add("modal-exit-active");
+            setTimeout(() => {
+                modalNhapLoaiSanPham.classList.add("hidden");
+            }, 1000);
+            overlay.classList.add("hidden");
+        });
+
+<!--        document.getElementById("gotoPage1").addEventListener("click", function() {-->
+<!--            window.location.href = "admin.html";-->
+<!--        });-->
+<!--        document.getElementById("gotoPage2").addEventListener("click", function() {-->
+<!--            window.location.href = "admin-dondathang.html";-->
+<!--        });-->
+<!--        document.getElementById("gotoPage3").addEventListener("click", function() {-->
+<!--            window.location.href = "admin-khachhang.html";-->
+<!--        });-->
+<!--        document.getElementById("them").addEventListener("click", function() {-->
+<!--            window.location.href = "admin.html";-->
+<!--        });-->
+    </script>
+    <div th:replace="~{fragments/chatbox :: chatbox}"></div>
+</body>
+</html>

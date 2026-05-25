@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+</head>
+<body class="flex flex-col justify-center items-center bg-[#F3F1EC] overflow-x-hidden">
+    <div class="navb flex flex-row h-[80px] w-[100vw] justify-between mb-[50px] bg-[#dea069] text-white shadow-[0_5px_15px_rgba(0,0,0,0.35)]">
+        <div class="infor-shop h-[80px] w-fit flex flex-row justify-center items-center ml-2">
+            <img class="w-[50px] h-[50px] rounded-[999px] ml-[20px]" src="/img/tienhungw.jpg" alt="">
+            <h2 class="text-[30px] font-medium ml-[10px] mt-[10px] font-['Kaushan_Script']">TH Shop</h2>
+        </div>
+
+        <div class="relative h-[80px] w-[50vw]">
+            <div class="flex flex-row absolute gap-[20px] right-[20px] bottom-[10px] text-lg font-normal">
+                <a id="gotoPage1" class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/admin/products">Sản phẩm</a>
+                <a id="gotoPage2" class="cursor-pointer" href="/admin/order">Đơn đặt hàng</a>
+                <a id="gotoPage3" class="cursor-pointer" href="/admin/customer">Khách hàng</a>
+                <a id="gotoPage4" class="cursor-pointer" href="/logout">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-[80vw] h-fit">
+        <p class="text-3xl font-normal text-[#dea069]">TRANG CỦA NGƯỜI QUẢN LÝ</p>
+        <div class="flex flex-row justify-between mt-8">
+            <p class="text-2xl font-normal text-black">Danh sách tất cả các sản phẩm</p>
+            <form method = "get" action = "/admin/new-products">
+                <button class="text-xl font-medium text-white w-[200px] h-[50px] bg-[#dea069] hover:bg-[#ffa801] rounded-xl mb-2 cursor-pointer" id="tsp">
+                    Thêm sản phẩm
+                </button>
+            </form>
+            <form method = "get" action = "/admin/new-ctkm">
+                <button class="text-xl font-medium text-white w-[200px] h-[50px] bg-[#dea069] hover:bg-[#ffa801] rounded-xl mb-2 cursor-pointer" id="ctkm">
+                    Thay đổi CTKM
+                </button>
+            </form>
+
+        </div>
+        <div class="mt-2">
+            <table class="min-w-full border border-white table-fixed border-collapse" style="table-layout: fixed;">
+                <thead>
+                    <tr class="bg-[#dea069]">
+                        <th class="border border-white w-[80px] h-[40px] text-white text-lg font-medium">Tên sản phẩm</th>
+                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Phân loại</th>
+                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Hình ảnh</th>
+                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Giá bán</th>
+                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Tồn Kho</th>
+                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-[#dfe4ea] justify-center items-center">
+                    <tr th:each="product : ${Products}">
+                        <td th:text="${product.name}" class="border border-white w-[240px] p-2 overflow-hidden text-ellipsis whitespace-normal"></td>
+                        <td th:text="${product.category.name}" class="border border-white w-[150px] p-2 text-center justify-center items-center"></td>
+                        <td class="border border-white w-[150px] p-1 text-center justify-center items-center">
+                            <div class="w-full h-full text-center justify-center items-center relative">
+                                <div class="text-center justify-center items-center w-fit ml-[50%] -translate-x-1/2">
+                                    <img th:src="@{${product.imageUrl}}" class="w-[100px]">
+                                </div>
+                            </div>
+                        </td>
+<!--                        <td th:text="${product.imageUrl}" class="border border-white w-[150px] p-2 text-center">900000</td>-->
+                        <td th:text="${product.price}" class="border border-white w-[150px] p-2 text-center"></td>
+                        <td th:text="${product.quantity}" class="border border-white w-[150px] p-2 text-center"></td>
+                        <td class="border border-white w-[150px] p-2 text-center">
+                            <div class="flex flex-col gap-1">
+                                <div class="">
+                                    <button class="text-lg font-medium text-white w-[120px] h-auto bg-[#e58e26] hover:bg-[#fa983a] rounded-xl cursor-pointer mb-1"
+                                            th:if="${product.id != null}"
+                                            th:onclick="|window.location.href='/admin/edit-products/' + ${product.id}|">
+                                        Chỉnh sửa
+                                    </button>
+
+                                    <form th:action="@{'/admin/delete-products/'+${product.id}}" method="delete" onsubmit="return confirm('Bạn có chắc muốn xóa sản phẩm này không?')" style="display: inline;">
+                                        <button class="text-lg font-medium text-white w-[120px] h-auto bg-[#EE5A24] hover:bg-[#EA2027] rounded-xl cursor-pointer"
+                                                type="submit">
+                                            Xóa
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pagination mt-4 text-lg font-medium">
+            <span th:if="${currentPage > 0}">
+                <a th:href="@{/admin/products(page=${currentPage - 1}, size=${size})}">Previous</a>
+            </span>
+            <span th:each="i : ${#numbers.sequence(0, totalPages-1)}">
+                <a th:href="@{/admin/products( page=${i}, size=${size})}"
+                   th:text="${i + 1}" th:classappend="${i == currentPage} ? 'active'"></a>
+            </span>
+            <span th:if="${currentPage < totalPages - 1}">
+                <a th:href="@{/admin/products( page=${currentPage + 1}, size=${size})}">Next</a>
+            </span>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="w-[60vw] h-[30px] mt-[100px] mb-5">
+        <p class="text-lg font-nomarl text-gray-600 text-center">
+            © 2025 Bản quyền thuộc về TH Shop
+        </p>
+    </div>
+
+    <script >
+<!--        document.getElementById("gotoPage1").addEventListener("click", function() {-->
+<!--            window.location.href = "admin.html";-->
+<!--        });-->
+<!--        document.getElementById("gotoPage2").addEventListener("click", function() {-->
+<!--            window.location.href = "admin-dondathang.html";-->
+<!--        });-->
+<!--        document.getElementById("gotoPage3").addEventListener("click", function() {-->
+<!--            window.location.href = "admin-khachhang.html";-->
+<!--        });-->
+<!--        document.getElementById("tsp").addEventListener("click", function() {-->
+<!--            window.location.href = "admin-themsanpham.html";-->
+<!--        });-->
+
+<!--        document.querySelectorAll("[id^='cs']").forEach(element => {-->
+<!--            element.addEventListener("click", function() {-->
+<!--                window.location.href = "admin-chinhsua.html";-->
+<!--            });-->
+<!--        });-->
+    </script>
+    <div th:replace="~{fragments/chatbox :: chatbox}"></div>
+</body>
+</html>

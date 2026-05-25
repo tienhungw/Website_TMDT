@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Chương trình khuyến mãi</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-[#F3F1EC] overflow-x-hidden">
+<div class="navb fixed top-0 left-0 z-50 flex flex-row items-center justify-between h-[80px] w-full bg-[#dea069] text-white shadow-[0_5px_15px_rgba(0,0,0,0.35)]">
+
+    <!-- Logo + tên shop -->
+    <div class="flex flex-row items-center ml-5">
+        <img
+                class="w-[50px] h-[50px] rounded-full"
+                src="/img/tienhungw.jpg"
+                alt=""
+        >
+
+        <h2 class="text-[30px] font-medium ml-3 mt-2 font-['Kaushan_Script']">
+            TH Shop
+        </h2>
+    </div>
+
+    <!-- Menu -->
+    <div class="flex flex-row gap-[25px] mr-6 text-lg font-normal">
+
+        <a
+                id="gotoPage1"
+                class="cursor-pointer underline underline-offset-4 decoration-2"
+                href="/admin/products"
+        >
+            Sản phẩm
+        </a>
+
+        <a
+                id="gotoPage2"
+                class="cursor-pointer hover:text-[#f6e58d] duration-200"
+                href="/admin/order"
+        >
+            Đơn đặt hàng
+        </a>
+
+        <a
+                id="gotoPage3"
+                class="cursor-pointer hover:text-[#f6e58d] duration-200"
+                href="/admin/customer"
+        >
+            Khách hàng
+        </a>
+
+        <a
+                id="gotoPage4"
+                class="cursor-pointer hover:text-[#ffcccc] duration-200"
+                href="/logout"
+        >
+            Đăng xuất
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="w-full min-h-screen flex justify-center items-center pt-[80px]">
+
+    <form
+            action="/admin/save-ctkm"
+            method="post"
+            enctype="multipart/form-data"
+            class="bg-white p-10 rounded-2xl shadow-xl w-[700px]"
+    >
+
+        <p class="text-3xl font-medium mb-8 text-center text-[#dea069]">
+            THAY ĐỔI ẢNH QUẢNG CÁO
+        </p>
+
+        <div class="grid grid-cols-2 gap-6">
+
+            <div>
+                <p class="mb-2">Ảnh trái 1</p>
+                <input type="file" name="qc1" accept="image/*">
+            </div>
+
+            <div>
+                <p class="mb-2">Ảnh trái 2</p>
+                <input type="file" name="qc2" accept="image/*">
+            </div>
+
+            <div>
+                <p class="mb-2">Ảnh phải 1</p>
+                <input type="file" name="qc3" accept="image/*">
+            </div>
+
+            <div>
+                <p class="mb-2">Ảnh phải 2</p>
+                <input type="file" name="qc4" accept="image/*">
+            </div>
+
+        </div>
+
+        <button
+                type="submit"
+                class="mt-10 w-full h-[50px] bg-[#dea069] hover:bg-[#ffa801] text-white text-xl rounded-xl cursor-pointer"
+        >
+            Lưu ảnh quảng cáo
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

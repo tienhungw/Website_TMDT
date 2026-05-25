@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán QR</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+</head>
+<body class="flex flex-col justify-center items-center bg-[#F3F1EC] overflow-x-hidden">
+    <div class="navb flex flex-row h-[80px] w-[100vw] justify-between mb-[50px] bg-[#dea069] text-white shadow-[0_5px_15px_rgba(0,0,0,0.35)]">
+        <div class="infor-shop h-[80px] w-fit flex flex-row justify-center items-center ml-2">
+            <img class="w-[50px] h-[50px] rounded-[999px] ml-[20px]" src="/img/tienhungw.jpg" alt="">
+            <h2 class="text-[30px] font-medium ml-[10px] mt-[10px] font-['Kaushan_Script']">TH Shop</h2>
+        </div>
+
+        <div class="relative h-[80px] w-[50vw] absolute right-[20px]">
+            <div class="flex flex-row absolute gap-[30px] right-[20px] bottom-[6px] text-lg font-normal">
+                <a class="cursor-pointer" href="/user/home">Trang chủ</a>
+                <a class="cursor-pointer" href="/user/cart">Giỏ hàng</a>
+                <a class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/user/history">Lịch sử</a>
+                <a class="cursor-pointer" href="/user/about">Thông tin</a>
+                <a class="cursor-pointer" href="/logout">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-md p-8 w-[600px] flex flex-col items-center">
+        <p class="text-3xl font-normal text-[#a86f3b] mb-2">THANH TOÁN</p>
+        <p class="text-lg text-gray-700 mb-6">Đơn hàng #<span th:text="${order.id}"></span></p>
+
+        <div th:if="${error}" class="w-full bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4" th:text="${error}"></div>
+
+        <img class="w-[320px] h-[320px] object-contain border border-gray-200 rounded-lg mb-6"
+             th:src="@{|https://img.vietqr.io/image/${bankCode}-${bankAccount}-print.png?amount=${amount}&addInfo=${memo}&accountName=${bankAccountName}|}"
+             alt="QR thanh toán">
+
+        <div class="w-full bg-[#f8f9fa] rounded-lg p-4 mb-4 text-base">
+            <div class="flex flex-row justify-between py-1">
+                <span class="text-gray-600">Ngân hàng:</span>
+                <span class="font-medium" th:text="${bankCode}"></span>
+            </div>
+            <div class="flex flex-row justify-between py-1">
+                <span class="text-gray-600">Số tài khoản:</span>
+                <span class="font-medium" th:text="${bankAccount}"></span>
+            </div>
+            <div class="flex flex-row justify-between py-1">
+                <span class="text-gray-600">Chủ tài khoản:</span>
+                <span class="font-medium" th:text="${bankAccountName}"></span>
+            </div>
+            <div class="flex flex-row justify-between py-1">
+                <span class="text-gray-600">Số tiền:</span>
+                <span class="font-semibold text-[#a86f3b]">
+                    <span th:text="${#numbers.formatDecimal(amount, 0, 'COMMA', 0, 'POINT')}"></span> đ
+                </span>
+            </div>
+            <div class="flex flex-row justify-between py-1">
+                <span class="text-gray-600">Nội dung chuyển khoản:</span>
+                <span class="font-bold text-red-600">DH<span th:text="${order.id}"></span></span>
+            </div>
+        </div>
+
+        <p class="text-sm text-gray-600 text-center mb-4">
+            Vui lòng chuyển khoản đúng số tiền và nội dung trên, sau đó bấm xác nhận.
+        </p>
+
+        <form th:action="@{'/user/order/' + ${order.id} + '/confirm-paid'}" method="post" class="w-full flex flex-col items-center gap-3">
+            <button type="submit" class="bg-[#a86f3b] hover:bg-[#ffa801] text-white text-lg font-medium w-[280px] h-[50px] rounded-lg cursor-pointer">
+                Tôi đã chuyển khoản
+            </button>
+            <a href="/user/cart" class="text-sm text-gray-500 hover:text-[#a86f3b]">Quay lại giỏ hàng</a>
+        </form>
+    </div>
+
+    <div class="w-[100vw] mt-[80px] mb-5 ml-1 flex-col text-center mb-10">
+        <div class="text-lg font-medium text-gray-600 text-center mb-2">
+            © 2025 Bản quyền thuộc về TH Shop
+        </div>
+        <div class="text-lg font-normal text-gray-600 text-center">
+            Cảm ơn quý khách đã tin tưởng và ủng hộ cửa hàng!
+        </div>
+    </div>
+<div th:replace="~{fragments/chatbox :: chatbox}"></div>
+</body>
+</html>

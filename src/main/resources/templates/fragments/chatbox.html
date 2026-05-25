@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="chatbox">
+    <button id="chatbox-toggle" type="button"
+            class="fixed bottom-6 right-6 w-[60px] h-[60px] rounded-full bg-[#cc8e35] text-white shadow-lg hover:bg-[#ffa801] flex justify-center items-center cursor-pointer z-50">
+        <box-icon name='message-rounded-dots' type='solid' color='white' size='28px'></box-icon>
+    </button>
+
+    <div id="chatbox-panel" class="hidden fixed bottom-[100px] right-6 w-[360px] h-[480px] bg-white rounded-2xl shadow-2xl flex flex-col z-50 border border-gray-200 overflow-hidden">
+        <div class="bg-[#cc8e35] text-white px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <box-icon name='bot' color='white' size='22px'></box-icon>
+                <span class="font-semibold">TH Shop AI</span>
+            </div>
+            <button id="chatbox-close" type="button" class="cursor-pointer text-2xl leading-none hover:opacity-80">&times;</button>
+        </div>
+
+        <div id="chatbox-messages" class="flex-1 overflow-y-auto p-3 space-y-2 text-sm bg-[#f7f8fa]">
+            <div class="bg-white border border-gray-200 rounded-lg p-2 max-w-[85%] whitespace-pre-wrap">
+                Xin chào! Tôi là trợ lý ảo của TH Shop. Tôi có thể giúp gì cho bạn?
+            </div>
+        </div>
+
+        <form id="chatbox-form" class="border-t border-gray-200 p-2 flex gap-2 bg-white">
+            <input id="chatbox-input" type="text" autocomplete="off" required
+                   class="flex-1 border border-gray-300 rounded-lg px-3 py-2 outline-none focus:border-[#cc8e35] text-sm"
+                   placeholder="Nhập câu hỏi..." />
+            <button type="submit"
+                    class="bg-[#cc8e35] text-white rounded-lg w-[44px] flex justify-center items-center cursor-pointer hover:bg-[#ffa801]">
+                <box-icon name='send' color='white' size='20px'></box-icon>
+            </button>
+        </form>
+    </div>
+
+    <script>
+        (function() {
+            if (window.__thChatboxInit) return;
+            window.__thChatboxInit = true;
+
+            const toggle = document.getElementById('chatbox-toggle');
+            const panel = document.getElementById('chatbox-panel');
+            const closeBtn = document.getElementById('chatbox-close');
+            const form = document.getElementById('chatbox-form');
+            const input = document.getElementById('chatbox-input');
+            const messages = document.getElementById('chatbox-messages');
+
+            toggle.addEventListener('click', () => {
+                panel.classList.toggle('hidden');
+                if (!panel.classList.contains('hidden')) input.focus();
+            });
+            closeBtn.addEventListener('click', () => panel.classList.add('hidden'));
+
+            function addMessage(text, fromUser) {
+                const div = document.createElement('div');
+                div.className = fromUser
+                    ? 'bg-[#cc8e35] text-white rounded-lg p-2 max-w-[85%] ml-auto whitespace-pre-wrap'
+                    : 'bg-white border border-gray-200 rounded-lg p-2 max-w-[85%] whitespace-pre-wrap';
+                div.textContent = text;
+                messages.appendChild(div);
+                messages.scrollTop = messages.scrollHeight;
+                return div;
+            }
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const text = input.value.trim();
+                if (!text) return;
+                addMessage(text, true);
+                input.value = '';
+                const loading = addMessage('...', false);
+                loading.classList.add('italic', 'text-gray-500');
+                try {
+                    const r = await fetch('/user/chat', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            message: text,
+                            pageContext: window.location.pathname
+                        })
+                    });
+                    const j = await r.json();
+                    loading.classList.remove('italic', 'text-gray-500');
+                    loading.textContent = j.reply || '(không có phản hồi)';
+                } catch (err) {
+                    loading.classList.remove('italic', 'text-gray-500');
+                    loading.textContent = 'Xin lỗi, có lỗi xảy ra. Vui lòng thử lại.';
+                }
+            });
+        })();
+    </script>
+</div>
+
+</body>
+</html>

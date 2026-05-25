@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng nhập</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="flex items-center justify-center h-screen bg-gray-100">
+<form th:action="@{/login}" method="post" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-6 text-center">Đăng nhập</h2>
+    <div th:if="${param.error}" class="text-red-500 mb-4 text-center">
+        Sai tên đăng nhập hoặc mật khẩu.
+    </div>
+    <div th:if="${param.logout}" class="text-green-500 mb-4 text-center">
+        Bạn đã đăng xuất.
+    </div>
+    <div class="mb-4">
+        <label for="username" class="block text-sm font-medium text-gray-700">Tên đăng nhập</label>
+        <input type="text" id="username" name="username" class="w-full border p-2 rounded mt-1">
+    </div>
+    <div class="mb-6">
+        <label for="password" class="block text-sm font-medium text-gray-700">Mật khẩu</label>
+        <input type="password" id="password" name="password" class="w-full border p-2 rounded mt-1">
+    </div>
+    <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Đăng nhập</button>
+    <a href="/register" class="block text-blue-500 text-sm text-center mt-4 hover:underline">
+        Chưa có tài khoản? Đăng ký
+    </a>
+</form>
+</body>
+</html>

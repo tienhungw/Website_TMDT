@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dat hang</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+    <style>
+        
+    </style>
+</head>
+<body class="flex flex-col justify-center items-center bg-[#F3F1EC] overflow-x-hidden">
+    <div class="navb flex flex-row h-[80px] w-[100vw] justify-between mb-[50px] bg-[#dea069] text-white shadow-[0_5px_15px_rgba(0,0,0,0.35)]">
+        <div class="infor-shop h-[80px] w-fit flex flex-row justify-center items-center ml-2">
+            <img class="w-[50px] h-[50px] rounded-[999px] ml-[20px]" src="/img/tienhungw.jpg" alt="">
+            <h2 class="text-[30px] font-medium ml-[10px] mt-[10px] font-['Kaushan_Script']">TH Shop</h2>
+        </div>
+
+        <div class="relative h-[80px] w-[50vw] absolute right-[20px]">
+            <div class="flex flex-row h-[40px] bg-white w-[400px] absolute right-[20px] rounded-3xl justify-between mt-1">
+                <input class="outline-none text-gray-600 pl-4" type="text" placeholder="Tìm kiếm sản phẩm">
+                <box-icon class="mr-3 mt-2 cursor-pointer" name='search' flip='horizontal' color='rgba(0,0,0,0.8)' ></box-icon>
+            </div>
+            <div class="flex flex-row absolute gap-[30px] right-[20px] bottom-[6px] text-lg font-normal">
+                <a id="gotoPage1" class="cursor-pointer" href="/user/home">Trang chủ</a>
+                <a id="gotoPage2" class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/user/cart">Giỏ hàng</a>
+                <a id="gotoPage3" class="cursor-pointer" href="/user/history">Lịch sử</a>
+                <a id="gotoPage4" class="cursor-pointer" href="/user/about">Thông tin</a>
+                <a id="gotoPage5" class="cursor-pointer" href="/logout">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-fit h-fit relative">
+        <p class="text-3xl font-normal text-[#a86f3b] mb-6">GIỎ HÀNG</p>
+        <p class="text-[27px] font-normal mb-10 text-[#a86f3b]">Tiến hành đặt hàng</p>
+        <div class="flex flex-row justify-between mt-5">
+            <div class="w-[20vw]">
+                <p class="text-xl text-[#a86f3b] mb-6">Người nhận hàng</p>
+                <p class="text-base font-normal m-2 text-gray-800">Họ tên</p>
+                <span class="w-[20vw] h-[40px] border border-gray-600 outline-none rounded-sm p-2 placeholder-gray-600 mb-3" th:text="${user.full_name}"></span>
+                <p class="text-base font-normal m-2 text-gray-800">Số điện thoại</p>
+                <span class="w-[20vw] h-[40px] border border-gray-600 outline-none rounded-sm p-2 placeholder-gray-600 mb-3" th:text="${user.phone}"></span>
+                <p class="text-base font-normal m-2 text-gray-800">Địa chỉ</p>
+                <span class="w-[20vw] h-[40px] border border-gray-600 outline-none rounded-sm p-2 placeholder-gray-600 mb-3" th:text="${user.address}"></span>
+            </div>
+            <div class="w-[55vw]">
+                <p class="text-xl text-[#a86f3b] mb-6 text-center">Đơn hàng</p>
+                <div class="cart-items">
+                    <div class="cart-item flex flex-row gap-20 mb-4" th:each="item : ${cartItems}">
+                        <div class="tb-pname w-[250px]" th:text="${item.product.name}"></div>
+                        <div class="tb-pimg">
+                            <img th:src="@{${item.product.imageUrl}}" alt="product image" width="80">
+                        </div>
+                        <div class="tb-pprice" th:text="${item.product.price}"></div>
+                        <div class="tb-pquantity" th:text="${item.quantity}"></div>
+                    </div>
+                </div>
+<!--                <div class="flex flex-col w-[50vw] gap-2 ml-[2vw] gap-3">-->
+<!--                    <div class="flex flex-row justify-between mb-2">-->
+<!--                        <p class="text-base text-black w-[25vw]">Tên sản phẩm</p>-->
+<!--                        <p class="text-base text-black w-[10vw] text-center">Giá trị</p>-->
+<!--                        <p class="text-base text-black w-[5vw]">Số lượng</p>-->
+<!--                    </div>-->
+<!--                    <div class="flex flex-row justify-between">-->
+<!--                        <p class="text-lg text-black font-medium w-[25vw]">Máy ảnh KC trắng cam có tích hợp đèn</p>-->
+<!--                        <p class="text-base text-black w-[10vw] text-center">900000</p>-->
+<!--                        <p class="text-base text-black w-[5vw] text-center">1</p>-->
+<!--                    </div>-->
+<!--                    <div class="flex flex-row justify-between">-->
+<!--                        <p class="text-lg text-black font-medium w-[25vw]">Camera giám sát 360 độ kết nối wifi </p>-->
+<!--                        <p class="text-base text-black w-[10vw] text-center">500000</p>-->
+<!--                        <p class="text-base text-black w-[5vw] text-center">1</p>-->
+<!--                    </div>-->
+<!--                    <div class="flex flex-row justify-between">-->
+<!--                        <p class="text-lg text-black font-medium w-[25vw]">Ống kính phụ đa năng dành cho máy ảnh Canon</p>-->
+<!--                        <p class="text-base text-black w-[10vw] text-center">200000</p>-->
+<!--                        <p class="text-base text-black w-[5vw] text-center">1</p>-->
+<!--                    </div>-->
+<!--                    <div class="flex flex-row justify-between">-->
+<!--                        <p class="text-lg text-black font-medium w-[25vw]">Máy ảnh KC trắng cam có tích hợp đèn</p>-->
+<!--                        <p class="text-base text-black w-[10vw] text-center">900000</p>-->
+<!--                        <p class="text-base text-black w-[5vw] text-center">1</p>-->
+<!--                    </div>-->
+<!--                    <div class="flex flex-row justify-between">-->
+<!--                        <p class="text-lg text-black font-medium w-[25vw]">Camera giám sát 360 độ kết nối wifi </p>-->
+<!--                        <p class="text-base text-black w-[10vw] text-center">500000</p>-->
+<!--                        <p class="text-base text-black w-[5vw] text-center">1</p>-->
+<!--                    </div>-->
+<!--                    <div class="flex flex-row justify-between">-->
+<!--                        <p class="text-lg text-black font-medium w-[25vw]">Ống kính phụ đa năng dành cho máy ảnh Canon</p>-->
+<!--                        <p class="text-base text-black w-[10vw] text-center">200000</p>-->
+<!--                        <p class="text-base text-black w-[5vw] text-center">1</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+        </div>
+        <div class="text-lg font-medium mt-4">
+            Tổng giá trị đơn hàng:
+            <span th:text="${#numbers.formatDecimal(totalAmount, 0, 'COMMA', 0, 'POINT')} + ' VND'">0 VND</span>
+        </div>
+<!--        <p class="text-xl font-medium mt-8" th:value="${totalPrice}"></p>-->
+        <form th:action="@{/user/order/checkout}" method="post">
+            <button class="bg-[#dea069] w-[250px] h-[50px] text-lg font-medium rounded-lg mt-10 text-white absolute left-[50%] -translate-x-[50%] cursor-pointer" id="dathang" type="submit">ĐẶT HÀNG</button>
+        </form>
+    </div>
+
+    <div class="w-[100vw] mt-[200px] mb-5 ml-1 flex-col text-center mb-10">
+        <div class="text-lg font-medium text-gray-600 text-center mb-2">
+            © 2025 Bản quyền thuộc về TH Shop
+        </div>
+        <div class="text-lg font-normal text-gray-600 text-center">
+            Cảm ơn quý khách đã tin tưởng và ủng hộ cửa hàng!
+        </div>
+        <div class="text-lg font-normal text-gray-600 text-center mb-3">
+            Thông tin liên hệ
+        </div>
+        <div class="flex flex-row text-center absolute left-[50%] -translate-x-[50%]">
+            <div class="flex flex-row">
+                <box-icon name='facebook-circle' type='logo' color='rgba(0,0,0,0.70)' ></box-icon>
+                <a target="_blank" class="mr-8 w-[150px] text-gray-700 hover:text-[#009432]" href="https://www.facebook.com/holahuliba">Nguyễn Tiến Hưng</a>
+            </div>
+
+            <div class="flex flex-row">
+                <box-icon name='phone' type='solid' color='rgba(0,0,0,0.70)' ></box-icon>
+                <p class="mr-8 w-[100px] text-gray-700 hover:text-[#009432]">0327644604</p>
+            </div>
+
+            <div class="flex flex-row">
+                <box-icon name='envelope' color='rgba(0,0,0,0.70)' ></box-icon>
+                <a target="_blank" class="mr-8 w-[280px] text-gray-700 hover:text-[#009432]" href="https://mail.google.com/mail/u/0/?pli=1#inbox">nguyentienhung04042004gmail.com</a>
+            </div>
+
+            <div class="flex flex-row">
+                <box-icon name='instagram' type='logo' color='rgba(0,0,0,0.70)' ></box-icon>
+                <a target="_blank" class="w-[150px] text-gray-700 hover:text-[#009432]" href="https://www.instagram.com/holahuliba/">Nguyễn Tiến Hưng</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+<!--        document.getElementById("gotoPage1").addEventListener("click", function() {-->
+<!--            window.location.href = "trangchu.html";-->
+<!--        });-->
+<!--        document.getElementById("gotoPage2").addEventListener("click", function() {-->
+<!--            window.location.href = "giohang.html";-->
+<!--        });-->
+<!--        document.getElementById("gotoPage3").addEventListener("click", function() {-->
+<!--            window.location.href = "lichsu.html";-->
+<!--        });-->
+<!--        document.getElementById("gotoPage4").addEventListener("click", function() {-->
+<!--            window.location.href = "thongtin.html";-->
+<!--        });-->
+    </script>
+<div th:replace="~{fragments/chatbox :: chatbox}"></div>
+</body>
+</html>

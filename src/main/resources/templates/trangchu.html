@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chu</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+    <style>
+        
+    </style>
+</head>
+
+<body class="flex flex-col justify-center items-center bg-[#F3F1EC] overflow-x-hidden relative">
+
+
+
+
+<!--                            <div class="fixed border border-black left-0 top-0 w-[20vw] h-[100%] z-[-1]">-->
+<!--                                <img-->
+<!--                                        src="/img/a1.jpg"-->
+<!--                                        alt=""-->
+<!--                                        class="w-full h-full object-cover"-->
+<!--                                >-->
+<!--                            </div>-->
+
+<!--                            &lt;!&ndash; Ảnh bên phải &ndash;&gt;-->
+<!--                            <div class="fixed border border-black right-0 top-0 w-[20vw] h-[100%] z-[-1]">-->
+<!--                                <img-->
+<!--                                        src="/img/a2.jpg"-->
+<!--                                        alt=""-->
+<!--                                        class="w-full h-full object-cover"-->
+<!--                                >-->
+<!--                            </div>-->
+
+
+
+                            <!-- BÊN TRÁI -->
+                            <div class="fixed mt-[18vh] rounded-md ml-[1vw] left-0 top-0 w-[20vw] h-[70vh] overflow-hidden z-0">
+
+                                <img
+                                        id="leftImg1"
+                                        src="/img/qc1.jpg"
+                                        class="absolute rounded-md  w-full h-full object-cover transition-opacity duration-1000 "
+                                        alt=""
+                                >
+
+                                <img
+                                        id="leftImg2"
+                                        src="/img/qc2.jpg"
+                                        class="absolute rounded-md w-full h-full object-cover transition-opacity duration-1000 opacity-0"
+                                        alt=""
+                                >
+
+                            </div>
+
+
+                            <!-- BÊN PHẢI -->
+                            <div class="fixed mt-[18vh] rounded-md mr-[1vw] right-0 top-0 w-[20vw] h-[70vh] overflow-hidden z-[-1]">
+
+                                <img
+                                        id="rightImg1"
+                                        src="/img/qc3.jpg"
+                                        class="absolute rounded-md w-full h-full object-cover transition-opacity duration-1000"
+                                        alt=""
+                                >
+
+                                <img
+                                        id="rightImg2"
+                                        src="/img/qc4.jpg"
+                                        class="absolute rounded-md w-full h-full object-cover transition-opacity duration-1000 opacity-0"
+                                        alt=""
+                                >
+
+                            </div>
+
+
+
+
+
+                            <div class="relative z-10 w-[60vw] flex flex-col items-center bg-[#F3F1EC]">
+
+
+                                <div id="successMessage"
+                                     th:if="${success}"
+                                     class="fixed top-[90px] right-[20px] z-[9999] bg-[#dea069] text-white px-6 py-3 rounded-lg shadow-lg">
+
+                                    <span th:text="${success}"></span>
+
+                                </div>
+
+                                <div id="errorMessage"
+                                     th:if="${error}"
+                                     class="fixed top-[90px] right-[20px] z-[9999] bg-[#d35400] text-white px-6 py-3 rounded-lg shadow-lg">
+
+                                    <span th:text="${error}"></span>
+
+                                </div>
+
+
+
+
+                                <!-- TOÀN BỘ CODE WEBSITE CỦA BẠN -->
+                                <div class="navb flex flex-row h-[80px] w-[100vw] justify-between mb-[50px] bg-[#dea069] text-white shadow-[0_5px_15px_rgba(0,0,0,0.35)]">
+                                    <div class="infor-shop h-[80px] w-fit flex flex-row justify-center items-center ml-2">
+                                        <img class="w-[50px] h-[50px] rounded-[999px] ml-[20px]" src="/img/tienhungw.jpg" alt="">
+                                        <h2 class="text-[30px] font-medium ml-[10px] mt-[10px] font-['Kaushan_Script']">TH Shop</h2>
+                                    </div>
+
+                                    <div class="relative h-[80px] w-[50vw] absolute right-[20px]">
+                                        <div class="flex flex-row h-[40px] bg-white w-[400px] absolute right-[20px] rounded-3xl justify-between mt-1">
+                                            <form th:action="@{/user/home/search}" method="get">
+                                                <input name="keyword" class="outline-none text-gray-600 pl-4" type="text" placeholder="Tìm kiếm sản phẩm">
+                                                <button type="submit">
+                                                    <box-icon class="mr-3 mt-2 ml-38 cursor-pointer" name='search' flip='horizontal' color='rgba(0,0,0,0.8)' ></box-icon>
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="flex flex-row absolute gap-[30px] right-[20px] bottom-[6px] text-lg font-normal">
+                                            <a id="gotoPage1" class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/user/home">Trang chủ</a>
+                                            <a id="gotoPage2" class="cursor-pointer" href="/user/cart">Giỏ hàng</a>
+                                            <a id="gotoPage3" class="cursor-pointer" href="/user/history">Lịch sử</a>
+                                            <a id="gotoPage4" class="cursor-pointer" href="/user/about">Thông tin</a>
+                                            <a id="gotoPage5" class="cursor-pointer" href="/logout">Đăng xuất</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="w-[900px] h-fit relative">
+                                    <p class="text-3xl font-normal text-[#a86f3b] mb-10">DANH MỤC CÁC LOẠI SẢN PHẨM</p>
+                                    <!--        127332-->
+<!--                                    <div class="flex flex-row gap-[20px] w-[900px]">-->
+<!--                                        <div class="w-[440px] h-[380px]">-->
+<!--                                            <img class="w-[440px] h-[380px] rounded-3xl" src="/img/a1.jpg" alt="">-->
+<!--                                        </div>-->
+<!--                                        <div class="flex flex-col w-[440px] h-[380px] gap-5">-->
+<!--                                            <div class="w-[440px] h-[180px]">-->
+<!--                                                <img class="w-[440px] h-[180px] rounded-3xl" src="/img/a2.jpg" alt="">-->
+<!--                                            </div>-->
+<!--                                            <div class="flex flex-row gap-5">-->
+<!--                                                <div class="w-[210px] h-[180px]">-->
+<!--                                                    <img class="w-[210px] h-[180px] rounded-3xl" src="/img/a3.jpg" alt="">-->
+<!--                                                </div>-->
+<!--                                                <div class="w-[210px] h-[180px]">-->
+<!--                                                    <img class="w-[210px] h-[180px] rounded-3xl" src="/img/a4.jpg" alt="">-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+
+
+                                    <div class="flex flex-row gap-[20px] w-[900px]">
+
+                                        <div class="w-[440px] h-[380px] rounded-3xl overflow-hidden">
+                                            <img
+                                                    class="w-full h-full rounded-3xl object-cover transition duration-500 hover:scale-110"
+                                                    src="/img/a1.jpg"
+                                                    alt=""
+                                            >
+                                        </div>
+
+                                        <div class="flex flex-col w-[440px] h-[380px] gap-5">
+
+                                            <div class="w-[440px] h-[180px] rounded-3xl overflow-hidden">
+                                                <img
+                                                        class="w-full h-full rounded-3xl object-cover transition duration-500 hover:scale-110"
+                                                        src="/img/a2.jpg"
+                                                        alt=""
+                                                >
+                                            </div>
+
+                                            <div class="flex flex-row gap-5">
+
+                                                <div class="w-[210px] h-[180px] rounded-3xl overflow-hidden">
+                                                    <img
+                                                            class="w-full h-full rounded-3xl object-cover transition duration-500 hover:scale-110"
+                                                            src="/img/a3.jpg"
+                                                            alt=""
+                                                    >
+                                                </div>
+
+                                                <div class="w-[210px] h-[180px] rounded-3xl overflow-hidden">
+                                                    <img
+                                                            class="w-full h-full rounded-3xl object-cover transition duration-500 hover:scale-110"
+                                                            src="/img/a4.jpg"
+                                                            alt=""
+                                                    >
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="flex flex-row justify-between">
+                                        <p class="text-3xl font-normal text-[#a86f3b] mb-6 mt-8">TẤT CẢ SẢN PHẨM</p>
+                                        <!--            <select id="selectTH" class="w-[280px] h-[35px] border border-gray-600 rounded-sm outline-none mt-10 mb-8 cursor-pointer">-->
+                                        <!--                <option value="" disabled selected>Lọc theo loại sản phẩm</option>-->
+                                        <!--                &lt;!&ndash; <p class="text-red-600">Chọn loại sản phẩm</p> &ndash;&gt;-->
+                                        <!--                <option value="TH1">Máy ảnh</option>-->
+                                        <!--                <option value="TH2">Camera</option>-->
+                                        <!--                <option value="TH3">Ống kính</option>-->
+                                        <!--                <option value="TH4">Phụ kiện</option>-->
+                                        <!--            </select>-->
+                                        <!--            <select id="selectTH" name="categoryId" class="w-[280px] h-[35px] border border-gray-600 rounded-sm outline-none mt-10 mb-8 cursor-pointer">-->
+                                        <!--                <option value="" disabled selected>Lọc theo loại sản phẩm</option>-->
+                                        <!--                <option th:each="cat : ${categories}"-->
+                                        <!--                        th:value="${cat.id}"-->
+                                        <!--                        th:text="${cat.name}">-->
+                                        <!--                </option>-->
+                                        <!--                -->
+                                        <!--            </select>-->
+                                        <form id="categoryForm" action="/user/home/category" method="get">
+                                            <select id="selectTH" name="categoryId" class="w-[280px] h-[35px] border border-gray-600 rounded-sm outline-none mt-10 mb-8 cursor-pointer" onchange="this.form.submit()">
+                                                <option value="" disabled selected>Lọc theo loại sản phẩm</option>
+                                                <option th:each="cat : ${categories}"
+                                                        th:value="${cat.id}"
+                                                        th:text="${cat.name}">
+                                                </option>
+                                            </select>
+                                        </form>
+
+                                        <form method="get" th:action="@{/user/home}">
+                                            <input type="hidden" name="page" th:value="${currentPage}">
+                                            <!--                <div class="text-lg w-[350px]">-->
+                                            <!--                    <label for="size">Số sản phẩm/trang: </label>-->
+                                            <!--                </div>-->
+                                            <label for="size">Số sản phẩm/trang: </label>
+                                            <input class="mt-10" type="number" min="1" max="100" id="size" name="size" th:value="${size}" style="width:60px" onchange="this.form.submit()" />
+                                        </form>
+
+                                    </div>
+                                    <div class="w-[900px] h-fit rounded-lg h-fit flex flex-row flex-wrap gap-[20px]">
+                                        <!--            <div class="w-[210px] h-[370px] rounded-lg bg-white relative">-->
+                                        <!--                <a th:href="@{/user/home/{id}(id=${product.id})}" style="text-decoration: none;">-->
+                                        <!--                    <img class="w-[210px] h-[210px] rounded-t-lg cursor-pointer" th:src="@{${product.image}}">-->
+                                        <!--                </a>-->
+                                        <!--                <a th:href="@{/user/home/{id}(id=${product.id})}" style="text-decoration: none;">-->
+                                        <!--                    <p class="text-lg font-medium p-2 w-[210px] h-[80px]" th:text="${product.name}"></p>-->
+                                        <!--                </a>-->
+                                        <!--                <p class="text-base font-medium p-2" th:text="'Giá: ' + ${product.price} + ' VND'"></p>-->
+                                        <!--                <button class="bg-[#01ac50] w-[210px] h-[40px] font-medium text-lg text-center text-white rounded-b-lg absolute bottom-0 cursor-pointer" type="submit">Thêm vào giỏ hàng</button>-->
+                                        <!--            </div>-->
+                                        <!--            <div class="w-[210px] h-[370px] rounded-lg bg-white relative">-->
+                                        <!--                <img class="w-[210px] h-[210px] rounded-t-lg cursor-pointer" src="img/s1.jpg" alt=""  id="chitiet1">-->
+                                        <!--                <p class="text-lg font-medium p-2 w-[210px] h-[80px]">Máy ảnh KC trắng cam có tích hợp đèn</p>-->
+                                        <!--                <p class="text-base font-medium p-2">Giá bán: 400000</p>-->
+                                        <!--                <button class="bg-[#01ac50] w-[210px] h-[40px] font-medium text-lg text-center text-white rounded-b-lg absolute bottom-0 cursor-pointer" type="submit">Thêm vào giỏ hàng</button>-->
+                                        <!--            </div>-->
+
+
+<!--                                        <div th:each="product : ${listProduct}">-->
+<!--                                            <div class="w-[210px] h-[370px] rounded-lg bg-[#f6edde] relative">-->
+<!--                                                &lt;!&ndash;                    dfe4ea mau cua them vao gio hang cũ&ndash;&gt;-->
+<!--                                                <p class="text-base font-medium p-2 hidden" th:text="${product.id}" ></p>-->
+<!--                                                <a th:href="@{/user/home/{id}(id=${product.id})}" style="text-decoration: none;">-->
+<!--                                                    <img class="w-[210px] h-[210px] rounded-t-lg cursor-pointer" th:src="@{${product.imageUrl}}" alt="Product image">-->
+<!--                                                </a>-->
+<!--                                                <a th:href="@{/user/home/{id}(id=${product.id})}" style="text-decoration: none;">-->
+<!--                                                    <p class="text-lg font-medium p-2 w-[210px] h-[80px]" th:text="${product.name}"></p>-->
+<!--                                                </a>-->
+<!--                                                <p class="text-base font-medium p-2" th:text="'Giá: ' + ${product.price} + ' VND'"></p>-->
+<!--                                                <form th:action="@{/user/home/add}" method="post" class="mt-5 flex flex-col gap-4">-->
+<!--                                                    <input type="hidden" name="productId" th:value="${product.id}">-->
+<!--                                                    <input type="hidden" name="quantity" id="quantity" value="1">-->
+<!--                                                    <button class="bg-[#cc8e35] hover:bg-[#ffa801] w-[210px] h-[40px] font-medium text-lg text-center text-white rounded-b-lg absolute bottom-0 cursor-pointer" type="submit">-->
+<!--                                                        Thêm vào giỏ hàng-->
+<!--                                                    </button>-->
+<!--                                                </form>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+
+
+
+                                        <div th:each="product : ${listProduct}">
+                                            <div class="w-[210px] h-[370px] rounded-lg bg-[#f6edde] relative overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+
+                                                <p class="text-base font-medium p-2 hidden"
+                                                   th:text="${product.id}">
+                                                </p>
+
+                                                <a th:href="@{/user/home/{id}(id=${product.id})}"
+                                                   style="text-decoration: none;">
+
+                                                    <div class="overflow-hidden rounded-t-lg">
+                                                        <img class="w-[210px] h-[210px]
+                            cursor-pointer object-cover
+                            transition-transform duration-300
+                            hover:scale-110"
+                                                             th:src="@{${product.imageUrl}}"
+                                                             alt="Product image">
+                                                    </div>
+
+                                                </a>
+
+                                                <a th:href="@{/user/home/{id}(id=${product.id})}"
+                                                   style="text-decoration: none;">
+
+                                                    <p class="text-lg font-medium p-2 w-[210px] h-[80px]"
+                                                       th:text="${product.name}">
+                                                    </p>
+
+                                                </a>
+
+<!--                                                <p class="text-base font-medium p-2"-->
+<!--                                                   th:text="'Giá: ' + ${product.price} + ' VND'">-->
+<!--                                                </p>-->
+
+
+                                                <p class="text-base font-medium p-2">
+                                                    Giá:
+                                                    <span th:text="${#numbers.formatInteger(product.price, 3, 'COMMA')}"></span>
+                                                    VND
+                                                </p>
+
+                                                <form th:action="@{/user/home/add}"
+                                                      method="post"
+                                                      class="mt-5 flex flex-col gap-4">
+
+                                                    <input type="hidden"
+                                                           name="productId"
+                                                           th:value="${product.id}">
+
+                                                    <input type="hidden"
+                                                           name="quantity"
+                                                           id="quantity"
+                                                           value="1">
+
+                                                    <button class="bg-[#cc8e35] hover:bg-[#ffa801]
+                           w-[210px] h-[40px]
+                           font-medium text-lg text-center text-white
+                           rounded-b-lg absolute bottom-0
+                           cursor-pointer transition duration-300"
+                                                            type="submit">
+
+                                                        Thêm vào giỏ hàng
+
+                                                    </button>
+
+                                                </form>
+
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="pagination mt-4 text-lg font-medium">
+            <span th:if="${currentPage > 0}">
+                <a th:href="@{/user/home(page=${currentPage - 1}, size=${size})}">Previous</a>
+            </span>
+                                        <span th:each="i : ${#numbers.sequence(0, totalPages-1)}">
+                <a th:href="@{/user/home( page=${i}, size=${size})}"
+                   th:text="${i + 1}" th:classappend="${i == currentPage} ? 'active'"></a>
+            </span>
+                                        <span th:if="${currentPage < totalPages - 1}">
+                <a th:href="@{/user/home( page=${currentPage + 1}, size=${size})}">Next</a>
+            </span>
+                                    </div>
+                                    <!--        <button onclick="window.location.href='/user/home/products'"-->
+                                    <!--                class="border border-[#01ac50] w-[150px] h-[50px] text-[#01ac50] text-xl font-normal rounded-lg cursor-pointer mt-8 absolute left-[50%] -translate-x-[50%]">-->
+                                    <!--            Xem thêm-->
+                                    <!--        </button>-->
+                                </div>
+
+                                <div class="w-[100vw] mt-[100px] mb-5 ml-1 flex-col text-center mb-10">
+                                    <div class="text-lg font-medium text-gray-600 text-center mb-2">
+                                        © 2025 Bản quyền thuộc về TH Shop
+                                    </div>
+                                    <div class="text-lg font-normal text-gray-600 text-center">
+                                        Cảm ơn quý khách đã tin tưởng và ủng hộ cửa hàng!
+                                    </div>
+                                    <div class="text-lg font-normal text-gray-600 text-center mb-3">
+                                        Thông tin liên hệ
+                                    </div>
+                                    <div class="flex flex-row text-center absolute left-[50%] -translate-x-[50%]">
+                                        <div class="flex flex-row">
+                                            <box-icon name='facebook-circle' type='logo' color='rgba(0,0,0,0.70)' ></box-icon>
+                                            <a target="_blank" class="mr-8 w-[150px] text-gray-700 hover:text-[#009432]" href="https://www.facebook.com/holahuliba">Nguyễn Tiến Hưng</a>
+                                        </div>
+
+                                        <div class="flex flex-row">
+                                            <box-icon name='phone' type='solid' color='rgba(0,0,0,0.70)' ></box-icon>
+                                            <p class="mr-8 w-[100px] text-gray-700 hover:text-[#009432]">0327644604</p>
+                                        </div>
+
+                                        <div class="flex flex-row">
+                                            <box-icon name='envelope' color='rgba(0,0,0,0.70)' ></box-icon>
+                                            <a target="_blank" class="mr-8 w-[280px] text-gray-700 hover:text-[#009432]" href="https://mail.google.com/mail/u/0/?pli=1#inbox">nguyentienhung04042004gmail.com</a>
+                                        </div>
+
+                                        <div class="flex flex-row">
+                                            <box-icon name='instagram' type='logo' color='rgba(0,0,0,0.70)' ></box-icon>
+                                            <a target="_blank" class="w-[150px] text-gray-700 hover:text-[#009432]" href="https://www.instagram.com/holahuliba/">Nguyễn Tiến Hưng</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+<!--    <div class="navb flex flex-row h-[80px] w-[100vw] justify-between mb-[50px] bg-[#dea069] text-white shadow-[0_5px_15px_rgba(0,0,0,0.35)]">-->
+<!--        <div class="infor-shop h-[80px] w-fit flex flex-row justify-center items-center ml-2">-->
+<!--            <img class="w-[50px] h-[50px] rounded-[999px] ml-[20px]" src="/img/tienhungw.jpg" alt="">-->
+<!--            <h2 class="text-[30px] font-medium ml-[10px] mt-[10px] font-['Kaushan_Script']">TH Shop</h2>-->
+<!--        </div>-->
+
+<!--        <div class="relative h-[80px] w-[50vw] absolute right-[20px]">-->
+<!--            <div class="flex flex-row h-[40px] bg-white w-[400px] absolute right-[20px] rounded-3xl justify-between mt-1">-->
+<!--                <form th:action="@{/user/home/search}" method="get">-->
+<!--                    <input name="keyword" class="outline-none text-gray-600 pl-4" type="text" placeholder="Tìm kiếm sản phẩm">-->
+<!--                    <button type="submit">-->
+<!--                        <box-icon class="mr-3 mt-2 ml-38 cursor-pointer" name='search' flip='horizontal' color='rgba(0,0,0,0.8)' ></box-icon>-->
+<!--                    </button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--            <div class="flex flex-row absolute gap-[30px] right-[20px] bottom-[6px] text-lg font-normal">-->
+<!--                <a id="gotoPage1" class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/user/home">Trang chủ</a>-->
+<!--                <a id="gotoPage2" class="cursor-pointer" href="/user/cart">Giỏ hàng</a>-->
+<!--                <a id="gotoPage3" class="cursor-pointer" href="/user/history">Lịch sử</a>-->
+<!--                <a id="gotoPage4" class="cursor-pointer" href="/user/about">Thông tin</a>-->
+<!--                <a id="gotoPage5" class="cursor-pointer" href="/logout">Đăng xuất</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="w-[900px] h-fit relative">-->
+<!--        <p class="text-3xl font-normal text-[#a86f3b] mb-10">DANH MỤC CÁC LOẠI SẢN PHẨM</p>-->
+<!--&lt;!&ndash;        127332&ndash;&gt;-->
+<!--        <div class="flex flex-row gap-[20px] w-[900px]">-->
+<!--            <div class="w-[440px] h-[380px]">-->
+<!--                <img class="w-[440px] h-[380px] rounded-3xl" src="/img/a1.jpg" alt="">-->
+<!--            </div>-->
+<!--            <div class="flex flex-col w-[440px] h-[380px] gap-5">-->
+<!--                <div class="w-[440px] h-[180px]">-->
+<!--                    <img class="w-[440px] h-[180px] rounded-3xl" src="/img/a2.jpg" alt="">-->
+<!--                </div>-->
+<!--                <div class="flex flex-row gap-5">-->
+<!--                    <div class="w-[210px] h-[180px]">-->
+<!--                        <img class="w-[210px] h-[180px] rounded-3xl" src="/img/a3.jpg" alt="">-->
+<!--                    </div>-->
+<!--                    <div class="w-[210px] h-[180px]">-->
+<!--                        <img class="w-[210px] h-[180px] rounded-3xl" src="/img/a4.jpg" alt="">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="flex flex-row justify-between">-->
+<!--            <p class="text-3xl font-normal text-[#a86f3b] mb-6 mt-8">TẤT CẢ SẢN PHẨM</p>-->
+<!--&lt;!&ndash;            <select id="selectTH" class="w-[280px] h-[35px] border border-gray-600 rounded-sm outline-none mt-10 mb-8 cursor-pointer">&ndash;&gt;-->
+<!--&lt;!&ndash;                <option value="" disabled selected>Lọc theo loại sản phẩm</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                &lt;!&ndash; <p class="text-red-600">Chọn loại sản phẩm</p> &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                <option value="TH1">Máy ảnh</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                <option value="TH2">Camera</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                <option value="TH3">Ống kính</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                <option value="TH4">Phụ kiện</option>&ndash;&gt;-->
+<!--&lt;!&ndash;            </select>&ndash;&gt;-->
+<!--&lt;!&ndash;            <select id="selectTH" name="categoryId" class="w-[280px] h-[35px] border border-gray-600 rounded-sm outline-none mt-10 mb-8 cursor-pointer">&ndash;&gt;-->
+<!--&lt;!&ndash;                <option value="" disabled selected>Lọc theo loại sản phẩm</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                <option th:each="cat : ${categories}"&ndash;&gt;-->
+<!--&lt;!&ndash;                        th:value="${cat.id}"&ndash;&gt;-->
+<!--&lt;!&ndash;                        th:text="${cat.name}">&ndash;&gt;-->
+<!--&lt;!&ndash;                </option>&ndash;&gt;-->
+<!--&lt;!&ndash;                &ndash;&gt;-->
+<!--&lt;!&ndash;            </select>&ndash;&gt;-->
+<!--            <form id="categoryForm" action="/user/home/category" method="get">-->
+<!--                <select id="selectTH" name="categoryId" class="w-[280px] h-[35px] border border-gray-600 rounded-sm outline-none mt-10 mb-8 cursor-pointer" onchange="this.form.submit()">-->
+<!--                    <option value="" disabled selected>Lọc theo loại sản phẩm</option>-->
+<!--                    <option th:each="cat : ${categories}"-->
+<!--                            th:value="${cat.id}"-->
+<!--                            th:text="${cat.name}">-->
+<!--                    </option>-->
+<!--                </select>-->
+<!--            </form>-->
+
+<!--            <form method="get" th:action="@{/user/home}">-->
+<!--                <input type="hidden" name="page" th:value="${currentPage}">-->
+<!--&lt;!&ndash;                <div class="text-lg w-[350px]">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <label for="size">Số sản phẩm/trang: </label>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--                <label for="size">Số sản phẩm/trang: </label>-->
+<!--                <input class="mt-10" type="number" min="1" max="100" id="size" name="size" th:value="${size}" style="width:60px" onchange="this.form.submit()" />-->
+<!--            </form>-->
+
+<!--        </div>-->
+<!--        <div class="w-[900px] h-fit rounded-lg h-fit flex flex-row flex-wrap gap-[20px]">-->
+<!--&lt;!&ndash;            <div class="w-[210px] h-[370px] rounded-lg bg-white relative">&ndash;&gt;-->
+<!--&lt;!&ndash;                <a th:href="@{/user/home/{id}(id=${product.id})}" style="text-decoration: none;">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <img class="w-[210px] h-[210px] rounded-t-lg cursor-pointer" th:src="@{${product.image}}">&ndash;&gt;-->
+<!--&lt;!&ndash;                </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a th:href="@{/user/home/{id}(id=${product.id})}" style="text-decoration: none;">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <p class="text-lg font-medium p-2 w-[210px] h-[80px]" th:text="${product.name}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;                </a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <p class="text-base font-medium p-2" th:text="'Giá: ' + ${product.price} + ' VND'"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;                <button class="bg-[#01ac50] w-[210px] h-[40px] font-medium text-lg text-center text-white rounded-b-lg absolute bottom-0 cursor-pointer" type="submit">Thêm vào giỏ hàng</button>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="w-[210px] h-[370px] rounded-lg bg-white relative">&ndash;&gt;-->
+<!--&lt;!&ndash;                <img class="w-[210px] h-[210px] rounded-t-lg cursor-pointer" src="img/s1.jpg" alt=""  id="chitiet1">&ndash;&gt;-->
+<!--&lt;!&ndash;                <p class="text-lg font-medium p-2 w-[210px] h-[80px]">Máy ảnh KC trắng cam có tích hợp đèn</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                <p class="text-base font-medium p-2">Giá bán: 400000</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                <button class="bg-[#01ac50] w-[210px] h-[40px] font-medium text-lg text-center text-white rounded-b-lg absolute bottom-0 cursor-pointer" type="submit">Thêm vào giỏ hàng</button>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+
+
+<!--            <div th:each="product : ${listProduct}">-->
+<!--                <div class="w-[210px] h-[370px] rounded-lg bg-[#f6edde] relative">-->
+<!--&lt;!&ndash;                    dfe4ea mau cua them vao gio hang cũ&ndash;&gt;-->
+<!--                    <p class="text-base font-medium p-2 hidden" th:text="${product.id}" ></p>-->
+<!--                    <a th:href="@{/user/home/{id}(id=${product.id})}" style="text-decoration: none;">-->
+<!--                        <img class="w-[210px] h-[210px] rounded-t-lg cursor-pointer" th:src="@{${product.imageUrl}}" alt="Product image">-->
+<!--                    </a>-->
+<!--                    <a th:href="@{/user/home/{id}(id=${product.id})}" style="text-decoration: none;">-->
+<!--                        <p class="text-lg font-medium p-2 w-[210px] h-[80px]" th:text="${product.name}"></p>-->
+<!--                    </a>-->
+<!--                    <p class="text-base font-medium p-2" th:text="'Giá: ' + ${product.price} + ' VND'"></p>-->
+<!--                    <form th:action="@{/user/home/add}" method="post" class="mt-5 flex flex-col gap-4">-->
+<!--                        <input type="hidden" name="productId" th:value="${product.id}">-->
+<!--                        <input type="hidden" name="quantity" id="quantity" value="1">-->
+<!--                        <button class="bg-[#cc8e35] hover:bg-[#ffa801] w-[210px] h-[40px] font-medium text-lg text-center text-white rounded-b-lg absolute bottom-0 cursor-pointer" type="submit">-->
+<!--                            Thêm vào giỏ hàng-->
+<!--                        </button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="pagination mt-4 text-lg font-medium">-->
+<!--            <span th:if="${currentPage > 0}">-->
+<!--                <a th:href="@{/user/home(page=${currentPage - 1}, size=${size})}">Previous</a>-->
+<!--            </span>-->
+<!--                    <span th:each="i : ${#numbers.sequence(0, totalPages-1)}">-->
+<!--                <a th:href="@{/user/home( page=${i}, size=${size})}"-->
+<!--                   th:text="${i + 1}" th:classappend="${i == currentPage} ? 'active'"></a>-->
+<!--            </span>-->
+<!--                    <span th:if="${currentPage < totalPages - 1}">-->
+<!--                <a th:href="@{/user/home( page=${currentPage + 1}, size=${size})}">Next</a>-->
+<!--            </span>-->
+<!--        </div>-->
+<!--&lt;!&ndash;        <button onclick="window.location.href='/user/home/products'"&ndash;&gt;-->
+<!--&lt;!&ndash;                class="border border-[#01ac50] w-[150px] h-[50px] text-[#01ac50] text-xl font-normal rounded-lg cursor-pointer mt-8 absolute left-[50%] -translate-x-[50%]">&ndash;&gt;-->
+<!--&lt;!&ndash;            Xem thêm&ndash;&gt;-->
+<!--&lt;!&ndash;        </button>&ndash;&gt;-->
+<!--    </div>-->
+
+<!--    <div class="w-[100vw] mt-[100px] mb-5 ml-1 flex-col text-center mb-10">-->
+<!--        <div class="text-lg font-medium text-gray-600 text-center mb-2">-->
+<!--            © 2025 Bản quyền thuộc về TH Shop-->
+<!--        </div>-->
+<!--        <div class="text-lg font-normal text-gray-600 text-center">-->
+<!--            Cảm ơn quý khách đã tin tưởng và ủng hộ cửa hàng!-->
+<!--        </div>-->
+<!--        <div class="text-lg font-normal text-gray-600 text-center mb-3">-->
+<!--            Thông tin liên hệ-->
+<!--        </div>-->
+<!--        <div class="flex flex-row text-center absolute left-[50%] -translate-x-[50%]">-->
+<!--            <div class="flex flex-row">-->
+<!--                <box-icon name='facebook-circle' type='logo' color='rgba(0,0,0,0.70)' ></box-icon>-->
+<!--                <a target="_blank" class="mr-8 w-[150px] text-gray-700 hover:text-[#009432]" href="https://www.facebook.com/holahuliba">Nguyễn Tiến Hưng</a>-->
+<!--            </div>-->
+
+<!--            <div class="flex flex-row">-->
+<!--                <box-icon name='phone' type='solid' color='rgba(0,0,0,0.70)' ></box-icon>-->
+<!--                <p class="mr-8 w-[100px] text-gray-700 hover:text-[#009432]">0327644604</p>-->
+<!--            </div>-->
+
+<!--            <div class="flex flex-row">-->
+<!--                <box-icon name='envelope' color='rgba(0,0,0,0.70)' ></box-icon>-->
+<!--                <a target="_blank" class="mr-8 w-[280px] text-gray-700 hover:text-[#009432]" href="https://mail.google.com/mail/u/0/?pli=1#inbox">nguyentienhung04042004gmail.com</a>-->
+<!--            </div>-->
+
+<!--            <div class="flex flex-row">-->
+<!--                <box-icon name='instagram' type='logo' color='rgba(0,0,0,0.70)' ></box-icon>-->
+<!--                <a target="_blank" class="w-[150px] text-gray-700 hover:text-[#009432]" href="https://www.instagram.com/holahuliba/">Nguyễn Tiến Hưng</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+    <script>
+<!--        document.getElementById("gotoPage1").addEventListener("click", function() {-->
+<!--            window.location.href = "trangchu.html";-->
+<!--        });-->
+<!--        document.getElementById("gotoPage2").addEventListener("click", function() {-->
+<!--            window.location.href = "giohang.html";-->
+<!--        });-->
+<!--        document.getElementById("gotoPage3").addEventListener("click", function() {-->
+<!--            window.location.href = "lichsu.html";-->
+<!--        });-->
+<!--        document.getElementById("gotoPage4").addEventListener("click", function() {-->
+<!--            window.location.href = "thongtin.html";-->
+<!--        });-->
+<!--        document.querySelectorAll("[id^='chitiet']").forEach(element => {-->
+<!--            element.addEventListener("click", function() {-->
+<!--                window.location.href = "chitietsanpham.html";-->
+<!--            });-->
+<!--        });-->
+    </script>
+<script>
+
+    // LEFT
+    const leftImg1 = document.getElementById("leftImg1");
+    const leftImg2 = document.getElementById("leftImg2");
+
+    let leftToggle = true;
+
+    setInterval(() => {
+
+        if(leftToggle){
+            leftImg1.classList.remove("opacity-100");
+            leftImg1.classList.add("opacity-0");
+
+            leftImg2.classList.remove("opacity-0");
+            leftImg2.classList.add("opacity-100");
+        }
+        else{
+            leftImg2.classList.remove("opacity-100");
+            leftImg2.classList.add("opacity-0");
+
+            leftImg1.classList.remove("opacity-0");
+            leftImg1.classList.add("opacity-100");
+        }
+
+        leftToggle = !leftToggle;
+
+    }, 4000);
+
+
+
+    // RIGHT
+    const rightImg1 = document.getElementById("rightImg1");
+    const rightImg2 = document.getElementById("rightImg2");
+
+    let rightToggle = true;
+
+    setTimeout(() => {
+
+        setInterval(() => {
+
+            if(rightToggle){
+                rightImg1.classList.remove("opacity-100");
+                rightImg1.classList.add("opacity-0");
+
+                rightImg2.classList.remove("opacity-0");
+                rightImg2.classList.add("opacity-100");
+            }
+            else{
+                rightImg2.classList.remove("opacity-100");
+                rightImg2.classList.add("opacity-0");
+
+                rightImg1.classList.remove("opacity-0");
+                rightImg1.classList.add("opacity-100");
+            }
+
+            rightToggle = !rightToggle;
+
+        }, 4000);
+
+    }, 2000);
+
+
+
+    document.getElementById("leftImg1").src =
+        "/img/qc1.jpg?v=" + new Date().getTime();
+
+    document.getElementById("leftImg2").src =
+        "/img/qc2.jpg?v=" + new Date().getTime();
+
+    document.getElementById("rightImg1").src =
+        "/img/qc3.jpg?v=" + new Date().getTime();
+
+    document.getElementById("rightImg2").src =
+        "/img/qc4.jpg?v=" + new Date().getTime();
+
+
+
+    setTimeout(() => {
+
+    const success = document.getElementById("successMessage");
+    const error = document.getElementById("errorMessage");
+
+    if(success){
+        success.style.display = "none";
+    }
+
+    if(error){
+        error.style.display = "none";
+    }
+
+    }, 3000);
+</script>
+
+
+
+
+
+
+<div th:replace="~{fragments/chatbox :: chatbox}"></div>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin đơn dặt hàng</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+</head>
+<body class="flex flex-col justify-center items-center bg-[#F3F1EC] overflow-x-hidden">
+    <div class="navb flex flex-row h-[80px] w-[100vw] justify-between mb-[50px] bg-[#dea069] text-white shadow-[0_5px_15px_rgba(0,0,0,0.35)]">
+        <div class="infor-shop h-[80px] w-fit flex flex-row justify-center items-center ml-2">
+            <img class="w-[50px] h-[50px] rounded-[999px] ml-[20px]" src="/img/tienhungw.jpg" alt="">
+            <h2 class="text-[30px] font-medium ml-[10px] mt-[10px] font-['Kaushan_Script']">TH Shop</h2>
+        </div>
+
+        <div class="relative h-[80px] w-[50vw]">
+            <div class="flex flex-row absolute gap-[20px] right-[20px] bottom-[10px] text-lg font-normal">
+                <a id="gotoPage1" class="cursor-pointer" href="/admin/products">Sản phẩm</a>
+                <a id="gotoPage2" class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/admin/order">Đơn đặt hàng</a>
+                <a id="gotoPage3" class="cursor-pointer" href="/admin/customer">Khách hàng</a>
+                <a id="gotoPage4" class="cursor-pointer" href="/logout">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-[80vw] h-fit">
+        <p class="text-3xl font-normal text-[#dea069]">TRANG CỦA NGƯỜI QUẢN LÝ</p>
+        <div class="flex flex-row justify-between mt-8">
+            <p class="text-2xl font-normal text-black">Quản lý đơn hàng</p>
+        </div>
+        <div class="mt-2">
+            <table class="min-w-full border border-white table-fixed border-collapse">
+                <thead>
+                    <tr class="bg-[#dea069]">
+                        <th class="border border-white w-[30px] h-[40px] text-white text-lg font-medium">Mã đơn</th>
+                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Họ tên</th>
+                        <th class="border border-white w-[60px] h-[40px] text-white text-lg font-medium">Địa chỉ</th>
+                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Giá trị</th>
+                        <th class="border border-white w-[70px] h-[40px] text-white text-lg font-medium">Trạng thái</th>
+                        <th class="border border-white w-[60px] h-[40px] text-white text-lg font-medium">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-[#dfe4ea] justify-center items-center">
+                    <tr th:each="order : ${orders}">
+                        <td class="border border-white w-[100px] p-2 overflow-hidden text-ellipsis whitespace-normal text-center " th:text="${order.id}"></td>
+                        <td class="border border-white w-[150px] p-2 text-center justify-center items-center" th:text="${order.user.full_name}"></td>
+                        <td class="border border-white w-[200px] p-2 text-center" th:text="${order.user.address}"></td>
+                        <td class="border border-white w-[150px] p-2 text-center" th:text="${order.totalPrice}"></td>
+                        <td class="border border-white w-[150px] p-2 text-center">
+                            <form th:action="@{/admin/order/status}" method="post">
+                                <input type="hidden" name="orderId" th:value="${order.id}" />
+                                <div class="content-set">
+                                    <div class="select-container">
+                                        <select name="status" class="status-select">
+                                            <option th:each="status : ${statusList}"
+                                                    th:value="${status}"
+                                                    th:text="${status}"
+                                                    th:selected="${status == order.status}"
+                                                    th:classappend="${status}">Status</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <button class="btn-set rounded-sm px-2 bg-[#dea069] hover:bg-[#e58e26] text-white" type="submit">Save</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </td>
+                        <td class="border border-white w-[150px] p-2 text-center">
+                            <div class="flex flex-col gap-1 items-center">
+<!--                                <button class="text-lg font-medium text-white w-[70%] h-auto bg-[#DAB10C] rounded-xl cursor-pointer" id="chitiet1">-->
+<!--                                    Chi tiết-->
+<!--                                </button>-->
+                                <form th:action="@{'/admin/order/'+${order.id}}" method="get"><button class="text-lg font-medium text-white w-[100px] h-[30px] bg-[#DAB10C] hover:bg-[#ffa801] rounded-xl cursor-pointer">Chi tiết</button></form>
+                            </div>
+                        </td>
+                    </tr>
+<!--                    <tr>-->
+<!--                        <td class="border border-white w-[150px] p-2 overflow-hidden text-ellipsis whitespace-normal text-center ">HD002</td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center justify-center items-center">Nguyễn Thị Hoài</td>-->
+<!--                        <td class="border border-white w-[250px] p-2 text-center">Phú Thượng - Tây Hồ - Hà Nội</td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center">2000000</td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center">-->
+<!--                            <div class="flex flex-col gap-1 items-center">-->
+<!--                                <button class="text-lg font-medium text-white w-[70%] h-auto bg-[#DAB10C] rounded-xl cursor-pointer" id="chitiet2">-->
+<!--                                    Chi tiết-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td class="border border-white w-[150px] p-2 overflow-hidden text-ellipsis whitespace-normal text-center ">HD003</td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center justify-center items-center">Nguyễn Văn Hòa</td>-->
+<!--                        <td class="border border-white w-[250px] p-2 text-center">Hương Lung - Cẩm Khê - Phú Thọ</td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center">3000000</td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center">-->
+<!--                            <div class="flex flex-col gap-1 items-center">-->
+<!--                                <button class="text-lg font-medium text-white w-[70%] h-auto bg-[#DAB10C] rounded-xl cursor-pointer" id="chitiet3">-->
+<!--                                    Chi tiết-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td class="border border-white w-[150px] p-2 overflow-hidden text-ellipsis whitespace-normal text-center ">HD004</td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center justify-center items-center">Phan Thị Thu Lâm</td>-->
+<!--                        <td class="border border-white w-[250px] p-2 text-center">Hương Lung - Cẩm Khê - Phú Thọ</td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center">4000000</td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center">-->
+<!--                            <div class="flex flex-col gap-1 items-center">-->
+<!--                                <button class="text-lg font-medium text-white w-[70%] h-auto bg-[#DAB10C] rounded-xl cursor-pointer" id="chitiet4">-->
+<!--                                    Chi tiết-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td class="border border-white w-[150px] p-2 overflow-hidden text-ellipsis whitespace-normal text-center ">HD005</td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center justify-center items-center">Nguyễn Thị Thùy Linh</td>-->
+<!--                        <td class="border border-white w-[250px] p-2 text-center">Hương Lung - Cẩm Khê - Phú Thọ</td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center">3000000</td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center">-->
+<!--                            <div class="flex flex-col gap-1 items-center">-->
+<!--                                <button class="text-lg font-medium text-white w-[70%] h-auto bg-[#DAB10C] rounded-xl cursor-pointer" id="chitiet5">-->
+<!--                                    Chi tiết-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td class="border border-white w-[150px] p-2 overflow-hidden text-ellipsis whitespace-normal text-center ">HD006</td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center justify-center items-center">Nguyễn Tiến Bảo</td>-->
+<!--                        <td class="border border-white w-[250px] p-2 text-center">Hương Lung - Cẩm Khê - Phú Thọ</td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center">4000000</td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center">-->
+<!--                            <div class="flex flex-col gap-1 items-center">-->
+<!--                                <button class="text-lg font-medium text-white w-[70%] h-auto bg-[#DAB10C] rounded-xl cursor-pointer" id="chitiet6">-->
+<!--                                    Chi tiết-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+
+    <div class="w-[60vw] h-[30px] mt-[100px] mb-5">
+        <p class="text-lg font-nomarl text-gray-600 text-center">
+            © 2025 Bản quyền thuộc về TH Shop
+        </p>
+    </div>
+
+    <script>
+<!--        document.getElementById("gotoPage1").addEventListener("click", function() {-->
+<!--            window.location.href = "admin.html";-->
+<!--        });-->
+<!--        document.getElementById("gotoPage2").addEventListener("click", function() {-->
+<!--            window.location.href = "admin-dondathang.html";-->
+<!--        });-->
+<!--        document.getElementById("gotoPage3").addEventListener("click", function() {-->
+<!--            window.location.href = "admin-khachhang.html";-->
+<!--        });-->
+<!--        document.querySelectorAll("[id^='chitiet']").forEach(element => {-->
+<!--            element.addEventListener("click", function() {-->
+<!--                window.location.href = "admin-hoadonchitiet.html";-->
+<!--            });-->
+<!--        });-->
+    </script>
+    <div th:replace="~{fragments/chatbox :: chatbox}"></div>
+</body>
+</html>

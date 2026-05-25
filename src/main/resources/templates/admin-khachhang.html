@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin khách hàng</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <style>
+        
+    </style>
+</head>
+<body class="flex flex-col justify-center items-center bg-[#F3F1EC] overflow-x-hidden">
+    <div class="navb flex flex-row h-[80px] w-[100vw] justify-between mb-[50px] bg-[#dea069] text-white shadow-[0_5px_15px_rgba(0,0,0,0.35)]">
+        <div class="infor-shop h-[80px] w-fit flex flex-row justify-center items-center ml-2">
+            <img class="w-[50px] h-[50px] rounded-[999px] ml-[20px]" src="/img/tienhungw.jpg" alt="">
+            <h2 class="text-[30px] font-medium ml-[10px] mt-[10px] font-['Kaushan_Script']">TH Shop</h2>
+        </div>
+
+        <div class="relative h-[80px] w-[50vw]">
+            <div class="flex flex-row absolute gap-[20px] right-[20px] bottom-[10px] text-lg font-normal">
+                <a id="gotoPage1" class="cursor-pointer" href="/admin/products">Sản phẩm</a>
+                <a id="gotoPage2" class="cursor-pointer" href="/admin/order">Đơn đặt hàng</a>
+                <a id="gotoPage3" class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/admin/customer">Khách hàng</a>
+                <a id="gotoPage4" class="cursor-pointer" href="/logout">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-[80vw] h-fit relative">
+        <p class="text-3xl font-normal text-[#dea069]">TRANG CỦA NGƯỜI QUẢN LÝ</p>
+        <div class="flex flex-row justify-between mt-8 mb-6">
+            <p class="text-2xl font-normal text-black">Danh sách người dùng</p>
+        </div>
+        <div>
+            <table class="min-w-full border border-white table-fixed border-collapse">
+                <thead>
+                    <tr class="bg-[#dea069]">
+                        <th class="border border-white w-[150px] h-[40px] text-white text-lg font-medium">Username</th>
+                        <th class="border border-white w-[150px] h-[40px] text-white text-lg font-medium">Fullname</th>
+                        <th class="border border-white w-[150px] h-[40px] text-white text-lg font-medium">Phone</th>
+                        <th class="border border-white w-[250px] h-[40px] text-white text-lg font-medium">Email</th>
+                        <th class="border border-white w-[150px] h-[40px] text-white text-lg font-medium">Address</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-[#dfe4ea] justify-center items-center">
+<!--                    <tr>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center">tienhungw_04</td>-->
+<!--                        <td class="border border-white w-[200px] p-2 text-center">nguyentienhung04042004@gmail.com</td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center">tienhung123</td>-->
+<!--                    </tr>-->
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.username}" class="border border-white w-[150px] p-2 text-center"></td>
+                        <td th:text="${user.full_name}" class="border border-white w-[200px] p-2 text-center"></td>
+                        <td th:text="${user.phone}" class="border border-white w-[150px] p-2 text-center"></td>
+                        <td th:text="${user.email}" class="border border-white w-[150px] p-2 text-center"></td>
+                        <td th:text="${user.address}" class="border border-white w-[150px] p-2 text-center"></td>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="w-[60vw] h-[30px] mt-[100px] mb-5 ml-1">
+        <p class="text-lg font-nomarl text-gray-600 text-center">
+            © 2025 Bản quyền thuộc về TH Shop
+        </p>
+    </div>
+
+    <script>
+<!--        document.getElementById("gotoPage1").addEventListener("click", function() {-->
+<!--            window.location.href = "admin.html";-->
+<!--        });-->
+<!--        document.getElementById("gotoPage2").addEventListener("click", function() {-->
+<!--            window.location.href = "admin-dondathang.html";-->
+<!--        });-->
+<!--        document.getElementById("gotoPage3").addEventListener("click", function() {-->
+<!--            window.location.href = "admin-khachhang.html";-->
+<!--        });-->
+    </script>
+    <div th:replace="~{fragments/chatbox :: chatbox}"></div>
+</body>
+</html>

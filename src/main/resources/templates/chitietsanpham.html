@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiet san pham</title>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+    <style>
+        
+    </style>
+</head>
+<body class="flex flex-col justify-center items-center bg-[#F3F1EC] overflow-x-hidden">
+    <div class="navb flex flex-row h-[80px] w-[100vw] justify-between mb-[50px] bg-[#dea069] text-white shadow-[0_5px_15px_rgba(0,0,0,0.35)]">
+        <div class="infor-shop h-[80px] w-fit flex flex-row justify-center items-center ml-2">
+            <img class="w-[50px] h-[50px] rounded-[999px] ml-[20px]" src="/img/tienhungw.jpg" alt="">
+            <h2 class="text-[30px] font-medium ml-[10px] mt-[10px] font-['Kaushan_Script']">TH Shop</h2>
+        </div>
+
+        <div class="relative h-[80px] w-[50vw] absolute right-[20px]">
+            <div class="flex flex-row h-[40px] bg-white w-[400px] absolute right-[20px] rounded-3xl justify-between mt-1">
+                <input class="outline-none text-gray-600 pl-4" type="text" placeholder="Tìm kiếm sản phẩm">
+                <box-icon class="mr-3 mt-2 cursor-pointer" name='search' flip='horizontal' color='rgba(0,0,0,0.8)' ></box-icon>
+            </div>
+            <div class="flex flex-row absolute gap-[30px] right-[20px] bottom-[6px] text-lg font-normal">
+                <a id="gotoPage1" class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/user/home">Trang chủ</a>
+                <a id="gotoPage2" class="cursor-pointer" href="/user/cart">Giỏ hàng</a>
+                <a id="gotoPage3" class="cursor-pointer" href="/user/history">Lịch sử</a>
+                <a id="gotoPage4" class="cursor-pointer" href="/user/about">Thông tin</a>
+                <a id="gotoPage5" class="cursor-pointer" href="/logout">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-[900px] h-fit relative">
+        <p class="text-3xl font-normal text-[#a86f3b] mb-10">CHI TIẾT SẢN PHẨM</p>
+
+
+        <div class="flex flex-row gap-[50px]">
+            <div class="w-[350px] h-[350px] rounded-lg">
+                <img class="w-[350px] h-[350px] rounded-lg" th:src="@{${product.imageUrl}}"
+                     alt="">
+            </div>
+            <div class="w-[500px] h-[350px] rounded-lg">
+                <p class="w-[500px] h-[100px] rounded-lg text-3xl font-medium text-[#a86f3b]" th:text="${product.name}"></p>
+                <p class="w-[500px] h-[50px] rounded-lg text-lg font-medium text-[#a86f3b]" th:text="${product.price}"></p>
+                <p class="w-[500px] h-[200px] rounded-lg text-lg font-normal"th:text="${product.description}"></p>
+            </div>
+        </div>
+        <!-- Form thêm vào giỏ hàng -->
+        <form th:action="@{/user/home/add}" method="post" class="mt-5 flex flex-col gap-4">
+            <!-- ID sản phẩm (ẩn) -->
+            <input type="hidden" name="productId" th:value="${product.id}">
+            <!-- Ô nhập số lượng -->
+            <div class="flex items-center gap-2">
+                <label for="quantity" class="text-lg font-medium">Số lượng:</label>
+                <input type="number" name="quantity" id="quantity" value="1" min="1" class="w-[80px] h-[40px] border border-gray-300 rounded-lg text-center">
+            </div>
+
+            <!-- Nút thêm vào giỏ hàng -->
+            <button type="submit" class="bg-[#dea069] hover:bg-[#ffa801] w-[200px] h-[50px] text-lg font-medium rounded-lg mt-4 text-white cursor-pointer">
+                Thêm vào giỏ hàng
+            </button>
+        </form>
+    </div>
+
+
+
+<!--    <div class="bg-white rounded-lg shadow-md p-6 max-w-3xl mx-auto">-->
+<!--        <h2 class="text-xl font-bold text-gray-800 mb-6">Đánh giá từ người mua</h2>-->
+
+<!--        <div class="mb-8 last:mb-0" th:each="r : ${reviews}">-->
+<!--            &lt;!&ndash; Line 1: User info section &ndash;&gt;-->
+<!--            <div class="flex items-center space-x-3 mb-2">-->
+<!--                <span class="font-medium text-gray-700" th:text="${r.user.username}"></span>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Line 2: Rating stars &ndash;&gt;-->
+<!--            <div class="flex items-center mb-2">-->
+<!--                <div class="flex items-center">-->
+<!--                    <div class="flex space-x-1">-->
+<!--          <span th:each="i : ${#numbers.sequence(1, 5)}">-->
+<!--            <svg th:if="${i <= r.rating}" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400 fill-current" viewBox="0 0 20 20" fill="currentColor">-->
+<!--              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />-->
+<!--            </svg>-->
+<!--            <svg th:if="${i > r.rating}" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+<!--              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />-->
+<!--            </svg>-->
+<!--          </span>-->
+<!--                    </div>-->
+<!--                    <span class="ml-2 text-gray-700">(<span th:text="${r.rating}"></span>/5)</span>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Line 3: Comment section &ndash;&gt;-->
+<!--            <div class="mb-4">-->
+<!--                <p class="text-gray-700" th:text="${r.comment}"></p>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash; Divider - bigger spacing between reviews &ndash;&gt;-->
+<!--            <div class="border-b border-gray-200 mb-8" th:if="${!rStat.last}"></div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Empty state &ndash;&gt;-->
+<!--        <div class="text-center py-8" th:if="${#lists.isEmpty(reviews)}">-->
+<!--            <p class="text-gray-500">Chưa có đánh giá nào</p>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+
+    <div class="bg-[#fffaf5] rounded-2xl shadow-[0_5px_20px_rgba(0,0,0,0.12)]
+            p-8 max-w-4xl mx-auto border border-[#f1d2b5] mt-10">
+
+        <!-- Title -->
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-3xl font-bold text-[#a86f3b]">
+                Đánh giá khách hàng
+            </h2>
+
+            <div class="bg-[#dea069] text-white px-4 py-2 rounded-xl text-sm font-medium shadow">
+                <span th:text="${reviews.size()}"></span> đánh giá
+            </div>
+        </div>
+
+        <!-- Reviews -->
+        <div th:each="r, rStat : ${reviews}"
+             class="bg-white rounded-2xl p-6 mb-6 border border-[#f3dfcb]
+                hover:shadow-lg transition-all duration-300">
+
+            <!-- User + date -->
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-[45px] h-[45px] rounded-full
+                            bg-[#dea069] text-white
+                            flex items-center justify-center
+                            text-lg font-bold uppercase">
+                        <span th:text="${#strings.substring(r.user.username,0,1)}"></span>
+                    </div>
+
+                    <div>
+                        <p class="text-[17px] font-semibold text-[#8c5a2b]"
+                           th:text="${r.user.username}">
+                        </p>
+
+                        <p class="text-sm text-gray-500">
+                            Khách hàng đã mua sản phẩm
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Rating -->
+                <div class="flex items-center gap-1 bg-[#fff4e8] px-3 py-2 rounded-xl">
+                <span th:each="i : ${#numbers.sequence(1, 5)}">
+
+                    <!-- Star filled -->
+                    <svg th:if="${i <= r.rating}"
+                         xmlns="http://www.w3.org/2000/svg"
+                         class="h-5 w-5 text-yellow-400 fill-current"
+                         viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+
+                    <!-- Star empty -->
+                    <svg th:if="${i > r.rating}"
+                         xmlns="http://www.w3.org/2000/svg"
+                         class="h-5 w-5 text-yellow-400"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118L2.98 10.1c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                    </svg>
+
+                </span>
+
+                    <span class="ml-2 text-[#8c5a2b] font-medium text-sm">
+                    <span th:text="${r.rating}"></span>/5
+                </span>
+                </div>
+            </div>
+
+            <!-- Comment -->
+            <div class="bg-[#fffaf5] rounded-xl p-5 border border-[#f5e3cf]">
+                <p class="text-gray-700 leading-7 text-[16px]"
+                   th:text="${r.comment}">
+                </p>
+            </div>
+        </div>
+
+        <!-- Empty -->
+        <div class="text-center py-10"
+             th:if="${#lists.isEmpty(reviews)}">
+
+            <div class="flex flex-col items-center">
+                <div class="w-[80px] h-[80px] rounded-full
+                        bg-[#fde7d2] flex items-center
+                        justify-center mb-4">
+
+                    <box-icon name='message-rounded-detail'
+                              color='#a86f3b'
+                              size="50px">
+                    </box-icon>
+
+                </div>
+
+                <p class="text-[#a86f3b] text-xl font-semibold mb-2">
+                    Chưa có đánh giá nào
+                </p>
+
+                <p class="text-gray-500">
+                    Hãy trở thành người đầu tiên đánh giá sản phẩm này
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="w-[100vw] mt-[200px] mb-5 ml-1 flex-col text-center mb-10">
+        <div class="text-lg font-medium text-gray-600 text-center mb-2">
+            © 2025 Bản quyền thuộc về TH Shop
+        </div>
+        <div class="text-lg font-normal text-gray-600 text-center">
+            Cảm ơn quý khách đã tin tưởng và ủng hộ cửa hàng!
+        </div>
+        <div class="text-lg font-normal text-gray-600 text-center mb-3">
+            Thông tin liên hệ
+        </div>
+        <div class="flex flex-row text-center absolute left-[50%] -translate-x-[50%]">
+            <div class="flex flex-row">
+                <box-icon name='facebook-circle' type='logo' color='rgba(0,0,0,0.70)' ></box-icon>
+                <a target="_blank" class="mr-8 w-[150px] text-gray-700 hover:text-[#009432]" href="https://www.facebook.com/holahuliba">Nguyễn Tiến Hưng</a>
+            </div>
+
+            <div class="flex flex-row">
+                <box-icon name='phone' type='solid' color='rgba(0,0,0,0.70)' ></box-icon>
+                <p class="mr-8 w-[100px] text-gray-700 hover:text-[#009432]">0327644604</p>
+            </div>
+
+            <div class="flex flex-row">
+                <box-icon name='envelope' color='rgba(0,0,0,0.70)' ></box-icon>
+                <a target="_blank" class="mr-8 w-[280px] text-gray-700 hover:text-[#009432]" href="https://mail.google.com/mail/u/0/?pli=1#inbox">nguyentienhung04042004gmail.com</a>
+            </div>
+
+            <div class="flex flex-row">
+                <box-icon name='instagram' type='logo' color='rgba(0,0,0,0.70)' ></box-icon>
+                <a target="_blank" class="w-[150px] text-gray-700 hover:text-[#009432]" href="https://www.instagram.com/holahuliba/">Nguyễn Tiến Hưng</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+<!--        document.getElementById("gotoPage1").addEventListener("click", function() {-->
+<!--            window.location.href = "trangchu.html";-->
+<!--        });-->
+<!--        document.getElementById("gotoPage2").addEventListener("click", function() {-->
+<!--            window.location.href = "giohang.html";-->
+<!--        });-->
+<!--        document.getElementById("gotoPage3").addEventListener("click", function() {-->
+<!--            window.location.href = "lichsu.html";-->
+<!--        });-->
+<!--        document.getElementById("gotoPage4").addEventListener("click", function() {-->
+<!--            window.location.href = "thongtin.html";-->
+<!--        });-->
+    </script>
+<div th:replace="~{fragments/chatbox :: chatbox}"></div>
+</body>
+</html>
