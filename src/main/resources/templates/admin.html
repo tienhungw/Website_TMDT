@@ -21,89 +21,424 @@
                 <a id="gotoPage1" class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/admin/products">Sản phẩm</a>
                 <a id="gotoPage2" class="cursor-pointer" href="/admin/order">Đơn đặt hàng</a>
                 <a id="gotoPage3" class="cursor-pointer" href="/admin/customer">Khách hàng</a>
-                <a id="gotoPage4" class="cursor-pointer" href="/logout">Đăng xuất</a>
+                <a id="gotoPage4" class="cursor-pointer" href="/logout" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất không?')">Đăng xuất</a>
             </div>
         </div>
     </div>
 
-    <div class="w-[80vw] h-fit">
-        <p class="text-3xl font-normal text-[#dea069]">TRANG CỦA NGƯỜI QUẢN LÝ</p>
-        <div class="flex flex-row justify-between mt-8">
-            <p class="text-2xl font-normal text-black">Danh sách tất cả các sản phẩm</p>
-            <form method = "get" action = "/admin/new-products">
-                <button class="text-xl font-medium text-white w-[200px] h-[50px] bg-[#dea069] hover:bg-[#ffa801] rounded-xl mb-2 cursor-pointer" id="tsp">
-                    Thêm sản phẩm
-                </button>
-            </form>
-            <form method = "get" action = "/admin/new-ctkm">
-                <button class="text-xl font-medium text-white w-[200px] h-[50px] bg-[#dea069] hover:bg-[#ffa801] rounded-xl mb-2 cursor-pointer" id="ctkm">
-                    Thay đổi CTKM
-                </button>
-            </form>
+<!--    <div class="w-[80vw] h-fit">-->
+<!--        <p class="text-3xl font-normal text-[#dea069]">TRANG CỦA NGƯỜI QUẢN LÝ</p>-->
+<!--        <div class="flex flex-row justify-between mt-8">-->
+<!--            <p class="text-2xl font-normal text-black">Danh sách tất cả các sản phẩm</p>-->
+<!--            <form method = "get" action = "/admin/new-products">-->
+<!--                <button class="text-xl font-medium text-white w-[200px] h-[50px] bg-[#dea069] hover:bg-[#ffa801] rounded-xl mb-2 cursor-pointer" id="tsp">-->
+<!--                    Thêm sản phẩm-->
+<!--                </button>-->
+<!--            </form>-->
+<!--            <form method = "get" action = "/admin/new-ctkm">-->
+<!--                <button class="text-xl font-medium text-white w-[200px] h-[50px] bg-[#dea069] hover:bg-[#ffa801] rounded-xl mb-2 cursor-pointer" id="ctkm">-->
+<!--                    Thay đổi CTKM-->
+<!--                </button>-->
+<!--            </form>-->
+
+<!--        </div>-->
+<!--        <div class="mt-2">-->
+<!--            <table class="min-w-full border border-white table-fixed border-collapse" style="table-layout: fixed;">-->
+<!--                <thead>-->
+<!--                    <tr class="bg-[#dea069]">-->
+<!--                        <th class="border border-white w-[80px] h-[40px] text-white text-lg font-medium">Tên sản phẩm</th>-->
+<!--                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Phân loại</th>-->
+<!--                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Hình ảnh</th>-->
+<!--                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Giá bán</th>-->
+<!--                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Tồn Kho</th>-->
+<!--                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Thao tác</th>-->
+<!--                    </tr>-->
+<!--                </thead>-->
+<!--                <tbody class="bg-[#dfe4ea] justify-center items-center">-->
+<!--                    <tr th:each="product : ${Products}">-->
+<!--                        <td th:text="${product.name}" class="border border-white w-[240px] p-2 overflow-hidden text-ellipsis whitespace-normal"></td>-->
+<!--                        <td th:text="${product.category.name}" class="border border-white w-[150px] p-2 text-center justify-center items-center"></td>-->
+<!--                        <td class="border border-white w-[150px] p-1 text-center justify-center items-center">-->
+<!--                            <div class="w-full h-full text-center justify-center items-center relative">-->
+<!--                                <div class="text-center justify-center items-center w-fit ml-[50%] -translate-x-1/2">-->
+<!--                                    <img th:src="@{${product.imageUrl}}" class="w-[100px]">-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--&lt;!&ndash;                        <td th:text="${product.imageUrl}" class="border border-white w-[150px] p-2 text-center">900000</td>&ndash;&gt;-->
+<!--                        <td th:text="${product.price}" class="border border-white w-[150px] p-2 text-center"></td>-->
+<!--                        <td th:text="${product.quantity}" class="border border-white w-[150px] p-2 text-center"></td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center">-->
+<!--                            <div class="flex flex-col gap-1">-->
+<!--                                <div class="">-->
+<!--                                    <button class="text-lg font-medium text-white w-[120px] h-auto bg-[#e58e26] hover:bg-[#fa983a] rounded-xl cursor-pointer mb-1"-->
+<!--                                            th:if="${product.id != null}"-->
+<!--                                            th:onclick="|window.location.href='/admin/edit-products/' + ${product.id}|">-->
+<!--                                        Chỉnh sửa-->
+<!--                                    </button>-->
+
+<!--                                    <form th:action="@{'/admin/delete-products/'+${product.id}}" method="delete" onsubmit="return confirm('Bạn có chắc muốn xóa sản phẩm này không?')" style="display: inline;">-->
+<!--                                        <button class="text-lg font-medium text-white w-[120px] h-auto bg-[#EE5A24] hover:bg-[#EA2027] rounded-xl cursor-pointer"-->
+<!--                                                type="submit">-->
+<!--                                            Xóa-->
+<!--                                        </button>-->
+<!--                                    </form>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--            <div class="pagination mt-4 text-lg font-medium">-->
+<!--            <span th:if="${currentPage > 0}">-->
+<!--                <a th:href="@{/admin/products(page=${currentPage - 1}, size=${size})}">Previous</a>-->
+<!--            </span>-->
+<!--            <span th:each="i : ${#numbers.sequence(0, totalPages-1)}">-->
+<!--                <a th:href="@{/admin/products( page=${i}, size=${size})}"-->
+<!--                   th:text="${i + 1}" th:classappend="${i == currentPage} ? 'active'"></a>-->
+<!--            </span>-->
+<!--            <span th:if="${currentPage < totalPages - 1}">-->
+<!--                <a th:href="@{/admin/products( page=${currentPage + 1}, size=${size})}">Next</a>-->
+<!--            </span>-->
+<!--            </div>-->
+<!--            -->
+<!--        </div>-->
+<!--    </div>-->
+
+
+    <div class="w-[92vw] max-w-[1600px] h-fit">
+
+        <!-- Title -->
+        <div class="flex items-center justify-between mb-8">
+
+            <div>
+                <p class="text-4xl font-bold text-[#8c5a2b] mb-2">
+                    TRANG QUẢN LÝ SẢN PHẨM
+                </p>
+
+                <p class="text-lg text-[#b27b48]">
+                    Quản lý toàn bộ sản phẩm của cửa hàng
+                </p>
+            </div>
+
+            <div class="flex gap-4">
+
+                <form method="get" action="/admin/new-products">
+                    <button class="text-lg font-semibold text-white
+                           w-[210px] h-[52px]
+                           bg-gradient-to-r from-[#dea069] to-[#c88447]
+                           hover:scale-[1.03]
+                           hover:shadow-xl
+                           rounded-2xl
+                           transition duration-300
+                           cursor-pointer"
+                            id="tsp">
+
+                        + Thêm sản phẩm
+
+                    </button>
+                </form>
+
+                <form method="get" action="/admin/new-ctkm">
+                    <button class="text-lg font-semibold text-white
+                           w-[220px] h-[52px]
+                           bg-gradient-to-r from-[#e58e26] to-[#fa983a]
+                           hover:scale-[1.03]
+                           hover:shadow-xl
+                           rounded-2xl
+                           transition duration-300
+                           cursor-pointer"
+                            id="ctkm">
+
+                        Chương trình KM
+
+                    </button>
+                </form>
+
+            </div>
 
         </div>
-        <div class="mt-2">
-            <table class="min-w-full border border-white table-fixed border-collapse" style="table-layout: fixed;">
-                <thead>
-                    <tr class="bg-[#dea069]">
-                        <th class="border border-white w-[80px] h-[40px] text-white text-lg font-medium">Tên sản phẩm</th>
-                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Phân loại</th>
-                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Hình ảnh</th>
-                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Giá bán</th>
-                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Tồn Kho</th>
-                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Thao tác</th>
+
+        <!-- Table Card -->
+        <div class="bg-[#fffaf5]
+            rounded-[30px]
+            border border-[#f0d7be]
+            shadow-[0_15px_40px_rgba(0,0,0,0.08)]
+            overflow-hidden">
+
+            <!-- Header -->
+            <div class="flex justify-between items-center
+                px-8 py-6
+                bg-[#fff4e8]
+                border-b border-[#f3dfcb]">
+
+                <div class="flex items-center gap-4">
+
+                    <div class="w-[60px] h-[60px]
+                        rounded-2xl
+                        bg-[#dea069]
+                        flex items-center justify-center
+                        shadow-md">
+
+                        <box-icon name='camera'
+                                  color='white'
+                                  size='md'>
+                        </box-icon>
+
+                    </div>
+
+                    <div>
+
+                        <p class="text-2xl font-bold text-[#8c5a2b]">
+                            Danh sách sản phẩm
+                        </p>
+
+                        <p class="text-gray-500">
+                            Quản lý thông tin sản phẩm trong hệ thống
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="bg-[#dea069]
+                    text-white
+                    px-5 py-3
+                    rounded-2xl
+                    font-semibold
+                    shadow">
+
+                    <span th:text="${Products.size()}"></span>
+                    sản phẩm
+
+                </div>
+
+            </div>
+
+            <!-- Table -->
+            <div class="overflow-x-auto">
+
+                <table class="min-w-full border-collapse">
+
+                    <thead>
+
+                    <tr class="bg-[#dea069] text-white">
+
+                        <th class="px-6 py-5 text-center text-lg font-semibold">
+                            Tên sản phẩm
+                        </th>
+
+                        <th class="px-6 py-5 text-center text-lg font-semibold">
+                            Phân loại
+                        </th>
+
+                        <th class="px-6 py-5 text-center text-lg font-semibold">
+                            Hình ảnh
+                        </th>
+
+                        <th class="px-6 py-5 text-center text-lg font-semibold">
+                            Giá bán
+                        </th>
+
+                        <th class="px-6 py-5 text-center text-lg font-semibold">
+                            Tồn kho
+                        </th>
+
+                        <th class="px-6 py-5 text-center text-lg font-semibold">
+                            Thao tác
+                        </th>
+
                     </tr>
-                </thead>
-                <tbody class="bg-[#dfe4ea] justify-center items-center">
-                    <tr th:each="product : ${Products}">
-                        <td th:text="${product.name}" class="border border-white w-[240px] p-2 overflow-hidden text-ellipsis whitespace-normal"></td>
-                        <td th:text="${product.category.name}" class="border border-white w-[150px] p-2 text-center justify-center items-center"></td>
-                        <td class="border border-white w-[150px] p-1 text-center justify-center items-center">
-                            <div class="w-full h-full text-center justify-center items-center relative">
-                                <div class="text-center justify-center items-center w-fit ml-[50%] -translate-x-1/2">
-                                    <img th:src="@{${product.imageUrl}}" class="w-[100px]">
-                                </div>
-                            </div>
+
+                    </thead>
+
+                    <tbody class="bg-white">
+
+                    <tr th:each="product : ${Products}"
+                        class="border-b border-[#f6e5d3]
+                       hover:bg-[#fff8f1]
+                       transition duration-200">
+
+                        <!-- Product Name -->
+                        <td th:text="${product.name}"
+                            class="px-6 py-5
+                           text-gray-800
+                           font-semibold
+                           leading-7">
                         </td>
-<!--                        <td th:text="${product.imageUrl}" class="border border-white w-[150px] p-2 text-center">900000</td>-->
-                        <td th:text="${product.price}" class="border border-white w-[150px] p-2 text-center"></td>
-                        <td th:text="${product.quantity}" class="border border-white w-[150px] p-2 text-center"></td>
-                        <td class="border border-white w-[150px] p-2 text-center">
-                            <div class="flex flex-col gap-1">
-                                <div class="">
-                                    <button class="text-lg font-medium text-white w-[120px] h-auto bg-[#e58e26] hover:bg-[#fa983a] rounded-xl cursor-pointer mb-1"
-                                            th:if="${product.id != null}"
-                                            th:onclick="|window.location.href='/admin/edit-products/' + ${product.id}|">
-                                        Chỉnh sửa
+
+                        <!-- Category -->
+                        <td th:text="${product.category.name}"
+                            class="px-6 py-5
+                           text-center
+                           text-gray-700
+                           font-medium">
+                        </td>
+
+                        <!-- Image -->
+                        <td class="px-6 py-5 text-center">
+
+                            <div class="flex justify-center">
+
+                                <img th:src="@{${product.imageUrl}}"
+                                     class="w-[110px]
+                                    h-[90px]
+                                    object-cover
+                                    rounded-2xl
+                                    border border-[#f0d7be]
+                                    shadow-md
+                                    hover:scale-105
+                                    transition duration-300">
+
+                            </div>
+
+                        </td>
+
+                        <!-- Price -->
+                        <td class="px-6 py-5 text-center">
+
+                        <span class="bg-[#fff1e4]
+                                     text-[#c26d1d]
+                                     px-4 py-2
+                                     rounded-xl
+                                     font-bold"
+                              th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} + ' VND'">
+                        </span>
+
+                        </td>
+
+                        <!-- Quantity -->
+                        <td class="px-6 py-5 text-center">
+
+                        <span class="px-4 py-2
+                                     rounded-xl
+                                     font-bold
+                                     text-white"
+                              th:classappend="${product.quantity <= 5} ? ' bg-red-500' :
+                                              (${product.quantity <= 15} ? ' bg-yellow-500' : ' bg-green-600')"
+                              th:text="${product.quantity}">
+                        </span>
+
+                        </td>
+
+                        <!-- Action -->
+                        <td class="px-6 py-5 text-center">
+
+                            <div class="flex flex-col items-center gap-3">
+
+                                <button class="text-white
+                                       font-semibold
+                                       w-[130px]
+                                       h-[42px]
+                                       bg-gradient-to-r from-[#e58e26] to-[#fa983a]
+                                       hover:shadow-lg
+                                       hover:scale-[1.03]
+                                       rounded-xl
+                                       transition duration-300
+                                       cursor-pointer"
+                                        th:if="${product.id != null}"
+                                        th:onclick="|window.location.href='/admin/edit-products/' + ${product.id}|">
+
+                                    Chỉnh sửa
+
+                                </button>
+
+                                <form th:action="@{'/admin/delete-products/'+${product.id}}"
+                                      method="delete"
+                                      onsubmit="return confirm('Bạn có chắc muốn xóa sản phẩm này không?')"
+                                      style="display: inline;">
+
+                                    <button class="text-white
+                                           font-semibold
+                                           w-[130px]
+                                           h-[42px]
+                                           bg-gradient-to-r from-[#ee5a24] to-[#ea2027]
+                                           hover:shadow-lg
+                                           hover:scale-[1.03]
+                                           rounded-xl
+                                           transition duration-300
+                                           cursor-pointer"
+                                            type="submit">
+
+                                        Xóa
+
                                     </button>
 
-                                    <form th:action="@{'/admin/delete-products/'+${product.id}}" method="delete" onsubmit="return confirm('Bạn có chắc muốn xóa sản phẩm này không?')" style="display: inline;">
-                                        <button class="text-lg font-medium text-white w-[120px] h-auto bg-[#EE5A24] hover:bg-[#EA2027] rounded-xl cursor-pointer"
-                                                type="submit">
-                                            Xóa
-                                        </button>
-                                    </form>
-                                </div>
+                                </form>
+
                             </div>
+
                         </td>
+
                     </tr>
-                </tbody>
-            </table>
-            <div class="pagination mt-4 text-lg font-medium">
-            <span th:if="${currentPage > 0}">
-                <a th:href="@{/admin/products(page=${currentPage - 1}, size=${size})}">Previous</a>
-            </span>
-            <span th:each="i : ${#numbers.sequence(0, totalPages-1)}">
-                <a th:href="@{/admin/products( page=${i}, size=${size})}"
-                   th:text="${i + 1}" th:classappend="${i == currentPage} ? 'active'"></a>
-            </span>
-            <span th:if="${currentPage < totalPages - 1}">
-                <a th:href="@{/admin/products( page=${currentPage + 1}, size=${size})}">Next</a>
-            </span>
+
+                    </tbody>
+
+                </table>
+
             </div>
-            
+
+            <!-- Pagination -->
+            <div class="flex justify-center items-center gap-3 py-8 bg-[#fffaf5]">
+
+            <span th:if="${currentPage > 0}">
+                <a th:href="@{/admin/products(page=${currentPage - 1}, size=${size})}"
+                   class="px-5 py-2
+                      rounded-xl
+                      bg-[#f1dfcb]
+                      text-[#8c5a2b]
+                      font-semibold
+                      hover:bg-[#dea069]
+                      hover:text-white
+                      transition">
+
+                    Previous
+
+                </a>
+            </span>
+
+                <span th:each="i : ${#numbers.sequence(0, totalPages-1)}">
+
+                <a th:href="@{/admin/products(page=${i}, size=${size})}"
+                   th:text="${i + 1}"
+                   class="w-[42px] h-[42px]
+                      inline-flex
+                      items-center
+                      justify-center
+                      rounded-xl
+                      font-semibold
+                      transition"
+                   th:classappend="${i == currentPage}
+                   ? ' bg-[#dea069] text-white shadow-lg'
+                   : ' bg-[#f5e6d6] text-[#8c5a2b] hover:bg-[#dea069] hover:text-white'">
+                </a>
+
+            </span>
+
+                <span th:if="${currentPage < totalPages - 1}">
+                <a th:href="@{/admin/products(page=${currentPage + 1}, size=${size})}"
+                   class="px-5 py-2
+                      rounded-xl
+                      bg-[#f1dfcb]
+                      text-[#8c5a2b]
+                      font-semibold
+                      hover:bg-[#dea069]
+                      hover:text-white
+                      transition">
+
+                    Next
+
+                </a>
+            </span>
+
+            </div>
+
         </div>
+
     </div>
+
+
+
 
     <div class="w-[60vw] h-[30px] mt-[100px] mb-5">
         <p class="text-lg font-nomarl text-gray-600 text-center">

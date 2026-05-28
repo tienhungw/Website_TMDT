@@ -30,7 +30,7 @@
                 <a id="gotoPage2" class="cursor-pointer" href="/user/cart">Giỏ hàng</a>
                 <a id="gotoPage3" class="cursor-pointer" href="/user/history">Lịch sử</a>
                 <a id="gotoPage4" class="cursor-pointer" href="/user/about">Thông tin</a>
-                <a id="gotoPage5" class="cursor-pointer" href="/logout">Đăng xuất</a>
+                <a id="gotoPage5" class="cursor-pointer" href="/logout" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất không?')">Đăng xuất</a>
             </div>
         </div>
     </div>
@@ -39,26 +39,143 @@
         <p class="text-3xl font-normal text-[#a86f3b] mb-10">CHI TIẾT SẢN PHẨM</p>
 
 
-        <div class="flex flex-row gap-[50px]">
-            <div class="w-[350px] h-[350px] rounded-lg">
-                <img class="w-[350px] h-[350px] rounded-lg" th:src="@{${product.imageUrl}}"
+<!--        <div class="flex flex-row gap-[50px]">-->
+<!--            <div class="w-[350px] h-[350px] rounded-lg">-->
+<!--                <img class="w-[350px] h-[350px] rounded-lg" th:src="@{${product.imageUrl}}"-->
+<!--                     alt="">-->
+<!--            </div>-->
+<!--            <div class="w-[500px] h-[350px] rounded-lg">-->
+<!--                <p class="w-[500px] h-[100px] rounded-lg text-3xl font-medium text-[#a86f3b]" th:text="${product.name}"></p>-->
+<!--                <p class="w-[500px] h-[50px] rounded-lg text-lg font-medium text-[#a86f3b]" th:text="${product.price}"></p>-->
+<!--                <p class="w-[500px] h-[200px] rounded-lg text-lg font-normal"th:text="${product.description}"></p>-->
+<!--            </div>-->
+<!--        </div>-->
+
+
+        <div class="flex flex-row gap-[60px]
+            bg-[#fffaf5]
+            p-8
+            rounded-3xl
+            border border-[#f1d2b5]
+            shadow-[0_10px_30px_rgba(0,0,0,0.10)]">
+
+            <!-- Image -->
+            <div class="w-[380px] h-[380px]
+                overflow-hidden
+                rounded-3xl
+                border border-[#f3dfcb]
+                bg-white
+                shadow-[0_5px_20px_rgba(0,0,0,0.08)]">
+
+                <img class="w-full h-full
+                    object-cover
+                    hover:scale-105
+                    transition duration-500"
+                     th:src="@{${product.imageUrl}}"
                      alt="">
             </div>
-            <div class="w-[500px] h-[350px] rounded-lg">
-                <p class="w-[500px] h-[100px] rounded-lg text-3xl font-medium text-[#a86f3b]" th:text="${product.name}"></p>
-                <p class="w-[500px] h-[50px] rounded-lg text-lg font-medium text-[#a86f3b]" th:text="${product.price}"></p>
-                <p class="w-[500px] h-[200px] rounded-lg text-lg font-normal"th:text="${product.description}"></p>
+
+            <!-- Product Info -->
+            <div class="flex flex-col justify-between
+                w-[500px]">
+
+                <!-- Product Name -->
+                <div>
+                    <p class="text-4xl
+                      leading-[52px]
+                      font-bold
+                      text-[#8c5a2b]
+                      mb-6"
+                       th:text="${product.name}">
+                    </p>
+
+                    <!-- Price -->
+                    <div class="flex items-center gap-4 mb-6">
+
+                        <div class="bg-[#dea069]
+                            px-6 py-3
+                            rounded-2xl
+                            shadow-md">
+
+                            <p class="text-2xl
+                              font-bold
+                              text-white"
+                               th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') + ' VND'}">
+                            </p>
+                        </div>
+
+                        <div class="bg-[#fff1e4]
+                            px-4 py-2
+                            rounded-xl
+                            border border-[#f3d6b8]">
+
+                            <p class="text-[#a86f3b]
+                              font-medium">
+                                Premium Product
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="bg-white
+                        rounded-2xl
+                        border border-[#f5e3cf]
+                        p-5
+                        shadow-sm">
+
+                        <p class="text-[17px]
+                          text-gray-700
+                          leading-8"
+                           th:text="${product.description}">
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </div>
+
+
+
         <!-- Form thêm vào giỏ hàng -->
         <form th:action="@{/user/home/add}" method="post" class="mt-5 flex flex-col gap-4">
             <!-- ID sản phẩm (ẩn) -->
             <input type="hidden" name="productId" th:value="${product.id}">
             <!-- Ô nhập số lượng -->
-            <div class="flex items-center gap-2">
-                <label for="quantity" class="text-lg font-medium">Số lượng:</label>
-                <input type="number" name="quantity" id="quantity" value="1" min="1" class="w-[80px] h-[40px] border border-gray-300 rounded-lg text-center">
+<!--            <div class="flex items-center gap-2">-->
+<!--                <label for="quantity" class="text-lg font-medium">Số lượng:</label>-->
+<!--                <input type="number" name="quantity" id="quantity" value="1" min="1" class="w-[80px] h-[40px] border border-gray-300 rounded-lg text-center">-->
+<!--            </div>-->
+
+            <div class="flex items-center gap-4 mt-6 bg-[#fff4e8] w-fit px-5 py-4 rounded-2xl border border-[#f0d8c2] shadow-sm">
+
+                <label for="quantity"
+                       class="text-[18px] font-semibold text-[#8c5a2b] tracking-wide">
+                    Số lượng:
+                </label>
+
+                <input type="number"
+                       name="quantity"
+                       id="quantity"
+                       value="1"
+                       min="1"
+                       class="w-[90px]
+                  h-[45px]
+                  border-2 border-[#e7c6a5]
+                  rounded-xl
+                  text-center
+                  text-lg
+                  font-semibold
+                  text-[#8c5a2b]
+                  bg-white
+                  outline-none
+                  focus:border-[#dea069]
+                  focus:ring-4
+                  focus:ring-[#f7d7b8]
+                  transition duration-300
+                  shadow-sm">
             </div>
+
+
 
             <!-- Nút thêm vào giỏ hàng -->
             <button type="submit" class="bg-[#dea069] hover:bg-[#ffa801] w-[200px] h-[50px] text-lg font-medium rounded-lg mt-4 text-white cursor-pointer">

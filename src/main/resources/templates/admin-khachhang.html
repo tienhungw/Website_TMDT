@@ -24,44 +24,142 @@
                 <a id="gotoPage1" class="cursor-pointer" href="/admin/products">Sản phẩm</a>
                 <a id="gotoPage2" class="cursor-pointer" href="/admin/order">Đơn đặt hàng</a>
                 <a id="gotoPage3" class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/admin/customer">Khách hàng</a>
-                <a id="gotoPage4" class="cursor-pointer" href="/logout">Đăng xuất</a>
+                <a id="gotoPage4" class="cursor-pointer" href="/logout" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất không?')">Đăng xuất</a>
             </div>
         </div>
     </div>
 
-    <div class="w-[80vw] h-fit relative">
-        <p class="text-3xl font-normal text-[#dea069]">TRANG CỦA NGƯỜI QUẢN LÝ</p>
-        <div class="flex flex-row justify-between mt-8 mb-6">
-            <p class="text-2xl font-normal text-black">Danh sách người dùng</p>
-        </div>
-        <div>
-            <table class="min-w-full border border-white table-fixed border-collapse">
-                <thead>
-                    <tr class="bg-[#dea069]">
-                        <th class="border border-white w-[150px] h-[40px] text-white text-lg font-medium">Username</th>
-                        <th class="border border-white w-[150px] h-[40px] text-white text-lg font-medium">Fullname</th>
-                        <th class="border border-white w-[150px] h-[40px] text-white text-lg font-medium">Phone</th>
-                        <th class="border border-white w-[250px] h-[40px] text-white text-lg font-medium">Email</th>
-                        <th class="border border-white w-[150px] h-[40px] text-white text-lg font-medium">Address</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-[#dfe4ea] justify-center items-center">
-<!--                    <tr>-->
-<!--                        <td class="border border-white w-[150px] p-2 text-center">tienhungw_04</td>-->
-<!--                        <td class="border border-white w-[200px] p-2 text-center">nguyentienhung04042004@gmail.com</td>-->
-<!--                        <td class="border border-white w-[150px] p-2 text-center">tienhung123</td>-->
+<!--    <div class="w-[80vw] h-fit relative">-->
+<!--        <p class="text-3xl font-normal text-[#dea069]">TRANG CỦA NGƯỜI QUẢN LÝ</p>-->
+<!--        <div class="flex flex-row justify-between mt-8 mb-6">-->
+<!--            <p class="text-2xl font-normal text-black">Danh sách người dùng</p>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <table class="min-w-full border border-white table-fixed border-collapse">-->
+<!--                <thead>-->
+<!--                    <tr class="bg-[#dea069]">-->
+<!--                        <th class="border border-white w-[150px] h-[40px] text-white text-lg font-medium">Username</th>-->
+<!--                        <th class="border border-white w-[150px] h-[40px] text-white text-lg font-medium">Fullname</th>-->
+<!--                        <th class="border border-white w-[150px] h-[40px] text-white text-lg font-medium">Phone</th>-->
+<!--                        <th class="border border-white w-[250px] h-[40px] text-white text-lg font-medium">Email</th>-->
+<!--                        <th class="border border-white w-[150px] h-[40px] text-white text-lg font-medium">Address</th>-->
 <!--                    </tr>-->
-                    <tr th:each="user : ${users}">
-                        <td th:text="${user.username}" class="border border-white w-[150px] p-2 text-center"></td>
-                        <td th:text="${user.full_name}" class="border border-white w-[200px] p-2 text-center"></td>
-                        <td th:text="${user.phone}" class="border border-white w-[150px] p-2 text-center"></td>
-                        <td th:text="${user.email}" class="border border-white w-[150px] p-2 text-center"></td>
-                        <td th:text="${user.address}" class="border border-white w-[150px] p-2 text-center"></td>
+<!--                </thead>-->
+<!--                <tbody class="bg-[#dfe4ea] justify-center items-center">-->
+<!--&lt;!&ndash;                    <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 text-center">tienhungw_04</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[200px] p-2 text-center">nguyentienhung04042004@gmail.com</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 text-center">tienhung123</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </tr>&ndash;&gt;-->
+<!--                    <tr th:each="user : ${users}">-->
+<!--                        <td th:text="${user.username}" class="border border-white w-[150px] p-2 text-center"></td>-->
+<!--                        <td th:text="${user.full_name}" class="border border-white w-[200px] p-2 text-center"></td>-->
+<!--                        <td th:text="${user.phone}" class="border border-white w-[150px] p-2 text-center"></td>-->
+<!--                        <td th:text="${user.email}" class="border border-white w-[150px] p-2 text-center"></td>-->
+<!--                        <td th:text="${user.address}" class="border border-white w-[150px] p-2 text-center"></td>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+
+<!--    </div>-->
+
+
+
+
+    <div class="w-[85vw] h-fit relative bg-white rounded-3xl shadow-[0_10px_35px_rgba(0,0,0,0.08)] p-8">
+
+        <!-- Title -->
+        <p class="text-4xl font-bold text-[#dea069] tracking-wide mb-8">
+            TRANG CỦA NGƯỜI QUẢN LÝ
+        </p>
+
+        <!-- Header -->
+        <div class="flex flex-row justify-between items-center mb-8">
+            <p class="text-3xl font-semibold text-gray-800">
+                Danh sách người dùng
+            </p>
+
+            <div class="bg-[#fff4e8] px-5 py-2 rounded-2xl border border-[#f5d7b8] shadow-sm">
+            <span class="text-[#dea069] font-semibold text-lg">
+                Tổng:
+            </span>
+                <span class="text-gray-700 font-bold text-lg"
+                      th:text="${#lists.size(users)}">
+                0
+            </span>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="overflow-hidden rounded-3xl border border-[#f3e4d6] shadow-sm">
+
+            <table class="min-w-full table-fixed border-collapse">
+
+                <!-- Head -->
+                <thead>
+                <tr class="bg-[#dea069] text-white">
+
+                    <th class="w-[180px] h-[60px] text-lg font-semibold tracking-wide">
+                        Username
+                    </th>
+
+                    <th class="w-[220px] h-[60px] text-lg font-semibold tracking-wide">
+                        Fullname
+                    </th>
+
+                    <th class="w-[180px] h-[60px] text-lg font-semibold tracking-wide">
+                        Phone
+                    </th>
+
+                    <th class="w-[300px] h-[60px] text-lg font-semibold tracking-wide">
+                        Email
+                    </th>
+
+                    <th class="w-[250px] h-[60px] text-lg font-semibold tracking-wide">
+                        Address
+                    </th>
+
+                </tr>
+                </thead>
+
+                <!-- Body -->
+                <tbody class="bg-white">
+
+                <tr th:each="user : ${users}"
+                    class="border-b border-[#f3ece6] hover:bg-[#fffaf5] transition-all duration-200">
+
+                    <td th:text="${user.username}"
+                        class="p-4 text-center text-gray-700 font-medium">
+                    </td>
+
+                    <td th:text="${user.full_name}"
+                        class="p-4 text-center text-gray-800 font-semibold">
+                    </td>
+
+                    <td th:text="${user.phone}"
+                        class="p-4 text-center text-gray-700">
+                    </td>
+
+                    <td th:text="${user.email}"
+                        class="p-4 text-center text-[#e58e26] break-words">
+                    </td>
+
+                    <td th:text="${user.address}"
+                        class="p-4 text-center text-gray-700 break-words">
+                    </td>
+
+                </tr>
+
                 </tbody>
             </table>
+
         </div>
 
     </div>
+
+
+
+
 
     <div class="w-[60vw] h-[30px] mt-[100px] mb-5 ml-1">
         <p class="text-lg font-nomarl text-gray-600 text-center">

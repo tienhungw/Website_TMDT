@@ -30,43 +30,259 @@
                 <a id="gotoPage2" class="cursor-pointer" href="/user/cart">Giỏ hàng</a>
                 <a id="gotoPage3" class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/user/history">Lịch sử</a>
                 <a id="gotoPage4" class="cursor-pointer" href="/user/about">Thông tin</a>
-                <a id="gotoPage5" class="cursor-pointer" href="/logout">Đăng xuất</a>
+                <a id="gotoPage5" class="cursor-pointer" href="/logout" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất không?')">Đăng xuất</a>
             </div>
         </div>
     </div>
 
-    <div class="w-[80vw] h-fit relative">
-        <p class="text-3xl font-normal text-[#a86f3b] mb-6">LỊCH SỬ MUA HÀNG</p>
-        <p class="text-[27px] font-normal mb-10">Tất cả đơn hàng đã đặt</p>
-        <div>
-            <table class="min-w-full border border-white table-fixed border-collapse">
-                <thead>
-                    <tr class="bg-[#dea069]">
-                        <th class="border border-white w-[30px] h-[40px] text-white text-lg font-medium">Mã đơn</th>
-                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Họ tên</th>
-                        <th class="border border-white w-[60px] h-[40px] text-white text-lg font-medium">Địa chỉ</th>
-                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Giá trị</th>
-                        <th class="border border-white w-[70px] h-[40px] text-white text-lg font-medium">Trạng thái</th>
-                        <th class="border border-white w-[60px] h-[40px] text-white text-lg font-medium">Thao tác</th>
+<!--    <div class="w-[80vw] h-fit relative">-->
+<!--        <p class="text-3xl font-normal text-[#a86f3b] mb-6">LỊCH SỬ MUA HÀNG</p>-->
+<!--        <p class="text-[27px] font-normal mb-10">Tất cả đơn hàng đã đặt</p>-->
+<!--        <div>-->
+<!--            <table class="min-w-full border border-white table-fixed border-collapse">-->
+<!--                <thead>-->
+<!--                    <tr class="bg-[#dea069]">-->
+<!--                        <th class="border border-white w-[30px] h-[40px] text-white text-lg font-medium">Mã đơn</th>-->
+<!--                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Họ tên</th>-->
+<!--                        <th class="border border-white w-[60px] h-[40px] text-white text-lg font-medium">Địa chỉ</th>-->
+<!--                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Giá trị</th>-->
+<!--                        <th class="border border-white w-[70px] h-[40px] text-white text-lg font-medium">Trạng thái</th>-->
+<!--                        <th class="border border-white w-[60px] h-[40px] text-white text-lg font-medium">Thao tác</th>-->
+<!--                    </tr>-->
+<!--                </thead>-->
+<!--                <tbody class="bg-[#dfe4ea] justify-center items-center">-->
+<!--                    <tr th:each="order : ${orders}">-->
+<!--                        <td th:text="${order.id}" class="border border-white w-[100px] p-2 text-center overflow-hidden text-ellipsis whitespace-normal"></td>-->
+<!--                        <td th:text="${order.user.full_name}" class="border border-white w-[150px] p-2 text-center justify-center items-center"></td>-->
+<!--                        <td th:text="${order.user.address}" class="border border-white w-[200px] p-2 text-center"></td>-->
+<!--                        <td th:text="${order.totalPrice}" class="border border-white w-[150px] p-2 text-center"></td>-->
+<!--                        <td th:text="${order.status}" class="border border-white w-[150px] p-2 text-center"></td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center">-->
+<!--                            <div class="flex flex-col gap-1 items-center" id="lsct1">-->
+<!--                                <form th:action="@{'/user/order/'+${order.id}}" method="get"><button class="text-lg font-medium text-white w-[100px] h-[30px] bg-[#DAB10C] rounded-xl cursor-pointer">Chi tiết</button></form>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+
+
+    <div class="w-[92vw] max-w-[1500px] h-fit relative">
+
+        <!-- Title -->
+        <div class="mb-10">
+
+            <p class="text-4xl font-bold text-[#8c5a2b] mb-3">
+                LỊCH SỬ MUA HÀNG
+            </p>
+
+            <p class="text-xl text-[#b37a45]">
+                Tất cả đơn hàng đã đặt của bạn
+            </p>
+
+        </div>
+
+        <!-- Table Wrapper -->
+        <div class="bg-[#fffaf5]
+                rounded-3xl
+                border border-[#f1d2b5]
+                shadow-[0_10px_30px_rgba(0,0,0,0.08)]
+                overflow-hidden">
+
+            <!-- Header -->
+            <div class="flex items-center justify-between
+                    px-8 py-6
+                    border-b border-[#f3dfcb]
+                    bg-[#fff4e8]">
+
+                <div class="flex items-center gap-4">
+
+                    <div class="w-[55px] h-[55px]
+                            rounded-2xl
+                            bg-[#dea069]
+                            flex items-center
+                            justify-center
+                            shadow-md">
+
+                        <box-icon name='receipt'
+                                  color='white'>
+                        </box-icon>
+
+                    </div>
+
+                    <div>
+                        <p class="text-2xl font-bold text-[#8c5a2b]">
+                            Đơn hàng của bạn
+                        </p>
+
+                        <p class="text-gray-500">
+                            Theo dõi trạng thái đơn hàng
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="bg-[#dea069]
+                        text-white
+                        px-5 py-3
+                        rounded-2xl
+                        font-semibold
+                        shadow">
+
+                    <span th:text="${orders.size()}"></span>
+                    đơn hàng
+
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="overflow-x-auto">
+
+                <table class="min-w-full table-auto border-collapse">
+
+                    <thead>
+
+                    <tr class="bg-[#dea069] text-white">
+
+                        <th class="px-6 py-5 text-center text-lg font-semibold">
+                            Mã đơn
+                        </th>
+
+                        <th class="px-6 py-5 text-center text-lg font-semibold">
+                            Họ tên
+                        </th>
+
+                        <th class="px-6 py-5 text-center text-lg font-semibold">
+                            Địa chỉ
+                        </th>
+
+                        <th class="px-6 py-5 text-center text-lg font-semibold">
+                            Giá trị
+                        </th>
+
+                        <th class="px-6 py-5 text-center text-lg font-semibold">
+                            Trạng thái
+                        </th>
+
+                        <th class="px-6 py-5 text-center text-lg font-semibold">
+                            Thao tác
+                        </th>
+
                     </tr>
-                </thead>
-                <tbody class="bg-[#dfe4ea] justify-center items-center">
-                    <tr th:each="order : ${orders}">
-                        <td th:text="${order.id}" class="border border-white w-[100px] p-2 text-center overflow-hidden text-ellipsis whitespace-normal"></td>
-                        <td th:text="${order.user.full_name}" class="border border-white w-[150px] p-2 text-center justify-center items-center"></td>
-                        <td th:text="${order.user.address}" class="border border-white w-[200px] p-2 text-center"></td>
-                        <td th:text="${order.totalPrice}" class="border border-white w-[150px] p-2 text-center"></td>
-                        <td th:text="${order.status}" class="border border-white w-[150px] p-2 text-center"></td>
-                        <td class="border border-white w-[150px] p-2 text-center">
-                            <div class="flex flex-col gap-1 items-center" id="lsct1">
-                                <form th:action="@{'/user/order/'+${order.id}}" method="get"><button class="text-lg font-medium text-white w-[100px] h-[30px] bg-[#DAB10C] rounded-xl cursor-pointer">Chi tiết</button></form>
-                            </div>
+
+                    </thead>
+
+                    <tbody class="bg-white">
+
+                    <tr th:each="order : ${orders}"
+                        class="border-b border-[#f5e3cf]
+                           hover:bg-[#fff8f1]
+                           transition duration-200">
+
+                        <!-- Order ID -->
+                        <td th:text="${order.id}"
+                            class="px-6 py-5 text-center
+                               font-semibold
+                               text-[#8c5a2b]">
                         </td>
+
+                        <!-- Name -->
+                        <td th:text="${order.user.full_name}"
+                            class="px-6 py-5 text-center
+                               text-gray-700
+                               font-medium">
+                        </td>
+
+                        <!-- Address -->
+                        <td th:text="${order.user.address}"
+                            class="px-6 py-5 text-center
+                               text-gray-600
+                               leading-7">
+                        </td>
+
+                        <!-- Price -->
+                        <td class="px-6 py-5 text-center">
+
+                        <span class="bg-[#fff1e4]
+                                     text-[#c26d1d]
+                                     px-4 py-2
+                                     rounded-xl
+                                     font-bold"
+                              th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'POINT')} + ' VND'">
+                        </span>
+
+                        </td>
+
+                        <!-- Status -->
+                        <td class="px-6 py-5 text-center">
+
+                        <span
+                            class="px-4 py-2 rounded-xl font-semibold text-sm shadow-sm"
+
+                            th:classappend="
+                                ${order.status.name() == 'PENDING'} ? ' bg-[#fff4d6] text-[#c28a00] border border-[#f5d97b] ' :
+
+                                (${order.status.name() == 'PROCESSING'} ? ' bg-[#e3f2fd] text-[#1565c0] border border-[#90caf9] ' :
+
+                                (${order.status.name() == 'SHIPPING'} ? ' bg-[#ede7f6] text-[#6a1b9a] border border-[#c5b3ea] ' :
+
+                                (${order.status.name() == 'COMPLETED'} ? ' bg-[#e8f5e9] text-[#2e7d32] border border-[#a5d6a7] ' :
+
+                                ' bg-[#ffebee] text-[#c62828] border border-[#ef9a9a] ')))"
+
+                            th:text="${order.status}">
+                        </span>
+
+                        </td>
+
+                        <!-- Action -->
+                        <td class="px-6 py-5 text-center">
+
+                            <div class="flex justify-center">
+
+                                <form th:action="@{'/user/order/'+${order.id}}"
+                                      method="get">
+
+                                    <button class="w-[120px]
+                                               h-[42px]
+                                               bg-[#dea069]
+                                               hover:bg-[#c88447]
+                                               text-white
+                                               font-semibold
+                                               rounded-xl
+                                               shadow-md
+                                               hover:scale-[1.03]
+                                               active:scale-[0.98]
+                                               transition duration-300
+                                               cursor-pointer">
+
+                                        Chi tiết
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </td>
+
                     </tr>
-                </tbody>
-            </table>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
         </div>
     </div>
+
+
 
     <div class="w-[100vw] mt-[100px] mb-5 ml-1 flex-col text-center mb-10">
         <div class="text-lg font-medium text-gray-600 text-center mb-2">

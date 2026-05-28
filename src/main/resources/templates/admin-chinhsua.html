@@ -25,76 +25,377 @@
       <a id="gotoPage1" class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/admin/products">Sản phẩm</a>
       <a id="gotoPage2" class="cursor-pointer" href="/admin/order">Đơn đặt hàng</a>
       <a id="gotoPage3" class="cursor-pointer" href="/admin/customer">Khách hàng</a>
-      <a id="gotoPage4" class="cursor-pointer" href="/logout">Đăng xuất</a>
+      <a id="gotoPage4" class="cursor-pointer" href="/logout" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất không?')">Đăng xuất</a>
     </div>
   </div>
 </div>
 
-<div class="w-[80vw] h-fit relative">
-  <p class="text-3xl font-normal text-[#dea069]">TRANG CỦA NGƯỜI QUẢN LÝ</p>
-  <div class="flex flex-row justify-between mt-8">
-    <p class="text-2xl font-normal text-black">Chỉnh sửa thông tin sản phẩm</p>
+<!--<div class="w-[80vw] h-fit relative">-->
+<!--  <p class="text-3xl font-normal text-[#dea069]">TRANG CỦA NGƯỜI QUẢN LÝ</p>-->
+<!--  <div class="flex flex-row justify-between mt-8">-->
+<!--    <p class="text-2xl font-normal text-black">Chỉnh sửa thông tin sản phẩm</p>-->
+<!--  </div>-->
+
+<!--  <div class="flex flex-col absolute w-[350px] h-[650px] bg-white rounded-lg left-[50%] -translate-x-[50%] mt-8">-->
+<!--    <form method="post" th:action="@{/admin/save}" th:object="${product}" enctype="multipart/form-data">-->
+<!--      <input type="hidden" name="id" th:field="*{id}" readonly="readonly">-->
+<!--      <div class="mt-4 mb-2">-->
+<!--        <p class="text-sm font-light ml-[35px] text-gray-800">Tên sản phẩm</p>-->
+<!--        <input class="w-[280px] h-[35px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2 placeholder-black" type="text" name="name" id="name" th:field="*{name}" placeholder="Nhập tên sản phẩm">-->
+<!--      </div>-->
+<!--      <div class="mb-2">-->
+<!--        <p class="text-sm font-light ml-[35px] text-gray-800">Phân loại sản phẩm</p>-->
+<!--        &lt;!&ndash; <input class="w-[280px] h-[35px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2" type="text" placeholder="Chọn loại sản phẩm"> &ndash;&gt;-->
+<!--        <select id="chonLoai" name="chonLoai" class="w-[280px] h-[35px] ml-[35px] border border-gray-600 rounded-sm pl-1 outline-none" th:field="*{category.id}">-->
+<!--          <option value="" disabled selected>Chọn loại sản phẩm</option>-->
+<!--          <option th:each="category : ${categories}"-->
+<!--                  th:value="${category.id}"-->
+<!--                  th:text="${category.name}">Máy ảnh</option>-->
+<!--        </select>-->
+<!--      </div>-->
+<!--      &lt;!&ndash;                <div class="mb-2">&ndash;&gt;-->
+<!--      &lt;!&ndash;                    <p class="text-sm font-light ml-[35px] text-gray-800">Hình ảnh</p>&ndash;&gt;-->
+<!--      &lt;!&ndash;                    <label for="fileInput" class="block w-[280px] h-[35px] ml-[35px] border border-gray-600 rounded-sm p-2 cursor-pointer text-black">&ndash;&gt;-->
+<!--      &lt;!&ndash;                        <span id="fileName">Tải hình ảnh lên</span>&ndash;&gt;-->
+<!--      &lt;!&ndash;                    </label>&ndash;&gt;-->
+<!--      &lt;!&ndash;                    <input id="fileInput" type="file" accept="image/*" class="hidden">&ndash;&gt;-->
+<!--      &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;        <p class="text-sm font-light ml-[35px] text-gray-800">Hình ảnh</p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input class="w-[280px] h-[35px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2 placeholder-black" id="fileInput" name="fileInput" type="text" th:field="*{imageUrl}" placeholder="Chọn hình ảnh">&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="mb-2">&ndash;&gt;-->
+<!--&lt;!&ndash;        <label for="fileInput" class="text-sm font-light ml-[35px] text-gray-800">Hình ảnh</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input class="w-[280px] h-[35px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2 placeholder-black" type="file" name="fileInput" id="fileInput" accept="image/*" required>&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--      <div class="mb-2 ml-[35px]">-->
+<!--        <label>Ảnh hiện tại:</label><br>-->
+<!--        <img th:src="@{${product.imageUrl}}" alt="Ảnh sản phẩm" width="80"><br>-->
+<!--        <input type="hidden" th:field="*{imageUrl}">-->
+<!--        <label for="fileInput">Chọn ảnh mới</label>-->
+<!--        <input class="w-[280px] h-[35px] border border-gray-600 outline-none rounded-sm p-2 placeholder-black" type="file" name="fileInput" id="fileInput" accept="image/*">-->
+<!--      </div>-->
+<!--      <div class="mb-2">-->
+<!--        <p class="text-sm font-light ml-[35px] text-gray-800">Giá bán</p>-->
+<!--        <input class="w-[280px] h-[35px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2 placeholder-black" type="number" id="giaBan" name="giaBan" th:field="*{price}" placeholder="Nhập giá bán">-->
+<!--      </div>-->
+<!--      <div class="mb-2">-->
+<!--        <p class="text-sm font-light ml-[35px] text-gray-800">Tồn kho</p>-->
+<!--        <input class="w-[280px] h-[35px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2 placeholder-black" type="number" id="tonKho" name="tonKho" th:field="*{quantity}" placeholder="Nhập số lượng sản phẩm">-->
+<!--      </div>-->
+<!--      <div class="mb-2">-->
+<!--        <p class="text-sm font-light ml-[35px] text-gray-800">Mô tả</p>-->
+<!--        <textarea class="w-[280px] h-[80px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2 resize-none text-black" id="moTa" name="moTa" th:field="*{description}" ></textarea>-->
+<!--      </div>-->
+<!--      <div class="">-->
+<!--        <button class="text-xl font-medium text-white w-[100px] h-[40px] bg-[#dea069] hover:bg-[#ffa801] rounded-lg mb-2 ml-[215px] mt-4 cursor-pointer" type="submit">-->
+<!--          Lưu lại-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
+
+
+<div class="w-[92vw] max-w-[1400px] h-fit relative">
+
+  <!-- Header -->
+  <div class="mb-10">
+
+    <p class="text-4xl font-bold text-[#8c5a2b] mb-3">
+      CHỈNH SỬA SẢN PHẨM
+    </p>
+
+    <p class="text-lg text-[#b27b48]">
+      Cập nhật thông tin sản phẩm trong hệ thống
+    </p>
+
   </div>
 
-  <div class="flex flex-col absolute w-[350px] h-[650px] bg-white rounded-lg left-[50%] -translate-x-[50%] mt-8">
-    <form method="post" th:action="@{/admin/save}" th:object="${product}" enctype="multipart/form-data">
-      <input type="hidden" name="id" th:field="*{id}" readonly="readonly">
-      <div class="mt-4 mb-2">
-        <p class="text-sm font-light ml-[35px] text-gray-800">Tên sản phẩm</p>
-        <input class="w-[280px] h-[35px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2 placeholder-black" type="text" name="name" id="name" th:field="*{name}" placeholder="Nhập tên sản phẩm">
+  <!-- Form Card -->
+  <div class="w-[480px]
+          bg-[#fffaf5]
+          rounded-[32px]
+          border border-[#f0d7be]
+          shadow-[0_15px_40px_rgba(0,0,0,0.08)]
+          mx-auto
+          overflow-hidden">
+
+    <!-- Top -->
+    <div class="bg-[#fff4e8]
+            border-b border-[#f3dfcb]
+            px-8 py-6">
+
+      <div class="flex items-center gap-4">
+
+        <div class="w-[60px] h-[60px]
+                rounded-2xl
+                bg-[#dea069]
+                flex items-center justify-center
+                shadow-md">
+
+          <box-icon name='edit'
+                    color='white'
+                    size='md'>
+          </box-icon>
+
+        </div>
+
+        <div>
+
+          <p class="text-2xl font-bold text-[#8c5a2b]">
+            Thông tin sản phẩm
+          </p>
+
+          <p class="text-gray-500">
+            Chỉnh sửa và cập nhật dữ liệu
+          </p>
+
+        </div>
+
       </div>
-      <div class="mb-2">
-        <p class="text-sm font-light ml-[35px] text-gray-800">Phân loại sản phẩm</p>
-        <!-- <input class="w-[280px] h-[35px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2" type="text" placeholder="Chọn loại sản phẩm"> -->
-        <select id="chonLoai" name="chonLoai" class="w-[280px] h-[35px] ml-[35px] border border-gray-600 rounded-sm pl-1 outline-none" th:field="*{category.id}">
-          <option value="" disabled selected>Chọn loại sản phẩm</option>
+
+    </div>
+
+    <!-- Form -->
+    <form method="post"
+          th:action="@{/admin/save}"
+          th:object="${product}"
+          enctype="multipart/form-data"
+          class="px-8 py-8">
+
+      <input type="hidden"
+             name="id"
+             th:field="*{id}"
+             readonly="readonly">
+
+      <!-- Product Name -->
+      <div class="mb-6">
+
+        <p class="text-sm font-semibold text-[#8c5a2b] mb-2">
+          Tên sản phẩm
+        </p>
+
+        <input class="w-full
+                   h-[48px]
+                   border border-[#e8cfb6]
+                   bg-white
+                   rounded-2xl
+                   px-4
+                   outline-none
+                   focus:border-[#dea069]
+                   focus:ring-4
+                   focus:ring-[#f7e3cf]
+                   transition"
+               type="text"
+               name="name"
+               id="name"
+               th:field="*{name}"
+               placeholder="Nhập tên sản phẩm">
+
+      </div>
+
+      <!-- Category -->
+      <div class="mb-6">
+
+        <p class="text-sm font-semibold text-[#8c5a2b] mb-2">
+          Phân loại sản phẩm
+        </p>
+
+        <select id="chonLoai"
+                name="chonLoai"
+                th:field="*{category.id}"
+                class="w-full
+                   h-[48px]
+                   border border-[#e8cfb6]
+                   rounded-2xl
+                   px-4
+                   bg-white
+                   outline-none
+                   focus:border-[#dea069]
+                   focus:ring-4
+                   focus:ring-[#f7e3cf]
+                   transition">
+
+          <option value="" disabled selected>
+            Chọn loại sản phẩm
+          </option>
+
           <option th:each="category : ${categories}"
                   th:value="${category.id}"
-                  th:text="${category.name}">Máy ảnh</option>
+                  th:text="${category.name}">
+            Máy ảnh
+          </option>
+
         </select>
+
       </div>
-      <!--                <div class="mb-2">-->
-      <!--                    <p class="text-sm font-light ml-[35px] text-gray-800">Hình ảnh</p>-->
-      <!--                    <label for="fileInput" class="block w-[280px] h-[35px] ml-[35px] border border-gray-600 rounded-sm p-2 cursor-pointer text-black">-->
-      <!--                        <span id="fileName">Tải hình ảnh lên</span>-->
-      <!--                    </label>-->
-      <!--                    <input id="fileInput" type="file" accept="image/*" class="hidden">-->
-      <!--                </div>-->
-<!--      <div class="mb-2">-->
-<!--        <p class="text-sm font-light ml-[35px] text-gray-800">Hình ảnh</p>-->
-<!--        <input class="w-[280px] h-[35px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2 placeholder-black" id="fileInput" name="fileInput" type="text" th:field="*{imageUrl}" placeholder="Chọn hình ảnh">-->
-<!--      </div>-->
-<!--      <div class="mb-2">-->
-<!--        <label for="fileInput" class="text-sm font-light ml-[35px] text-gray-800">Hình ảnh</label>-->
-<!--        <input class="w-[280px] h-[35px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2 placeholder-black" type="file" name="fileInput" id="fileInput" accept="image/*" required>-->
-<!--      </div>-->
-      <div class="mb-2 ml-[35px]">
-        <label>Ảnh hiện tại:</label><br>
-        <img th:src="@{${product.imageUrl}}" alt="Ảnh sản phẩm" width="80"><br>
-        <input type="hidden" th:field="*{imageUrl}">
-        <label for="fileInput">Chọn ảnh mới</label>
-        <input class="w-[280px] h-[35px] border border-gray-600 outline-none rounded-sm p-2 placeholder-black" type="file" name="fileInput" id="fileInput" accept="image/*">
+
+      <!-- Image -->
+      <div class="mb-6">
+
+        <p class="text-sm font-semibold text-[#8c5a2b] mb-3">
+          Hình ảnh sản phẩm
+        </p>
+
+        <div class="bg-[#fff4e8]
+                border border-[#f0d7be]
+                rounded-2xl
+                p-5">
+
+          <div class="flex justify-center mb-4">
+
+            <img th:src="@{${product.imageUrl}}"
+                 alt="Ảnh sản phẩm"
+                 class="w-[140px]
+                    h-[140px]
+                    object-cover
+                    rounded-2xl
+                    border border-[#ecd3ba]
+                    shadow-md">
+
+          </div>
+
+          <input type="hidden" th:field="*{imageUrl}">
+
+          <label for="fileInput"
+                 class="block
+                    text-sm
+                    font-medium
+                    text-[#8c5a2b]
+                    mb-2">
+
+            Chọn ảnh mới
+
+          </label>
+
+          <input class="w-full
+                     border border-[#e8cfb6]
+                     rounded-xl
+                     p-2
+                     bg-white
+                     cursor-pointer"
+                 type="file"
+                 name="fileInput"
+                 id="fileInput"
+                 accept="image/*">
+
+        </div>
+
       </div>
-      <div class="mb-2">
-        <p class="text-sm font-light ml-[35px] text-gray-800">Giá bán</p>
-        <input class="w-[280px] h-[35px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2 placeholder-black" type="number" id="giaBan" name="giaBan" th:field="*{price}" placeholder="Nhập giá bán">
+
+      <!-- Price -->
+      <div class="mb-6">
+
+        <p class="text-sm font-semibold text-[#8c5a2b] mb-2">
+          Giá bán
+        </p>
+
+        <input class="w-full
+                   h-[48px]
+                   border border-[#e8cfb6]
+                   rounded-2xl
+                   px-4
+                   outline-none
+                   focus:border-[#dea069]
+                   focus:ring-4
+                   focus:ring-[#f7e3cf]
+                   transition"
+               type="number"
+               id="giaBan"
+               name="giaBan"
+               th:field="*{price}"
+               placeholder="Nhập giá bán">
+
       </div>
-      <div class="mb-2">
-        <p class="text-sm font-light ml-[35px] text-gray-800">Tồn kho</p>
-        <input class="w-[280px] h-[35px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2 placeholder-black" type="number" id="tonKho" name="tonKho" th:field="*{quantity}" placeholder="Nhập số lượng sản phẩm">
+
+      <!-- Quantity -->
+      <div class="mb-6">
+
+        <p class="text-sm font-semibold text-[#8c5a2b] mb-2">
+          Tồn kho
+        </p>
+
+        <input class="w-full
+                   h-[48px]
+                   border border-[#e8cfb6]
+                   rounded-2xl
+                   px-4
+                   outline-none
+                   focus:border-[#dea069]
+                   focus:ring-4
+                   focus:ring-[#f7e3cf]
+                   transition"
+               type="number"
+               id="tonKho"
+               name="tonKho"
+               th:field="*{quantity}"
+               placeholder="Nhập số lượng sản phẩm">
+
       </div>
-      <div class="mb-2">
-        <p class="text-sm font-light ml-[35px] text-gray-800">Mô tả</p>
-        <textarea class="w-[280px] h-[80px] ml-[35px] border border-gray-600 outline-none rounded-sm p-2 resize-none text-black" id="moTa" name="moTa" th:field="*{description}" ></textarea>
+
+      <!-- Description -->
+      <div class="mb-8">
+
+        <p class="text-sm font-semibold text-[#8c5a2b] mb-2">
+          Mô tả sản phẩm
+        </p>
+
+        <textarea class="w-full
+                     h-[120px]
+                     border border-[#e8cfb6]
+                     rounded-2xl
+                     p-4
+                     resize-none
+                     outline-none
+                     focus:border-[#dea069]
+                     focus:ring-4
+                     focus:ring-[#f7e3cf]
+                     transition"
+                  id="moTa"
+                  name="moTa"
+                  th:field="*{description}">
+        </textarea>
+
       </div>
-      <div class="">
-        <button class="text-xl font-medium text-white w-[100px] h-[40px] bg-[#dea069] hover:bg-[#ffa801] rounded-lg mb-2 ml-[215px] mt-4 cursor-pointer" type="submit">
+
+      <!-- Button -->
+      <div class="flex justify-end">
+
+        <button class="w-[160px]
+                   h-[50px]
+                   bg-gradient-to-r
+                   from-[#dea069]
+                   to-[#c88447]
+                   hover:shadow-xl
+                   hover:scale-[1.03]
+                   active:scale-[0.98]
+                   text-white
+                   text-lg
+                   font-semibold
+                   rounded-2xl
+                   transition duration-300
+                   cursor-pointer"
+                type="submit">
+
           Lưu lại
+
         </button>
+
       </div>
+
     </form>
+
   </div>
+
 </div>
+
+
+
+
 
 <div class="w-[60vw] h-[30px] mt-[750px] mb-5 ml-1">
   <p class="text-lg font-nomarl text-gray-600 text-center">

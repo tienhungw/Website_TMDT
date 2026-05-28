@@ -1,163 +1,163 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<!--<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">-->
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chu</title>
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Trang chu</title>-->
+<!--    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>-->
+<!--    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>-->
 
-    <style>
+<!--    <style>-->
 
-    </style>
-</head>
-<body class="flex flex-col justify-center items-center bg-[#f1f2f6] overflow-x-hidden">
-<div class="navb flex flex-row h-[80px] w-[100vw] justify-between mb-[50px] bg-[#01ac50] text-white shadow-[0_5px_15px_rgba(0,0,0,0.35)]">
-    <div class="infor-shop h-[80px] w-fit flex flex-row justify-center items-center ml-2">
-        <img class="w-[50px] h-[50px] rounded-[999px] ml-[20px]" src="/img/tienhungw.jpg" alt="">
-        <h2 class="text-[30px] font-medium ml-[10px] mt-[10px] font-['Kaushan_Script']">TH Shop</h2>
-    </div>
+<!--    </style>-->
+<!--</head>-->
+<!--<body class="flex flex-col justify-center items-center bg-[#f1f2f6] overflow-x-hidden">-->
+<!--<div class="navb flex flex-row h-[80px] w-[100vw] justify-between mb-[50px] bg-[#01ac50] text-white shadow-[0_5px_15px_rgba(0,0,0,0.35)]">-->
+<!--    <div class="infor-shop h-[80px] w-fit flex flex-row justify-center items-center ml-2">-->
+<!--        <img class="w-[50px] h-[50px] rounded-[999px] ml-[20px]" src="/img/tienhungw.jpg" alt="">-->
+<!--        <h2 class="text-[30px] font-medium ml-[10px] mt-[10px] font-['Kaushan_Script']">TH Shop</h2>-->
+<!--    </div>-->
 
-    <div class="relative h-[80px] w-[50vw] absolute right-[20px]">
-        <div class="flex flex-row h-[40px] bg-white w-[400px] absolute right-[20px] rounded-3xl justify-between mt-1">
-            <input class="outline-none text-gray-600 pl-4" type="text" placeholder="Tìm kiếm sản phẩm">
-            <box-icon class="mr-3 mt-2 cursor-pointer" name='search' flip='horizontal' color='rgba(0,0,0,0.8)' ></box-icon>
-        </div>
-        <div class="flex flex-row absolute gap-[30px] right-[20px] bottom-[6px] text-lg font-normal">
-            <a id="gotoPage1" class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/user/home">Trang chủ</a>
-            <a id="gotoPage2" class="cursor-pointer" href="/user/cart">Giỏ hàng</a>
-            <a id="gotoPage3" class="cursor-pointer" href="/user/history">Lịch sử</a>
-            <a id="gotoPage4" class="cursor-pointer" href="/user/about">Thông tin</a>
-            <a id="gotoPage5" class="cursor-pointer" href="/logout">Đăng xuất</a>
-        </div>
-    </div>
-</div>
+<!--    <div class="relative h-[80px] w-[50vw] absolute right-[20px]">-->
+<!--        <div class="flex flex-row h-[40px] bg-white w-[400px] absolute right-[20px] rounded-3xl justify-between mt-1">-->
+<!--            <input class="outline-none text-gray-600 pl-4" type="text" placeholder="Tìm kiếm sản phẩm">-->
+<!--            <box-icon class="mr-3 mt-2 cursor-pointer" name='search' flip='horizontal' color='rgba(0,0,0,0.8)' ></box-icon>-->
+<!--        </div>-->
+<!--        <div class="flex flex-row absolute gap-[30px] right-[20px] bottom-[6px] text-lg font-normal">-->
+<!--            <a id="gotoPage1" class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/user/home">Trang chủ</a>-->
+<!--            <a id="gotoPage2" class="cursor-pointer" href="/user/cart">Giỏ hàng</a>-->
+<!--            <a id="gotoPage3" class="cursor-pointer" href="/user/history">Lịch sử</a>-->
+<!--            <a id="gotoPage4" class="cursor-pointer" href="/user/about">Thông tin</a>-->
+<!--            <a id="gotoPage5" class="cursor-pointer" href="/logout">Đăng xuất</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
-<div class="w-[900px] h-fit relative">
-    <p class="text-3xl font-normal text-[#127332] mb-10">DANH MỤC CÁC LOẠI SẢN PHẨM</p>
-    <div class="flex flex-row gap-[20px] w-[900px]">
-        <div class="w-[440px] h-[380px]">
-            <img class="w-[440px] h-[380px] rounded-3xl" src="/img/a1.jpg" alt="">
-        </div>
-        <div class="flex flex-col w-[440px] h-[380px] gap-5">
-            <div class="w-[440px] h-[180px]">
-                <img class="w-[440px] h-[180px] rounded-3xl" src="/img/a2.jpg" alt="">
-            </div>
-            <div class="flex flex-row gap-5">
-                <div class="w-[210px] h-[180px]">
-                    <img class="w-[210px] h-[180px] rounded-3xl" src="/img/a3.jpg" alt="">
-                </div>
-                <div class="w-[210px] h-[180px]">
-                    <img class="w-[210px] h-[180px] rounded-3xl" src="/img/a4.jpg" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="flex flex-row justify-between">
-        <p class="text-3xl font-normal text-[#127332] mb-6 mt-8">TẤT CẢ SẢN PHẨM</p>
-        <select id="selectTH" class="w-[280px] h-[35px] border border-gray-600 rounded-sm outline-none mt-10 mb-8 cursor-pointer">
-            <option value="" disabled selected>Lọc theo loại sản phẩm</option>
-            <!-- <p class="text-red-600">Chọn loại sản phẩm</p> -->
-            <option value="TH1">Máy ảnh</option>
-            <option value="TH2">Camera</option>
-            <option value="TH3">Ống kính</option>
-            <option value="TH4">Phụ kiện</option>
-        </select>
-    </div>
-    <div class="w-[900px] h-fit rounded-lg h-fit flex flex-row flex-wrap gap-[20px]">
-        <!--            <div class="w-[210px] h-[370px] rounded-lg bg-white relative">-->
-        <!--                <a th:href="@{/user/home/{id}(id=${product.id})}" style="text-decoration: none;">-->
-        <!--                    <img class="w-[210px] h-[210px] rounded-t-lg cursor-pointer" th:src="@{${product.image}}">-->
-        <!--                </a>-->
-        <!--                <a th:href="@{/user/home/{id}(id=${product.id})}" style="text-decoration: none;">-->
-        <!--                    <p class="text-lg font-medium p-2 w-[210px] h-[80px]" th:text="${product.name}"></p>-->
-        <!--                </a>-->
-        <!--                <p class="text-base font-medium p-2" th:text="'Giá: ' + ${product.price} + ' VND'"></p>-->
-        <!--                <button class="bg-[#01ac50] w-[210px] h-[40px] font-medium text-lg text-center text-white rounded-b-lg absolute bottom-0 cursor-pointer" type="submit">Thêm vào giỏ hàng</button>-->
-        <!--            </div>-->
-        <!--            <div class="w-[210px] h-[370px] rounded-lg bg-white relative">-->
-        <!--                <img class="w-[210px] h-[210px] rounded-t-lg cursor-pointer" src="img/s1.jpg" alt=""  id="chitiet1">-->
-        <!--                <p class="text-lg font-medium p-2 w-[210px] h-[80px]">Máy ảnh KC trắng cam có tích hợp đèn</p>-->
-        <!--                <p class="text-base font-medium p-2">Giá bán: 400000</p>-->
-        <!--                <button class="bg-[#01ac50] w-[210px] h-[40px] font-medium text-lg text-center text-white rounded-b-lg absolute bottom-0 cursor-pointer" type="submit">Thêm vào giỏ hàng</button>-->
-        <!--            </div>-->
+<!--<div class="w-[900px] h-fit relative">-->
+<!--    <p class="text-3xl font-normal text-[#127332] mb-10">DANH MỤC CÁC LOẠI SẢN PHẨM</p>-->
+<!--    <div class="flex flex-row gap-[20px] w-[900px]">-->
+<!--        <div class="w-[440px] h-[380px]">-->
+<!--            <img class="w-[440px] h-[380px] rounded-3xl" src="/img/a1.jpg" alt="">-->
+<!--        </div>-->
+<!--        <div class="flex flex-col w-[440px] h-[380px] gap-5">-->
+<!--            <div class="w-[440px] h-[180px]">-->
+<!--                <img class="w-[440px] h-[180px] rounded-3xl" src="/img/a2.jpg" alt="">-->
+<!--            </div>-->
+<!--            <div class="flex flex-row gap-5">-->
+<!--                <div class="w-[210px] h-[180px]">-->
+<!--                    <img class="w-[210px] h-[180px] rounded-3xl" src="/img/a3.jpg" alt="">-->
+<!--                </div>-->
+<!--                <div class="w-[210px] h-[180px]">-->
+<!--                    <img class="w-[210px] h-[180px] rounded-3xl" src="/img/a4.jpg" alt="">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="flex flex-row justify-between">-->
+<!--        <p class="text-3xl font-normal text-[#127332] mb-6 mt-8">TẤT CẢ SẢN PHẨM</p>-->
+<!--        <select id="selectTH" class="w-[280px] h-[35px] border border-gray-600 rounded-sm outline-none mt-10 mb-8 cursor-pointer">-->
+<!--            <option value="" disabled selected>Lọc theo loại sản phẩm</option>-->
+<!--            &lt;!&ndash; <p class="text-red-600">Chọn loại sản phẩm</p> &ndash;&gt;-->
+<!--            <option value="TH1">Máy ảnh</option>-->
+<!--            <option value="TH2">Camera</option>-->
+<!--            <option value="TH3">Ống kính</option>-->
+<!--            <option value="TH4">Phụ kiện</option>-->
+<!--        </select>-->
+<!--    </div>-->
+<!--    <div class="w-[900px] h-fit rounded-lg h-fit flex flex-row flex-wrap gap-[20px]">-->
+<!--        &lt;!&ndash;            <div class="w-[210px] h-[370px] rounded-lg bg-white relative">&ndash;&gt;-->
+<!--        &lt;!&ndash;                <a th:href="@{/user/home/{id}(id=${product.id})}" style="text-decoration: none;">&ndash;&gt;-->
+<!--        &lt;!&ndash;                    <img class="w-[210px] h-[210px] rounded-t-lg cursor-pointer" th:src="@{${product.image}}">&ndash;&gt;-->
+<!--        &lt;!&ndash;                </a>&ndash;&gt;-->
+<!--        &lt;!&ndash;                <a th:href="@{/user/home/{id}(id=${product.id})}" style="text-decoration: none;">&ndash;&gt;-->
+<!--        &lt;!&ndash;                    <p class="text-lg font-medium p-2 w-[210px] h-[80px]" th:text="${product.name}"></p>&ndash;&gt;-->
+<!--        &lt;!&ndash;                </a>&ndash;&gt;-->
+<!--        &lt;!&ndash;                <p class="text-base font-medium p-2" th:text="'Giá: ' + ${product.price} + ' VND'"></p>&ndash;&gt;-->
+<!--        &lt;!&ndash;                <button class="bg-[#01ac50] w-[210px] h-[40px] font-medium text-lg text-center text-white rounded-b-lg absolute bottom-0 cursor-pointer" type="submit">Thêm vào giỏ hàng</button>&ndash;&gt;-->
+<!--        &lt;!&ndash;            </div>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <div class="w-[210px] h-[370px] rounded-lg bg-white relative">&ndash;&gt;-->
+<!--        &lt;!&ndash;                <img class="w-[210px] h-[210px] rounded-t-lg cursor-pointer" src="img/s1.jpg" alt=""  id="chitiet1">&ndash;&gt;-->
+<!--        &lt;!&ndash;                <p class="text-lg font-medium p-2 w-[210px] h-[80px]">Máy ảnh KC trắng cam có tích hợp đèn</p>&ndash;&gt;-->
+<!--        &lt;!&ndash;                <p class="text-base font-medium p-2">Giá bán: 400000</p>&ndash;&gt;-->
+<!--        &lt;!&ndash;                <button class="bg-[#01ac50] w-[210px] h-[40px] font-medium text-lg text-center text-white rounded-b-lg absolute bottom-0 cursor-pointer" type="submit">Thêm vào giỏ hàng</button>&ndash;&gt;-->
+<!--        &lt;!&ndash;            </div>&ndash;&gt;-->
 
 
-        <div th:each="product : ${listProduct}">
-            <div class="w-[210px] h-[370px] rounded-lg bg-[#dfe4ea] relative">
-                <a th:href="@{/user/home/{id}(id=${product.id})}" style="text-decoration: none;">
-                    <img class="w-[210px] h-[210px] rounded-t-lg cursor-pointer" th:src="@{${product.imageUrl}}" alt="Product image">
-                </a>
-                <a th:href="@{/user/home/{id}(id=${product.id})}" style="text-decoration: none;">
-                    <p class="text-lg font-medium p-2 w-[210px] h-[80px]" th:text="${product.name}"></p>
-                </a>
-                <p class="text-base font-medium p-2" th:text="'Giá: ' + ${product.price} + ' VND'"></p>
-                <form>
-                    <input type="hidden" name="productId" th:value="${product.id}" />
-                    <button class="bg-[#01ac50] w-[210px] h-[40px] font-medium text-lg text-center text-white rounded-b-lg absolute bottom-0 cursor-pointer" type="submit">
-                        Thêm vào giỏ hàng
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
+<!--        <div th:each="product : ${listProduct}">-->
+<!--            <div class="w-[210px] h-[370px] rounded-lg bg-[#dfe4ea] relative">-->
+<!--                <a th:href="@{/user/home/{id}(id=${product.id})}" style="text-decoration: none;">-->
+<!--                    <img class="w-[210px] h-[210px] rounded-t-lg cursor-pointer" th:src="@{${product.imageUrl}}" alt="Product image">-->
+<!--                </a>-->
+<!--                <a th:href="@{/user/home/{id}(id=${product.id})}" style="text-decoration: none;">-->
+<!--                    <p class="text-lg font-medium p-2 w-[210px] h-[80px]" th:text="${product.name}"></p>-->
+<!--                </a>-->
+<!--                <p class="text-base font-medium p-2" th:text="'Giá: ' + ${product.price} + ' VND'"></p>-->
+<!--                <form>-->
+<!--                    <input type="hidden" name="productId" th:value="${product.id}" />-->
+<!--                    <button class="bg-[#01ac50] w-[210px] h-[40px] font-medium text-lg text-center text-white rounded-b-lg absolute bottom-0 cursor-pointer" type="submit">-->
+<!--                        Thêm vào giỏ hàng-->
+<!--                    </button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
-</div>
+<!--</div>-->
 
-<div class="w-[100vw] mt-[200px] mb-5 ml-1 flex-col text-center mb-10">
-    <div class="text-lg font-medium text-gray-600 text-center mb-2">
-        © 2025 Bản quyền thuộc về TH Shop
-    </div>
-    <div class="text-lg font-normal text-gray-600 text-center">
-        Cảm ơn quý khách đã tin tưởng và ủng hộ cửa hàng!
-    </div>
-    <div class="text-lg font-normal text-gray-600 text-center mb-3">
-        Thông tin liên hệ
-    </div>
-    <div class="flex flex-row text-center absolute left-[50%] -translate-x-[50%]">
-        <div class="flex flex-row">
-            <box-icon name='facebook-circle' type='logo' color='rgba(0,0,0,0.70)' ></box-icon>
-            <a target="_blank" class="mr-8 w-[150px] text-gray-700 hover:text-[#009432]" href="https://www.facebook.com/holahuliba">Nguyễn Tiến Hưng</a>
-        </div>
+<!--<div class="w-[100vw] mt-[200px] mb-5 ml-1 flex-col text-center mb-10">-->
+<!--    <div class="text-lg font-medium text-gray-600 text-center mb-2">-->
+<!--        © 2025 Bản quyền thuộc về TH Shop-->
+<!--    </div>-->
+<!--    <div class="text-lg font-normal text-gray-600 text-center">-->
+<!--        Cảm ơn quý khách đã tin tưởng và ủng hộ cửa hàng!-->
+<!--    </div>-->
+<!--    <div class="text-lg font-normal text-gray-600 text-center mb-3">-->
+<!--        Thông tin liên hệ-->
+<!--    </div>-->
+<!--    <div class="flex flex-row text-center absolute left-[50%] -translate-x-[50%]">-->
+<!--        <div class="flex flex-row">-->
+<!--            <box-icon name='facebook-circle' type='logo' color='rgba(0,0,0,0.70)' ></box-icon>-->
+<!--            <a target="_blank" class="mr-8 w-[150px] text-gray-700 hover:text-[#009432]" href="https://www.facebook.com/holahuliba">Nguyễn Tiến Hưng</a>-->
+<!--        </div>-->
 
-        <div class="flex flex-row">
-            <box-icon name='phone' type='solid' color='rgba(0,0,0,0.70)' ></box-icon>
-            <p class="mr-8 w-[100px] text-gray-700 hover:text-[#009432]">0327644604</p>
-        </div>
+<!--        <div class="flex flex-row">-->
+<!--            <box-icon name='phone' type='solid' color='rgba(0,0,0,0.70)' ></box-icon>-->
+<!--            <p class="mr-8 w-[100px] text-gray-700 hover:text-[#009432]">0327644604</p>-->
+<!--        </div>-->
 
-        <div class="flex flex-row">
-            <box-icon name='envelope' color='rgba(0,0,0,0.70)' ></box-icon>
-            <a target="_blank" class="mr-8 w-[280px] text-gray-700 hover:text-[#009432]" href="https://mail.google.com/mail/u/0/?pli=1#inbox">nguyentienhung04042004gmail.com</a>
-        </div>
+<!--        <div class="flex flex-row">-->
+<!--            <box-icon name='envelope' color='rgba(0,0,0,0.70)' ></box-icon>-->
+<!--            <a target="_blank" class="mr-8 w-[280px] text-gray-700 hover:text-[#009432]" href="https://mail.google.com/mail/u/0/?pli=1#inbox">nguyentienhung04042004gmail.com</a>-->
+<!--        </div>-->
 
-        <div class="flex flex-row">
-            <box-icon name='instagram' type='logo' color='rgba(0,0,0,0.70)' ></box-icon>
-            <a target="_blank" class="w-[150px] text-gray-700 hover:text-[#009432]" href="https://www.instagram.com/holahuliba/">Nguyễn Tiến Hưng</a>
-        </div>
-    </div>
-</div>
+<!--        <div class="flex flex-row">-->
+<!--            <box-icon name='instagram' type='logo' color='rgba(0,0,0,0.70)' ></box-icon>-->
+<!--            <a target="_blank" class="w-[150px] text-gray-700 hover:text-[#009432]" href="https://www.instagram.com/holahuliba/">Nguyễn Tiến Hưng</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
-<script>
-<!--    document.getElementById("gotoPage1").addEventListener("click", function() {-->
-<!--        window.location.href = "trangchu.html";-->
-<!--    });-->
-<!--    document.getElementById("gotoPage2").addEventListener("click", function() {-->
-<!--        window.location.href = "giohang.html";-->
-<!--    });-->
-<!--    document.getElementById("gotoPage3").addEventListener("click", function() {-->
-<!--        window.location.href = "lichsu.html";-->
-<!--    });-->
-<!--    document.getElementById("gotoPage4").addEventListener("click", function() {-->
-<!--        window.location.href = "thongtin.html";-->
-<!--    });-->
-<!--    document.querySelectorAll("[id^='chitiet']").forEach(element => {-->
-<!--        element.addEventListener("click", function() {-->
-<!--            window.location.href = "chitietsanpham.html";-->
-<!--        });-->
-<!--    });-->
-</script>
-<div th:replace="~{fragments/chatbox :: chatbox}"></div>
-</body>
-</html>
+<!--<script>-->
+<!--&lt;!&ndash;    document.getElementById("gotoPage1").addEventListener("click", function() {&ndash;&gt;-->
+<!--&lt;!&ndash;        window.location.href = "trangchu.html";&ndash;&gt;-->
+<!--&lt;!&ndash;    });&ndash;&gt;-->
+<!--&lt;!&ndash;    document.getElementById("gotoPage2").addEventListener("click", function() {&ndash;&gt;-->
+<!--&lt;!&ndash;        window.location.href = "giohang.html";&ndash;&gt;-->
+<!--&lt;!&ndash;    });&ndash;&gt;-->
+<!--&lt;!&ndash;    document.getElementById("gotoPage3").addEventListener("click", function() {&ndash;&gt;-->
+<!--&lt;!&ndash;        window.location.href = "lichsu.html";&ndash;&gt;-->
+<!--&lt;!&ndash;    });&ndash;&gt;-->
+<!--&lt;!&ndash;    document.getElementById("gotoPage4").addEventListener("click", function() {&ndash;&gt;-->
+<!--&lt;!&ndash;        window.location.href = "thongtin.html";&ndash;&gt;-->
+<!--&lt;!&ndash;    });&ndash;&gt;-->
+<!--&lt;!&ndash;    document.querySelectorAll("[id^='chitiet']").forEach(element => {&ndash;&gt;-->
+<!--&lt;!&ndash;        element.addEventListener("click", function() {&ndash;&gt;-->
+<!--&lt;!&ndash;            window.location.href = "chitietsanpham.html";&ndash;&gt;-->
+<!--&lt;!&ndash;        });&ndash;&gt;-->
+<!--&lt;!&ndash;    });&ndash;&gt;-->
+<!--</script>-->
+<!--<div th:replace="~{fragments/chatbox :: chatbox}"></div>-->
+<!--</body>-->
+<!--</html>-->

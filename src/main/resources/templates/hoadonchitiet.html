@@ -31,99 +31,415 @@
         <a id="gotoPage2" class="cursor-pointer" href="/user/cart">Giỏ hàng</a>
         <a id="gotoPage3" class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/user/history">Lịch sử</a>
         <a id="gotoPage4" class="cursor-pointer" href="/user/about">Thông tin</a>
-        <a id="gotoPage5" class="cursor-pointer" href="/logout">Đăng xuất</a>
+        <a id="gotoPage5" class="cursor-pointer" href="/logout" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất không?')">Đăng xuất</a>
       </div>
     </div>
   </div>
 </div>
 
-<div class="w-fit h-fit relative">
-  <p class="text-3xl font-normal text-[#a86f3b] mb-6">LỊCH SỬ ĐƠN HÀNG</p>
-  <p class="text-[27px] font-normal mb-10 text-[#a86f3b]">THÔNG TIN CHI TIẾT HÓA ĐƠN</p>
-  <div class="flex flex-row justify-between mt-5">
-    <div class="w-[20vw]">
-      <p class="text-xl text-[#a86f3b] mb-6">Người nhận hàng</p>
-      <p class="text-base font-normal m-2 text-gray-800">Họ tên</p>
-      <span class="w-[20vw] h-[40px] border border-gray-600 outline-none rounded-sm p-2 placeholder-gray-600 mb-3" th:text="${user.full_name}"></span>
-      <p class="text-base font-normal m-2 text-gray-800">Số điện thoại</p>
-      <span class="w-[20vw] h-[40px] border border-gray-600 outline-none rounded-sm p-2 placeholder-gray-600 mb-3" th:text="${user.phone}"></span>
-      <p class="text-base font-normal m-2 text-gray-800">Địa chỉ</p>
-      <span class="w-[20vw] h-[40px] border border-gray-600 outline-none rounded-sm p-2 placeholder-gray-600 mb-3" th:text="${user.address}"></span>
-    </div>
-    <div class="w-[55vw]">
-      <p class="text-xl text-[#a86f3b] mb-6 text-center">Đơn hàng</p>
-      <div class="cart-items">
-        <div class="cart-item flex flex-row gap-20 mb-4" th:each="item : ${orderDetails}">
-          <div class="tb-pname w-[250px]" th:text="${item.product.name}"></div>
-          <div class="tb-pimg">
-            <img th:src="@{${item.product.imageUrl}}" alt="product image" width="80">
-          </div>
-          <div class="tb-pprice" th:text="${item.product.price}"></div>
-          <div class="tb-pquantity" th:text="${item.quantity}"></div>
-          <a th:href="@{'/user/review/' + ${item.id}}" class="text-[#a86f3b] font-medium hover:underline cursor-pointer">
-            Đánh giá
-          </a>
-        </div>
-      </div>
-
-<!--      <div class="cart-items">-->
-<!--        <div class="cart-item" th:each="item : ${cartItems}">-->
-<!--          <div class="tb-pname" th:text="${item.product.name}"></div>-->
-<!--          <div class="tb-pimg">-->
-<!--            <img th:src="@{${item.product.imageUrl}}" alt="product image" width="80">-->
+<!--    <div class="w-fit h-fit relative">-->
+<!--      <p class="text-3xl font-normal text-[#a86f3b] mb-6">LỊCH SỬ ĐƠN HÀNG</p>-->
+<!--      <p class="text-[27px] font-normal mb-10 text-[#a86f3b]">THÔNG TIN CHI TIẾT HÓA ĐƠN</p>-->
+<!--      <div class="flex flex-row justify-between mt-5">-->
+<!--        <div class="w-[20vw]">-->
+<!--          <p class="text-xl text-[#a86f3b] mb-6">Người nhận hàng</p>-->
+<!--          <p class="text-base font-normal m-2 text-gray-800">Họ tên</p>-->
+<!--          <span class="w-[20vw] h-[40px] border border-gray-600 outline-none rounded-sm p-2 placeholder-gray-600 mb-3" th:text="${user.full_name}"></span>-->
+<!--          <p class="text-base font-normal m-2 text-gray-800">Số điện thoại</p>-->
+<!--          <span class="w-[20vw] h-[40px] border border-gray-600 outline-none rounded-sm p-2 placeholder-gray-600 mb-3" th:text="${user.phone}"></span>-->
+<!--          <p class="text-base font-normal m-2 text-gray-800">Địa chỉ</p>-->
+<!--          <span class="w-[20vw] h-[40px] border border-gray-600 outline-none rounded-sm p-2 placeholder-gray-600 mb-3" th:text="${user.address}"></span>-->
+<!--        </div>-->
+<!--        <div class="w-[55vw]">-->
+<!--          <p class="text-xl text-[#a86f3b] mb-6 text-center">Đơn hàng</p>-->
+<!--          <div class="cart-items">-->
+<!--            <div class="cart-item flex flex-row gap-20 mb-4" th:each="item : ${orderDetails}">-->
+<!--              <div class="tb-pname w-[250px]" th:text="${item.product.name}"></div>-->
+<!--              <div class="tb-pimg">-->
+<!--                <img th:src="@{${item.product.imageUrl}}" alt="product image" width="80">-->
+<!--              </div>-->
+<!--              <div class="tb-pprice" th:text="${item.product.price}"></div>-->
+<!--              <div class="tb-pquantity" th:text="${item.quantity}"></div>-->
+<!--              <a th:href="@{'/user/review/' + ${item.id}}" class="text-[#a86f3b] font-medium hover:underline cursor-pointer">-->
+<!--                Đánh giá-->
+<!--              </a>-->
+<!--            </div>-->
 <!--          </div>-->
-<!--          <div class="tb-pprice" th:text="${item.product.price}"></div>-->
-<!--          <div class="tb-pquantity" th:text="${item.quantity}"></div>-->
+<!--    -->
+<!--    &lt;!&ndash;      <div class="cart-items">&ndash;&gt;-->
+<!--    &lt;!&ndash;        <div class="cart-item" th:each="item : ${cartItems}">&ndash;&gt;-->
+<!--    &lt;!&ndash;          <div class="tb-pname" th:text="${item.product.name}"></div>&ndash;&gt;-->
+<!--    &lt;!&ndash;          <div class="tb-pimg">&ndash;&gt;-->
+<!--    &lt;!&ndash;            <img th:src="@{${item.product.imageUrl}}" alt="product image" width="80">&ndash;&gt;-->
+<!--    &lt;!&ndash;          </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;          <div class="tb-pprice" th:text="${item.product.price}"></div>&ndash;&gt;-->
+<!--    &lt;!&ndash;          <div class="tb-pquantity" th:text="${item.quantity}"></div>&ndash;&gt;-->
+<!--    &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--    &lt;!&ndash;      </div>&ndash;&gt;-->
+<!--          &lt;!&ndash;                <div class="flex flex-col w-[50vw] gap-2 ml-[2vw] gap-3">&ndash;&gt;-->
+<!--          &lt;!&ndash;                    <div class="flex flex-row justify-between mb-2">&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-base text-black w-[25vw]">Tên sản phẩm</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-base text-black w-[10vw] text-center">Giá trị</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-base text-black w-[5vw]">Số lượng</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--          &lt;!&ndash;                    <div class="flex flex-row justify-between">&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-lg text-black font-medium w-[25vw]">Máy ảnh KC trắng cam có tích hợp đèn</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-base text-black w-[10vw] text-center">900000</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-base text-black w-[5vw] text-center">1</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--          &lt;!&ndash;                    <div class="flex flex-row justify-between">&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-lg text-black font-medium w-[25vw]">Camera giám sát 360 độ kết nối wifi </p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-base text-black w-[10vw] text-center">500000</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-base text-black w-[5vw] text-center">1</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--          &lt;!&ndash;                    <div class="flex flex-row justify-between">&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-lg text-black font-medium w-[25vw]">Ống kính phụ đa năng dành cho máy ảnh Canon</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-base text-black w-[10vw] text-center">200000</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-base text-black w-[5vw] text-center">1</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--          &lt;!&ndash;                    <div class="flex flex-row justify-between">&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-lg text-black font-medium w-[25vw]">Máy ảnh KC trắng cam có tích hợp đèn</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-base text-black w-[10vw] text-center">900000</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-base text-black w-[5vw] text-center">1</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--          &lt;!&ndash;                    <div class="flex flex-row justify-between">&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-lg text-black font-medium w-[25vw]">Camera giám sát 360 độ kết nối wifi </p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-base text-black w-[10vw] text-center">500000</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-base text-black w-[5vw] text-center">1</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--          &lt;!&ndash;                    <div class="flex flex-row justify-between">&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-lg text-black font-medium w-[25vw]">Ống kính phụ đa năng dành cho máy ảnh Canon</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-base text-black w-[10vw] text-center">200000</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                        <p class="text-base text-black w-[5vw] text-center">1</p>&ndash;&gt;-->
+<!--          &lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--          &lt;!&ndash;                </div>&ndash;&gt;-->
 <!--        </div>-->
 <!--      </div>-->
-      <!--                <div class="flex flex-col w-[50vw] gap-2 ml-[2vw] gap-3">-->
-      <!--                    <div class="flex flex-row justify-between mb-2">-->
-      <!--                        <p class="text-base text-black w-[25vw]">Tên sản phẩm</p>-->
-      <!--                        <p class="text-base text-black w-[10vw] text-center">Giá trị</p>-->
-      <!--                        <p class="text-base text-black w-[5vw]">Số lượng</p>-->
-      <!--                    </div>-->
-      <!--                    <div class="flex flex-row justify-between">-->
-      <!--                        <p class="text-lg text-black font-medium w-[25vw]">Máy ảnh KC trắng cam có tích hợp đèn</p>-->
-      <!--                        <p class="text-base text-black w-[10vw] text-center">900000</p>-->
-      <!--                        <p class="text-base text-black w-[5vw] text-center">1</p>-->
-      <!--                    </div>-->
-      <!--                    <div class="flex flex-row justify-between">-->
-      <!--                        <p class="text-lg text-black font-medium w-[25vw]">Camera giám sát 360 độ kết nối wifi </p>-->
-      <!--                        <p class="text-base text-black w-[10vw] text-center">500000</p>-->
-      <!--                        <p class="text-base text-black w-[5vw] text-center">1</p>-->
-      <!--                    </div>-->
-      <!--                    <div class="flex flex-row justify-between">-->
-      <!--                        <p class="text-lg text-black font-medium w-[25vw]">Ống kính phụ đa năng dành cho máy ảnh Canon</p>-->
-      <!--                        <p class="text-base text-black w-[10vw] text-center">200000</p>-->
-      <!--                        <p class="text-base text-black w-[5vw] text-center">1</p>-->
-      <!--                    </div>-->
-      <!--                    <div class="flex flex-row justify-between">-->
-      <!--                        <p class="text-lg text-black font-medium w-[25vw]">Máy ảnh KC trắng cam có tích hợp đèn</p>-->
-      <!--                        <p class="text-base text-black w-[10vw] text-center">900000</p>-->
-      <!--                        <p class="text-base text-black w-[5vw] text-center">1</p>-->
-      <!--                    </div>-->
-      <!--                    <div class="flex flex-row justify-between">-->
-      <!--                        <p class="text-lg text-black font-medium w-[25vw]">Camera giám sát 360 độ kết nối wifi </p>-->
-      <!--                        <p class="text-base text-black w-[10vw] text-center">500000</p>-->
-      <!--                        <p class="text-base text-black w-[5vw] text-center">1</p>-->
-      <!--                    </div>-->
-      <!--                    <div class="flex flex-row justify-between">-->
-      <!--                        <p class="text-lg text-black font-medium w-[25vw]">Ống kính phụ đa năng dành cho máy ảnh Canon</p>-->
-      <!--                        <p class="text-base text-black w-[10vw] text-center">200000</p>-->
-      <!--                        <p class="text-base text-black w-[5vw] text-center">1</p>-->
-      <!--                    </div>-->
-      <!--                </div>-->
+<!--      <div class="text-lg font-medium mt-4">-->
+<!--        Tổng giá trị đơn hàng:-->
+<!--        <span th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'POINT')} + ' VND'">0 VND</span>-->
+<!--      </div>-->
+<!--      &lt;!&ndash;        <p class="text-xl font-medium mt-8" th:value="${totalPrice}"></p>&ndash;&gt;-->
+<!--      <form th:action="@{/user/history}" method="get">-->
+<!--        <button class="bg-[#dea069] w-[250px] h-[50px] text-lg font-medium rounded-lg mt-10 text-white absolute left-[50%] -translate-x-[50%] cursor-pointer" id="dathang" type="submit">XONG</button>-->
+<!--      </form>-->
+<!--    </div>-->
+
+
+<div class="w-[92vw] max-w-[1450px] relative">
+
+  <!-- Title -->
+  <div class="mb-10">
+
+    <p class="text-4xl font-bold text-[#8c5a2b] mb-3">
+      LỊCH SỬ ĐƠN HÀNG
+    </p>
+
+    <p class="text-2xl text-[#b37a45] font-medium">
+      THÔNG TIN CHI TIẾT HÓA ĐƠN
+    </p>
+
+  </div>
+
+  <div class="flex gap-8 items-start">
+
+    <!-- Customer Info -->
+    <div class="w-[28%]
+                    bg-[#fffaf5]
+                    border border-[#f1d2b5]
+                    rounded-3xl
+                    shadow-[0_8px_25px_rgba(0,0,0,0.08)]
+                    p-8">
+
+      <div class="flex items-center gap-4 mb-8">
+
+        <div class="w-[60px] h-[60px]
+                            rounded-2xl
+                            bg-[#dea069]
+                            flex items-center
+                            justify-center">
+
+          <box-icon name='user'
+                    color='white'>
+          </box-icon>
+
+        </div>
+
+        <div>
+
+          <p class="text-2xl font-bold text-[#8c5a2b]">
+            Người nhận
+          </p>
+
+          <p class="text-gray-500">
+            Thông tin giao hàng
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="flex flex-col gap-6">
+
+        <div>
+
+          <p class="text-sm font-semibold text-[#b37a45] mb-2 uppercase tracking-wide">
+            Họ tên
+          </p>
+
+          <div class="bg-[#fff4e8]
+                                border border-[#f3dfcb]
+                                rounded-2xl
+                                px-4 py-3
+                                text-gray-700
+                                font-medium"
+               th:text="${user.full_name}">
+          </div>
+
+        </div>
+
+        <div>
+
+          <p class="text-sm font-semibold text-[#b37a45] mb-2 uppercase tracking-wide">
+            Số điện thoại
+          </p>
+
+          <div class="bg-[#fff4e8]
+                                border border-[#f3dfcb]
+                                rounded-2xl
+                                px-4 py-3
+                                text-gray-700
+                                font-medium"
+               th:text="${user.phone}">
+          </div>
+
+        </div>
+
+        <div>
+
+          <p class="text-sm font-semibold text-[#b37a45] mb-2 uppercase tracking-wide">
+            Địa chỉ
+          </p>
+
+          <div class="bg-[#fff4e8]
+                                border border-[#f3dfcb]
+                                rounded-2xl
+                                px-4 py-3
+                                text-gray-700
+                                leading-7"
+               th:text="${user.address}">
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
+
+    <!-- Order Detail -->
+    <div class="w-[72%]
+                    bg-[#fffaf5]
+                    border border-[#f1d2b5]
+                    rounded-3xl
+                    shadow-[0_8px_25px_rgba(0,0,0,0.08)]
+                    overflow-hidden">
+
+      <!-- Header -->
+      <div class="flex justify-between items-center
+                        px-8 py-6
+                        bg-[#fff4e8]
+                        border-b border-[#f3dfcb]">
+
+        <div>
+
+          <p class="text-2xl font-bold text-[#8c5a2b]">
+            Chi tiết đơn hàng
+          </p>
+
+          <p class="text-gray-500">
+            Danh sách sản phẩm đã mua
+          </p>
+
+        </div>
+
+        <div class="bg-[#dea069]
+                            text-white
+                            px-5 py-3
+                            rounded-2xl
+                            font-semibold
+                            shadow">
+
+          <span th:text="${orderDetails.size()}"></span>
+          sản phẩm
+
+        </div>
+
+      </div>
+
+      <!-- Product List -->
+      <div class="p-6 flex flex-col gap-5">
+
+        <div class="cart-item
+                            flex items-center justify-between
+                            bg-white
+                            border border-[#f3dfcb]
+                            rounded-2xl
+                            p-5
+                            hover:shadow-lg
+                            transition duration-300"
+
+             th:each="item : ${orderDetails}">
+
+          <!-- Left -->
+          <div class="flex items-center gap-5 w-[45%]">
+
+            <div class="w-[95px] h-[95px]
+                                    rounded-2xl
+                                    overflow-hidden
+                                    border border-[#f3dfcb]
+                                    bg-[#fffaf5]">
+
+              <img th:src="@{${item.product.imageUrl}}"
+                   alt="product image"
+                   class="w-full h-full object-cover">
+
+            </div>
+
+            <div>
+
+              <p class="text-lg font-bold text-[#8c5a2b]
+                                      leading-7 mb-2"
+                 th:text="${item.product.name}">
+              </p>
+
+              <p class="text-sm text-gray-500">
+                Sản phẩm đã mua
+              </p>
+
+            </div>
+
+          </div>
+
+          <!-- Price -->
+          <div class="w-[18%] text-center">
+
+            <p class="text-sm text-gray-500 mb-2">
+              Giá
+            </p>
+
+            <div class="bg-[#fff1e4]
+                                    text-[#c26d1d]
+                                    px-4 py-2
+                                    rounded-xl
+                                    font-bold inline-block"
+                 th:text="${#numbers.formatDecimal(item.product.price, 0, 'COMMA', 0, 'POINT')} + ' VND'">
+            </div>
+
+          </div>
+
+          <!-- Quantity -->
+          <div class="w-[12%] text-center">
+
+            <p class="text-sm text-gray-500 mb-2">
+              Số lượng
+            </p>
+
+            <div class="bg-[#f7efe7]
+                                    text-[#8c5a2b]
+                                    px-4 py-2
+                                    rounded-xl
+                                    font-bold inline-block"
+                 th:text="${item.quantity}">
+            </div>
+
+          </div>
+
+          <!-- Review -->
+          <div class="w-[15%] text-center">
+
+            <a th:href="@{'/user/review/' + ${item.id}}"
+               class="inline-flex items-center justify-center
+                                  w-[130px] h-[44px]
+                                  bg-[#dea069]
+                                  hover:bg-[#c88447]
+                                  rounded-xl
+                                  text-white
+                                  font-semibold
+                                  shadow-md
+                                  transition duration-300
+                                  hover:scale-[1.03]
+                                  active:scale-[0.98]">
+
+              Đánh giá
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Total -->
+      <div class="border-t border-[#f3dfcb]
+                        bg-[#fff8f1]
+                        px-8 py-6
+                        flex justify-between items-center">
+
+        <p class="text-2xl font-bold text-[#8c5a2b]">
+          Tổng giá trị đơn hàng
+        </p>
+
+        <div class="bg-[#dea069]
+                            text-white
+                            px-6 py-4
+                            rounded-2xl
+                            text-xl
+                            font-bold
+                            shadow-lg">
+
+                    <span th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'POINT')} + ' VND'">
+                    </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
-  <div class="text-lg font-medium mt-4">
-    Tổng giá trị đơn hàng:
-    <span th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'POINT')} + ' VND'">0 VND</span>
-  </div>
-  <!--        <p class="text-xl font-medium mt-8" th:value="${totalPrice}"></p>-->
-  <form th:action="@{/user/history}" method="get">
-    <button class="bg-[#dea069] w-[250px] h-[50px] text-lg font-medium rounded-lg mt-10 text-white absolute left-[50%] -translate-x-[50%] cursor-pointer" id="dathang" type="submit">XONG</button>
+
+  <!-- Button -->
+  <form th:action="@{/user/history}"
+        method="get"
+        class="flex justify-center mt-12">
+
+    <button class="w-[260px]
+                       h-[55px]
+                       bg-[#dea069]
+                       hover:bg-[#c88447]
+                       text-white
+                       text-lg
+                       font-bold
+                       rounded-2xl
+                       shadow-[0_6px_20px_rgba(222,160,105,0.45)]
+                       transition duration-300
+                       hover:scale-[1.03]
+                       active:scale-[0.98]
+                       cursor-pointer"
+            id="dathang"
+            type="submit">
+
+      QUAY LẠI
+
+    </button>
+
   </form>
+
 </div>
+
+
+
 
 <div class="w-[100vw] mt-[200px] mb-5 ml-1 flex-col text-center mb-10">
   <div class="text-lg font-medium text-gray-600 text-center mb-2">

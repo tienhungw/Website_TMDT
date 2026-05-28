@@ -21,7 +21,7 @@
                 <a id="gotoPage1" class="cursor-pointer" href="/admin/products">Sản phẩm</a>
                 <a id="gotoPage2" class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/admin/order">Đơn đặt hàng</a>
                 <a id="gotoPage3" class="cursor-pointer" href="/admin/customer">Khách hàng</a>
-                <a id="gotoPage4" class="cursor-pointer" href="/logout">Đăng xuất</a>
+                <a id="gotoPage4" class="cursor-pointer" href="/logout" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất không?')">Đăng xuất</a>
             </div>
         </div>
     </div>
@@ -31,121 +31,314 @@
         <div class="flex flex-row justify-between mt-8">
             <p class="text-2xl font-normal text-black">Quản lý đơn hàng</p>
         </div>
-        <div class="mt-2">
-            <table class="min-w-full border border-white table-fixed border-collapse">
-                <thead>
-                    <tr class="bg-[#dea069]">
-                        <th class="border border-white w-[30px] h-[40px] text-white text-lg font-medium">Mã đơn</th>
-                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Họ tên</th>
-                        <th class="border border-white w-[60px] h-[40px] text-white text-lg font-medium">Địa chỉ</th>
-                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Giá trị</th>
-                        <th class="border border-white w-[70px] h-[40px] text-white text-lg font-medium">Trạng thái</th>
-                        <th class="border border-white w-[60px] h-[40px] text-white text-lg font-medium">Thao tác</th>
+<!--        <div class="mt-2">-->
+<!--            <table class="min-w-full border border-white table-fixed border-collapse">-->
+<!--                <thead>-->
+<!--                    <tr class="bg-[#dea069]">-->
+<!--                        <th class="border border-white w-[30px] h-[40px] text-white text-lg font-medium">Mã đơn</th>-->
+<!--                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Họ tên</th>-->
+<!--                        <th class="border border-white w-[60px] h-[40px] text-white text-lg font-medium">Địa chỉ</th>-->
+<!--                        <th class="border border-white w-[50px] h-[40px] text-white text-lg font-medium">Giá trị</th>-->
+<!--                        <th class="border border-white w-[70px] h-[40px] text-white text-lg font-medium">Trạng thái</th>-->
+<!--                        <th class="border border-white w-[60px] h-[40px] text-white text-lg font-medium">Thao tác</th>-->
+<!--                    </tr>-->
+<!--                </thead>-->
+<!--                <tbody class="bg-[#dfe4ea] justify-center items-center">-->
+<!--                    <tr th:each="order : ${orders}">-->
+<!--                        <td class="border border-white w-[100px] p-2 overflow-hidden text-ellipsis whitespace-normal text-center " th:text="${order.id}"></td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center justify-center items-center" th:text="${order.user.full_name}"></td>-->
+<!--                        <td class="border border-white w-[200px] p-2 text-center" th:text="${order.user.address}"></td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center" th:text="${order.totalPrice}"></td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center">-->
+<!--                            <form th:action="@{/admin/order/status}" method="post">-->
+<!--                                <input type="hidden" name="orderId" th:value="${order.id}" />-->
+<!--                                <div class="content-set">-->
+<!--                                    <div class="select-container">-->
+<!--                                        <select name="status" class="status-select">-->
+<!--                                            <option th:each="status : ${statusList}"-->
+<!--                                                    th:value="${status}"-->
+<!--                                                    th:text="${status}"-->
+<!--                                                    th:selected="${status == order.status}"-->
+<!--                                                    th:classappend="${status}">Status</option>-->
+<!--                                        </select>-->
+<!--                                    </div>-->
+<!--                                    <div>-->
+<!--                                        <button class="btn-set rounded-sm px-2 bg-[#dea069] hover:bg-[#e58e26] text-white" type="submit">Save</button>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </form>-->
+<!--                        </td>-->
+<!--                        <td class="border border-white w-[150px] p-2 text-center">-->
+<!--                            <div class="flex flex-col gap-1 items-center">-->
+<!--&lt;!&ndash;                                <button class="text-lg font-medium text-white w-[70%] h-auto bg-[#DAB10C] rounded-xl cursor-pointer" id="chitiet1">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    Chi tiết&ndash;&gt;-->
+<!--&lt;!&ndash;                                </button>&ndash;&gt;-->
+<!--                                <form th:action="@{'/admin/order/'+${order.id}}" method="get"><button class="text-lg font-medium text-white w-[100px] h-[30px] bg-[#DAB10C] hover:bg-[#ffa801] rounded-xl cursor-pointer">Chi tiết</button></form>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--&lt;!&ndash;                    <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 overflow-hidden text-ellipsis whitespace-normal text-center ">HD002</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 text-center justify-center items-center">Nguyễn Thị Hoài</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[250px] p-2 text-center">Phú Thượng - Tây Hồ - Hà Nội</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 text-center">2000000</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 text-center">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="flex flex-col gap-1 items-center">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <button class="text-lg font-medium text-white w-[70%] h-auto bg-[#DAB10C] rounded-xl cursor-pointer" id="chitiet2">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    Chi tiết&ndash;&gt;-->
+<!--&lt;!&ndash;                                </button>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 overflow-hidden text-ellipsis whitespace-normal text-center ">HD003</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 text-center justify-center items-center">Nguyễn Văn Hòa</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[250px] p-2 text-center">Hương Lung - Cẩm Khê - Phú Thọ</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 text-center">3000000</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 text-center">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="flex flex-col gap-1 items-center">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <button class="text-lg font-medium text-white w-[70%] h-auto bg-[#DAB10C] rounded-xl cursor-pointer" id="chitiet3">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    Chi tiết&ndash;&gt;-->
+<!--&lt;!&ndash;                                </button>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 overflow-hidden text-ellipsis whitespace-normal text-center ">HD004</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 text-center justify-center items-center">Phan Thị Thu Lâm</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[250px] p-2 text-center">Hương Lung - Cẩm Khê - Phú Thọ</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 text-center">4000000</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 text-center">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="flex flex-col gap-1 items-center">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <button class="text-lg font-medium text-white w-[70%] h-auto bg-[#DAB10C] rounded-xl cursor-pointer" id="chitiet4">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    Chi tiết&ndash;&gt;-->
+<!--&lt;!&ndash;                                </button>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 overflow-hidden text-ellipsis whitespace-normal text-center ">HD005</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 text-center justify-center items-center">Nguyễn Thị Thùy Linh</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[250px] p-2 text-center">Hương Lung - Cẩm Khê - Phú Thọ</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 text-center">3000000</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 text-center">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="flex flex-col gap-1 items-center">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <button class="text-lg font-medium text-white w-[70%] h-auto bg-[#DAB10C] rounded-xl cursor-pointer" id="chitiet5">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    Chi tiết&ndash;&gt;-->
+<!--&lt;!&ndash;                                </button>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 overflow-hidden text-ellipsis whitespace-normal text-center ">HD006</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 text-center justify-center items-center">Nguyễn Tiến Bảo</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[250px] p-2 text-center">Hương Lung - Cẩm Khê - Phú Thọ</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 text-center">4000000</td>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <td class="border border-white w-[150px] p-2 text-center">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="flex flex-col gap-1 items-center">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <button class="text-lg font-medium text-white w-[70%] h-auto bg-[#DAB10C] rounded-xl cursor-pointer" id="chitiet6">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    Chi tiết&ndash;&gt;-->
+<!--&lt;!&ndash;                                </button>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </td>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </tr>&ndash;&gt;-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--            -->
+<!--        </div>-->
+
+        <div class="mt-6 bg-white rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.08)] overflow-hidden border border-[#f3d8be]">
+
+            <!-- Header -->
+            <div class="flex items-center justify-between px-8 py-6 bg-[#fff4e8] border-b border-[#f3dfcb]">
+                <div>
+                    <p class="text-2xl font-bold text-[#8c5a2b]">
+                        Danh sách đơn hàng
+                    </p>
+                    <p class="text-gray-500 mt-1">
+                        Quản lý và cập nhật trạng thái đơn hàng
+                    </p>
+                </div>
+
+                <div class="bg-[#dea069] text-white px-5 py-3 rounded-2xl shadow font-semibold">
+                    <span th:text="${orders.size()}"></span> đơn hàng
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="overflow-x-auto">
+
+                <table class="min-w-full border-collapse">
+
+                    <thead>
+
+                    <tr class="bg-[#dea069] text-white">
+
+                        <th class="px-6 py-5 text-center text-lg font-semibold">
+                            Mã đơn
+                        </th>
+
+                        <th class="px-6 py-5 text-center text-lg font-semibold">
+                            Khách hàng
+                        </th>
+
+                        <th class="px-6 py-5 text-center text-lg font-semibold">
+                            Địa chỉ
+                        </th>
+
+                        <th class="px-6 py-5 text-center text-lg font-semibold">
+                            Tổng tiền
+                        </th>
+
+                        <th class="px-6 py-5 text-center text-lg font-semibold">
+                            Trạng thái
+                        </th>
+
+                        <th class="px-6 py-5 text-center text-lg font-semibold">
+                            Chi tiết
+                        </th>
+
                     </tr>
-                </thead>
-                <tbody class="bg-[#dfe4ea] justify-center items-center">
-                    <tr th:each="order : ${orders}">
-                        <td class="border border-white w-[100px] p-2 overflow-hidden text-ellipsis whitespace-normal text-center " th:text="${order.id}"></td>
-                        <td class="border border-white w-[150px] p-2 text-center justify-center items-center" th:text="${order.user.full_name}"></td>
-                        <td class="border border-white w-[200px] p-2 text-center" th:text="${order.user.address}"></td>
-                        <td class="border border-white w-[150px] p-2 text-center" th:text="${order.totalPrice}"></td>
-                        <td class="border border-white w-[150px] p-2 text-center">
+
+                    </thead>
+
+                    <tbody class="bg-white">
+
+                    <tr th:each="order : ${orders}"
+                        class="border-b border-[#f5e3cf]
+                       hover:bg-[#fffaf5]
+                       transition duration-200">
+
+                        <!-- ID -->
+                        <td class="px-6 py-5 text-center font-bold text-[#8c5a2b]"
+                            th:text="${order.id}">
+                        </td>
+
+                        <!-- User -->
+                        <td class="px-6 py-5 text-center font-medium text-gray-700"
+                            th:text="${order.user.full_name}">
+                        </td>
+
+                        <!-- Address -->
+                        <td class="px-6 py-5 text-center text-gray-600 leading-7"
+                            th:text="${order.user.address}">
+                        </td>
+
+                        <!-- Price -->
+                        <td class="px-6 py-5 text-center">
+
+                    <span class="bg-[#fff2e7]
+                                 text-[#c26d1d]
+                                 px-4 py-2
+                                 rounded-xl
+                                 font-bold
+                                 shadow-sm"
+                          th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'POINT')} + ' VND'">
+                    </span>
+
+                        </td>
+
+                        <!-- Status -->
+                        <td class="px-6 py-5 text-center">
+
                             <form th:action="@{/admin/order/status}" method="post">
-                                <input type="hidden" name="orderId" th:value="${order.id}" />
-                                <div class="content-set">
-                                    <div class="select-container">
-                                        <select name="status" class="status-select">
-                                            <option th:each="status : ${statusList}"
-                                                    th:value="${status}"
-                                                    th:text="${status}"
-                                                    th:selected="${status == order.status}"
-                                                    th:classappend="${status}">Status</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <button class="btn-set rounded-sm px-2 bg-[#dea069] hover:bg-[#e58e26] text-white" type="submit">Save</button>
-                                    </div>
+
+                                <input type="hidden"
+                                       name="orderId"
+                                       th:value="${order.id}" />
+
+                                <div class="flex flex-col items-center gap-3">
+
+                                    <select name="status"
+                                            class="w-[180px]
+                                           h-[42px]
+                                           rounded-xl
+                                           border border-[#e7c8a8]
+                                           bg-[#fffaf5]
+                                           px-3
+                                           text-[#8c5a2b]
+                                           font-semibold
+                                           outline-none
+                                           focus:border-[#dea069]
+                                           focus:ring-2
+                                           focus:ring-[#f4d1b2]
+                                           transition">
+
+                                        <option th:each="status : ${statusList}"
+                                                th:value="${status}"
+                                                th:text="${status}"
+                                                th:selected="${status == order.status}">
+                                            Status
+                                        </option>
+
+                                    </select>
+
+                                    <button class="w-[110px]
+                                           h-[40px]
+                                           bg-[#dea069]
+                                           hover:bg-[#c88447]
+                                           text-white
+                                           font-semibold
+                                           rounded-xl
+                                           shadow-md
+                                           hover:scale-[1.03]
+                                           active:scale-[0.97]
+                                           transition duration-300
+                                           cursor-pointer"
+                                            type="submit">
+
+                                        Save
+
+                                    </button>
+
                                 </div>
+
                             </form>
+
                         </td>
-                        <td class="border border-white w-[150px] p-2 text-center">
-                            <div class="flex flex-col gap-1 items-center">
-<!--                                <button class="text-lg font-medium text-white w-[70%] h-auto bg-[#DAB10C] rounded-xl cursor-pointer" id="chitiet1">-->
-<!--                                    Chi tiết-->
-<!--                                </button>-->
-                                <form th:action="@{'/admin/order/'+${order.id}}" method="get"><button class="text-lg font-medium text-white w-[100px] h-[30px] bg-[#DAB10C] hover:bg-[#ffa801] rounded-xl cursor-pointer">Chi tiết</button></form>
+
+                        <!-- Detail -->
+                        <td class="px-6 py-5 text-center">
+
+                            <div class="flex justify-center">
+
+                                <form th:action="@{'/admin/order/'+${order.id}}"
+                                      method="get">
+
+                                    <button class="w-[120px]
+                                           h-[42px]
+                                           bg-[#DAB10C]
+                                           hover:bg-[#f4c430]
+                                           text-white
+                                           font-semibold
+                                           rounded-xl
+                                           shadow-md
+                                           hover:scale-[1.03]
+                                           active:scale-[0.98]
+                                           transition duration-300
+                                           cursor-pointer">
+
+                                        Chi tiết
+
+                                    </button>
+
+                                </form>
+
                             </div>
+
                         </td>
+
                     </tr>
-<!--                    <tr>-->
-<!--                        <td class="border border-white w-[150px] p-2 overflow-hidden text-ellipsis whitespace-normal text-center ">HD002</td>-->
-<!--                        <td class="border border-white w-[150px] p-2 text-center justify-center items-center">Nguyễn Thị Hoài</td>-->
-<!--                        <td class="border border-white w-[250px] p-2 text-center">Phú Thượng - Tây Hồ - Hà Nội</td>-->
-<!--                        <td class="border border-white w-[150px] p-2 text-center">2000000</td>-->
-<!--                        <td class="border border-white w-[150px] p-2 text-center">-->
-<!--                            <div class="flex flex-col gap-1 items-center">-->
-<!--                                <button class="text-lg font-medium text-white w-[70%] h-auto bg-[#DAB10C] rounded-xl cursor-pointer" id="chitiet2">-->
-<!--                                    Chi tiết-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td class="border border-white w-[150px] p-2 overflow-hidden text-ellipsis whitespace-normal text-center ">HD003</td>-->
-<!--                        <td class="border border-white w-[150px] p-2 text-center justify-center items-center">Nguyễn Văn Hòa</td>-->
-<!--                        <td class="border border-white w-[250px] p-2 text-center">Hương Lung - Cẩm Khê - Phú Thọ</td>-->
-<!--                        <td class="border border-white w-[150px] p-2 text-center">3000000</td>-->
-<!--                        <td class="border border-white w-[150px] p-2 text-center">-->
-<!--                            <div class="flex flex-col gap-1 items-center">-->
-<!--                                <button class="text-lg font-medium text-white w-[70%] h-auto bg-[#DAB10C] rounded-xl cursor-pointer" id="chitiet3">-->
-<!--                                    Chi tiết-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td class="border border-white w-[150px] p-2 overflow-hidden text-ellipsis whitespace-normal text-center ">HD004</td>-->
-<!--                        <td class="border border-white w-[150px] p-2 text-center justify-center items-center">Phan Thị Thu Lâm</td>-->
-<!--                        <td class="border border-white w-[250px] p-2 text-center">Hương Lung - Cẩm Khê - Phú Thọ</td>-->
-<!--                        <td class="border border-white w-[150px] p-2 text-center">4000000</td>-->
-<!--                        <td class="border border-white w-[150px] p-2 text-center">-->
-<!--                            <div class="flex flex-col gap-1 items-center">-->
-<!--                                <button class="text-lg font-medium text-white w-[70%] h-auto bg-[#DAB10C] rounded-xl cursor-pointer" id="chitiet4">-->
-<!--                                    Chi tiết-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td class="border border-white w-[150px] p-2 overflow-hidden text-ellipsis whitespace-normal text-center ">HD005</td>-->
-<!--                        <td class="border border-white w-[150px] p-2 text-center justify-center items-center">Nguyễn Thị Thùy Linh</td>-->
-<!--                        <td class="border border-white w-[250px] p-2 text-center">Hương Lung - Cẩm Khê - Phú Thọ</td>-->
-<!--                        <td class="border border-white w-[150px] p-2 text-center">3000000</td>-->
-<!--                        <td class="border border-white w-[150px] p-2 text-center">-->
-<!--                            <div class="flex flex-col gap-1 items-center">-->
-<!--                                <button class="text-lg font-medium text-white w-[70%] h-auto bg-[#DAB10C] rounded-xl cursor-pointer" id="chitiet5">-->
-<!--                                    Chi tiết-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    <tr>-->
-<!--                        <td class="border border-white w-[150px] p-2 overflow-hidden text-ellipsis whitespace-normal text-center ">HD006</td>-->
-<!--                        <td class="border border-white w-[150px] p-2 text-center justify-center items-center">Nguyễn Tiến Bảo</td>-->
-<!--                        <td class="border border-white w-[250px] p-2 text-center">Hương Lung - Cẩm Khê - Phú Thọ</td>-->
-<!--                        <td class="border border-white w-[150px] p-2 text-center">4000000</td>-->
-<!--                        <td class="border border-white w-[150px] p-2 text-center">-->
-<!--                            <div class="flex flex-col gap-1 items-center">-->
-<!--                                <button class="text-lg font-medium text-white w-[70%] h-auto bg-[#DAB10C] rounded-xl cursor-pointer" id="chitiet6">-->
-<!--                                    Chi tiết-->
-<!--                                </button>-->
-<!--                            </div>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-                </tbody>
-            </table>
-            
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
         </div>
+
+
     </div>
 
     <div class="w-[60vw] h-[30px] mt-[100px] mb-5">

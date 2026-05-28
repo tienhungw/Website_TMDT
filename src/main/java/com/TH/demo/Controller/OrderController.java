@@ -211,7 +211,8 @@ public class OrderController {
 
     @GetMapping("admin/order")
     public String trangDatHang(Model model){
-        List<Order> orders = orderRepository.findAll();
+//        List<Order> orders = orderRepository.findAll();
+        List<Order> orders = orderRepository.findAllByOrderByIdDesc();
         model.addAttribute("statusList", OrderStatus.values());
         model.addAttribute("orders", orders);
         log.info("[ADMIN truy cập trang danh sách orders]");
@@ -261,7 +262,8 @@ public class OrderController {
     public String historyOrder(Model model, Principal principal){
         String username = principal.getName();
         Users user = userRepository.findByUsername(username).orElseThrow();
-        List<Order> orders = orderRepository.findByUser(user);
+//        List<Order> orders = orderRepository.findByUser(user);
+        List<Order> orders = orderRepository.findByUserOrderByIdDesc(user);
         model.addAttribute("orders", orders);
         log.info("[USER [{}] xem lịch sử mua hàng]", username);
 

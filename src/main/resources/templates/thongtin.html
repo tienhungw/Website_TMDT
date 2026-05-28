@@ -10,107 +10,288 @@
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 
     <style>
-        
+
     </style>
 </head>
 <body class="flex flex-col justify-center items-center bg-[#F3F1EC] overflow-x-hidden">
-    <div class="navb flex flex-row h-[80px] w-[100vw] justify-between mb-[50px] bg-[#dea069] text-white shadow-[0_5px_15px_rgba(0,0,0,0.35)]">
-        <div class="infor-shop h-[80px] w-fit flex flex-row justify-center items-center ml-2">
-            <img class="w-[50px] h-[50px] rounded-[999px] ml-[20px]" src="/img/tienhungw.jpg" alt="">
-            <h2 class="text-[30px] font-medium ml-[10px] mt-[10px] font-['Kaushan_Script']">TH Shop</h2>
-        </div>
-
-        <div class="relative h-[80px] w-[50vw] absolute right-[20px]">
-            <div class="flex flex-row h-[40px] bg-white w-[400px] absolute right-[20px] rounded-3xl justify-between mt-1">
-                <input class="outline-none text-gray-600 pl-4" type="text" placeholder="Tìm kiếm sản phẩm">
-                <box-icon class="mr-3 mt-2 cursor-pointer" name='search' flip='horizontal' color='rgba(0,0,0,0.8)' ></box-icon>
-            </div>
-            <div class="flex flex-row absolute gap-[30px] right-[20px] bottom-[6px] text-lg font-normal">
-                <a id="gotoPage1" class="cursor-pointer" href="/user/home">Trang chủ</a>
-                <a id="gotoPage2" class="cursor-pointer" href="/user/cart">Giỏ hàng</a>
-                <a id="gotoPage3" class="cursor-pointer" href="/user/history">Lịch sử</a>
-                <a id="gotoPage4" class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/user/about">Thông tin</a>
-                <a id="gotoPage5" class="cursor-pointer" href="/logout">Đăng xuất</a>
-            </div>
-        </div>
+<div class="navb flex flex-row h-[80px] w-[100vw] justify-between mb-[50px] bg-[#dea069] text-white shadow-[0_5px_15px_rgba(0,0,0,0.35)]">
+    <div class="infor-shop h-[80px] w-fit flex flex-row justify-center items-center ml-2">
+        <img class="w-[50px] h-[50px] rounded-[999px] ml-[20px]" src="/img/tienhungw.jpg" alt="">
+        <h2 class="text-[30px] font-medium ml-[10px] mt-[10px] font-['Kaushan_Script']">TH Shop</h2>
     </div>
 
-    <div class="w-[1020px] h-fit relative text-stone-900">
-        <p class="text-3xl font-normal text-[#a86f3b] mb-6">GIỚI THIỆU VỀ CỬA HÀNG</p>
-        <p class="ml-[60px] text-[24px] font-normal mb-2 indent-12">Chào mừng bạn đến với TH Shop - điểm đến lý tưởng dành cho những ai đam mê nhiếp ảnh và quay phim chuyên nghiệp!</p>
-        <p class="ml-[60px] text-[24px] font-normal mb-2 indent-12">Tại TH Shop, chúng tôi chuyên cung cấp các sản phẩm máy ảnh, máy quay phim, camera giám sát và đầy đủ phụ kiện hỗ trợ đến từ những thương hiệu hàng đầu như Sony, Canon, Nikon, Fujifilm, GoPro, DJI,...</p>
-        <p class="ml-[96px] text-[24px] font-normal mb-3">
-            Sản phẩm chất lượng – Chính hãng 100% 
-        <p>
-        <p class="ml-34 text-[24px] font-normal mb-3">
-            • Máy ảnh DSLR, mirrorless, máy quay chuyên dụng <br>
-            • Camera giám sát, camera hành trình, flycam <br>
-            • Ống kính, gimbal, tripod, đèn studio, mic thu âm <br>
-            • Thẻ nhớ, pin, balo đựng máy và nhiều phụ kiện khác
+    <div class="relative h-[80px] w-[50vw] absolute right-[20px]">
+        <div class="flex flex-row h-[40px] bg-white w-[400px] absolute right-[20px] rounded-3xl justify-between mt-1">
+            <input class="outline-none text-gray-600 pl-4" type="text" placeholder="Tìm kiếm sản phẩm">
+            <box-icon class="mr-3 mt-2 cursor-pointer" name='search' flip='horizontal' color='rgba(0,0,0,0.8)' ></box-icon>
+        </div>
+        <div class="flex flex-row absolute gap-[30px] right-[20px] bottom-[6px] text-lg font-normal">
+            <a id="gotoPage1" class="cursor-pointer" href="/user/home">Trang chủ</a>
+            <a id="gotoPage2" class="cursor-pointer" href="/user/cart">Giỏ hàng</a>
+            <a id="gotoPage3" class="cursor-pointer" href="/user/history">Lịch sử</a>
+            <a id="gotoPage4" class="cursor-pointer underline" style="text-underline-offset: 4px; text-decoration-thickness: 2px;" href="/user/about">Thông tin</a>
+            <a id="gotoPage5" class="cursor-pointer" href="/logout" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất không?')">Đăng xuất</a>
+        </div>
+    </div>
+</div>
+
+<div class="w-[90vw] max-w-[1250px] bg-[#fffaf5] border border-[#efd7c2] rounded-[35px] shadow-[0_15px_40px_rgba(0,0,0,0.08)] px-[70px] py-[60px] relative text-stone-800">
+<!--    <p class="text-3xl font-normal text-[#a86f3b] mb-6">GIỚI THIỆU VỀ CỬA HÀNG</p>-->
+<!--    <p class="ml-[60px] text-[24px] font-normal mb-2 indent-12">Chào mừng bạn đến với TH Shop - điểm đến lý tưởng dành cho những ai đam mê nhiếp ảnh và quay phim chuyên nghiệp!</p>-->
+<!--    <p class="ml-[60px] text-[24px] font-normal mb-2 indent-12">Tại TH Shop, chúng tôi chuyên cung cấp các sản phẩm máy ảnh, máy quay phim, camera giám sát và đầy đủ phụ kiện hỗ trợ đến từ những thương hiệu hàng đầu như Sony, Canon, Nikon, Fujifilm, GoPro, DJI,...</p>-->
+<!--    <p class="ml-[96px] text-[24px] font-normal mb-3">-->
+<!--        Sản phẩm chất lượng – Chính hãng 100%-->
+<!--    <p>-->
+<!--    <p class="ml-34 text-[24px] font-normal mb-3">-->
+<!--        • Máy ảnh DSLR, mirrorless, máy quay chuyên dụng <br>-->
+<!--        • Camera giám sát, camera hành trình, flycam <br>-->
+<!--        • Ống kính, gimbal, tripod, đèn studio, mic thu âm <br>-->
+<!--        • Thẻ nhớ, pin, balo đựng máy và nhiều phụ kiện khác-->
+<!--    </p>-->
+
+<!--    <p class="ml-[96px] text-[24px] font-normal mb-3">-->
+<!--        Dịch vụ chuyên nghiệp – Hỗ trợ tận tình-->
+<!--    <p>-->
+<!--    <p class="ml-34 text-[24px] font-normal mb-3">-->
+<!--        • Tư vấn chuyên sâu giúp bạn chọn sản phẩm phù hợp <br>-->
+<!--        •  Bảo hành chính hãng, hỗ trợ kỹ thuật nhanh chóng <br>-->
+<!--        • Chính sách đổi trả linh hoạt, cam kết mang đến trải nghiệm mua sắm tốt nhất-->
+<!--    </p>-->
+<!--    <p class="ml-[60px] text-[24px] font-normal mb-2 indent-12 mt-4">Với phương châm “Chất lượng tạo nên thương hiệu”, TH Shop luôn sẵn sàng đồng hành cùng bạn trên hành trình sáng tạo!</p>-->
+<!--    <p class="ml-[60px] text-[22px] font-normal mb-2 mt-4">📍 Địa chỉ: Ngõ 6 Phan Đình Giót - Quang Trung - Hà Đông - Hà Nội</p>-->
+<!--    <p class="ml-[60px] text-[22px] font-normal mb-2 mt-4">📞 Hotline: 0327644604</p>-->
+<!--    <p class="ml-[60px] text-[22px] font-normal mb-2 mt-4">🌐 Website: https://www.thshop.com.vn</p>-->
+<!--    <p class="ml-[60px] text-[22px] font-normal mb-2 mt-4">Hãy đến và trải nghiệm ngay hôm nay! 🚀</p>-->
+
+
+    <!-- TITLE -->
+    <div class="text-center mb-14">
+        <div class="w-[90px] h-[90px] rounded-[28px] bg-[#dea069] flex items-center justify-center mx-auto shadow-lg mb-5">
+            <box-icon name='camera' color='white' size="lg"></box-icon>
+        </div>
+
+        <p class="text-[42px] font-bold text-[#8c5a2b] tracking-wide mb-3">
+            TH SHOP
         </p>
-        
-        <p class="ml-[96px] text-[24px] font-normal mb-3">
-            Dịch vụ chuyên nghiệp – Hỗ trợ tận tình
-        <p>
-        <p class="ml-34 text-[24px] font-normal mb-3">
-            • Tư vấn chuyên sâu giúp bạn chọn sản phẩm phù hợp <br>
-            •  Bảo hành chính hãng, hỗ trợ kỹ thuật nhanh chóng <br>
-            • Chính sách đổi trả linh hoạt, cam kết mang đến trải nghiệm mua sắm tốt nhất
+
+        <p class="text-[22px] text-[#c58a56] font-medium">
+            Không gian dành cho những người đam mê nhiếp ảnh & công nghệ hình ảnh
         </p>
-        <p class="ml-[60px] text-[24px] font-normal mb-2 indent-12 mt-4">Với phương châm “Chất lượng tạo nên thương hiệu”, TH Shop luôn sẵn sàng đồng hành cùng bạn trên hành trình sáng tạo!</p>
-        <p class="ml-[60px] text-[22px] font-normal mb-2 mt-4">📍 Địa chỉ: Ngõ 6 Phan Đình Giót - Quang Trung - Hà Đông - Hà Nội</p>
-        <p class="ml-[60px] text-[22px] font-normal mb-2 mt-4">📞 Hotline: 0327644604</p>
-        <p class="ml-[60px] text-[22px] font-normal mb-2 mt-4">🌐 Website: https://www.thshop.com.vn</p>
-        <p class="ml-[60px] text-[22px] font-normal mb-2 mt-4">Hãy đến và trải nghiệm ngay hôm nay! 🚀</p>
     </div>
 
-    <div class="w-[100vw] mt-[100px] ml-1 flex-col text-center mb-10">
-        <div class="text-lg font-medium text-gray-600 text-center mb-2">
-            © 2025 Bản quyền thuộc về TH Shop
+    <!-- INTRO -->
+    <div class="space-y-7 leading-[42px]">
+
+        <p class="text-[24px] indent-14">
+            Chào mừng bạn đến với
+            <span class="font-bold text-[#b97432]">TH Shop</span>
+            — nơi hội tụ những thiết bị nhiếp ảnh, quay phim và công nghệ hình ảnh chất lượng cao dành cho cả người mới bắt đầu lẫn các nhiếp ảnh gia chuyên nghiệp.
+        </p>
+
+        <p class="text-[24px] indent-14">
+            Chúng tôi chuyên cung cấp các dòng
+            <span class="font-semibold text-[#b97432]">máy ảnh DSLR, mirrorless, camera giám sát, flycam, lens và phụ kiện chuyên dụng</span>
+            đến từ các thương hiệu hàng đầu thế giới như Canon, Sony, Nikon, Fujifilm, DJI, GoPro...
+        </p>
+
+    </div>
+
+    <!-- FEATURE BOX -->
+    <div class="grid grid-cols-2 gap-10 mt-14">
+
+        <!-- LEFT -->
+        <div class="bg-[#fff4e8] border border-[#f3dcc7] rounded-[28px] p-8 shadow-md hover:shadow-xl transition duration-300">
+
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-[55px] h-[55px] rounded-2xl bg-[#dea069] flex justify-center items-center">
+                    <box-icon name='badge-check' color='white'></box-icon>
+                </div>
+
+                <p class="text-[28px] font-bold text-[#8c5a2b]">
+                    Sản phẩm nổi bật
+                </p>
+            </div>
+
+            <div class="text-[22px] leading-[42px] text-gray-700">
+                • Máy ảnh DSLR & Mirrorless cao cấp <br>
+                • Camera giám sát, hành trình, flycam <br>
+                • Lens chuyên dụng cho chụp ảnh & quay phim <br>
+                • Gimbal, tripod, đèn studio, mic thu âm <br>
+                • Pin, thẻ nhớ, balo và phụ kiện hỗ trợ
+            </div>
+
         </div>
-        <div class="text-lg font-normal text-gray-600 text-center">
-            Cảm ơn quý khách đã tin tưởng và ủng hộ cửa hàng!
+
+        <!-- RIGHT -->
+        <div class="bg-[#fff4e8] border border-[#f3dcc7] rounded-[28px] p-8 shadow-md hover:shadow-xl transition duration-300">
+
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-[55px] h-[55px] rounded-2xl bg-[#dea069] flex justify-center items-center">
+                    <box-icon name='support' color='white'></box-icon>
+                </div>
+
+                <p class="text-[28px] font-bold text-[#8c5a2b]">
+                    Dịch vụ chuyên nghiệp
+                </p>
+            </div>
+
+            <div class="text-[22px] leading-[42px] text-gray-700">
+                • Tư vấn thiết bị phù hợp nhu cầu <br>
+                • Cam kết hàng chính hãng 100% <br>
+                • Hỗ trợ kỹ thuật & bảo hành nhanh chóng <br>
+                • Chính sách đổi trả linh hoạt <br>
+                • Trải nghiệm mua sắm hiện đại và tận tâm
+            </div>
+
         </div>
-        <div class="text-lg font-normal text-gray-600 text-center mb-3">
+
+    </div>
+
+    <!-- QUOTE -->
+    <div class="mt-16 bg-gradient-to-r from-[#dea069] to-[#c88447] rounded-[30px] px-10 py-10 text-white shadow-xl">
+
+        <p class="text-[32px] font-bold mb-5">
+            “Chất lượng tạo nên thương hiệu”
+        </p>
+
+        <p class="text-[22px] leading-[42px]">
+            TH Shop luôn mong muốn trở thành người bạn đồng hành đáng tin cậy trên hành trình sáng tạo hình ảnh của bạn - từ những khoảnh khắc đời thường cho đến các sản phẩm nghệ thuật chuyên nghiệp.
+        </p>
+
+    </div>
+
+    <!-- CONTACT -->
+    <div class="mt-16">
+
+        <p class="text-[34px] font-bold text-[#8c5a2b] mb-8">
             Thông tin liên hệ
+        </p>
+
+        <div class="grid grid-cols-2 gap-8">
+
+            <!-- ADDRESS -->
+            <div class="bg-[#fff4e8] rounded-[24px] p-7 border border-[#f0d8c2] shadow-sm">
+
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-[50px] h-[50px] rounded-xl bg-[#dea069] flex items-center justify-center">
+                        <box-icon name='map' color='white'></box-icon>
+                    </div>
+
+                    <p class="text-[24px] font-semibold text-[#8c5a2b]">
+                        Địa chỉ
+                    </p>
+                </div>
+
+                <p class="text-[21px] text-gray-700 leading-[38px]">
+                    Ngõ 6 Phan Đình Giót <br>
+                    Quang Trung - Hà Đông - Hà Nội
+                </p>
+
+            </div>
+
+            <!-- PHONE -->
+            <div class="bg-[#fff4e8] rounded-[24px] p-7 border border-[#f0d8c2] shadow-sm">
+
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-[50px] h-[50px] rounded-xl bg-[#dea069] flex items-center justify-center">
+                        <box-icon name='phone-call' color='white'></box-icon>
+                    </div>
+
+                    <p class="text-[24px] font-semibold text-[#8c5a2b]">
+                        Hotline hỗ trợ
+                    </p>
+                </div>
+
+                <p class="text-[24px] font-bold text-[#c26d1d]">
+                    0327 644 604
+                </p>
+
+            </div>
+
+            <!-- WEBSITE -->
+            <div class="bg-[#fff4e8] rounded-[24px] p-7 border border-[#f0d8c2] shadow-sm">
+
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-[50px] h-[50px] rounded-xl bg-[#dea069] flex items-center justify-center">
+                        <box-icon name='globe' color='white'></box-icon>
+                    </div>
+
+                    <p class="text-[24px] font-semibold text-[#8c5a2b]">
+                        Website
+                    </p>
+                </div>
+
+                <p class="text-[21px] text-[#b97432] font-medium">
+                    www.tienhungw.shop
+                </p>
+
+            </div>
+
+            <!-- THANK -->
+            <div class="bg-[#fff4e8] rounded-[24px] p-7 border border-[#f0d8c2] shadow-sm flex flex-col justify-center">
+
+                <p class="text-[28px] font-bold text-[#8c5a2b] mb-3">
+                    Cảm ơn bạn!
+                </p>
+
+                <p class="text-[21px] leading-[38px] text-gray-700">
+                    Hãy đến và trải nghiệm thế giới công nghệ hình ảnh hiện đại cùng TH Shop ngay hôm nay.
+                </p>
+
+            </div>
+
         </div>
-        <div class="flex flex-row text-center absolute left-[50%] -translate-x-[50%]">
-            <div class="flex flex-row">
-                <box-icon name='facebook-circle' type='logo' color='rgba(0,0,0,0.70)' ></box-icon>
-                <a target="_blank" class="mr-8 w-[150px] text-gray-700 hover:text-[#009432]" href="https://www.facebook.com/holahuliba">Nguyễn Tiến Hưng</a>
-            </div>
 
-            <div class="flex flex-row">
-                <box-icon name='phone' type='solid' color='rgba(0,0,0,0.70)' ></box-icon>
-                <p class="mr-8 w-[100px] text-gray-700 hover:text-[#009432]">0327644604</p>
-            </div>
+    </div>
+</div>
 
-            <div class="flex flex-row">
-                <box-icon name='envelope' color='rgba(0,0,0,0.70)' ></box-icon>
-                <a target="_blank" class="mr-8 w-[280px] text-gray-700 hover:text-[#009432]" href="https://mail.google.com/mail/u/0/?pli=1#inbox">nguyentienhung04042004gmail.com</a>
-            </div>
+<div class="w-[100vw] mt-[100px] ml-1 flex-col text-center mb-10">
+    <div class="text-lg font-medium text-gray-600 text-center mb-2">
+        © 2025 Bản quyền thuộc về TH Shop
+    </div>
+    <div class="text-lg font-normal text-gray-600 text-center">
+        Cảm ơn quý khách đã tin tưởng và ủng hộ cửa hàng!
+    </div>
+    <div class="text-lg font-normal text-gray-600 text-center mb-3">
+        Thông tin liên hệ
+    </div>
+    <div class="flex flex-row text-center absolute left-[50%] -translate-x-[50%]">
+        <div class="flex flex-row">
+            <box-icon name='facebook-circle' type='logo' color='rgba(0,0,0,0.70)' ></box-icon>
+            <a target="_blank" class="mr-8 w-[150px] text-gray-700 hover:text-[#009432]" href="https://www.facebook.com/holahuliba">Nguyễn Tiến Hưng</a>
+        </div>
 
-            <div class="flex flex-row">
-                <box-icon name='instagram' type='logo' color='rgba(0,0,0,0.70)' ></box-icon>
-                <a target="_blank" class="w-[150px] text-gray-700 hover:text-[#009432]" href="https://www.instagram.com/holahuliba/">Nguyễn Tiến Hưng</a>
-            </div>
+        <div class="flex flex-row">
+            <box-icon name='phone' type='solid' color='rgba(0,0,0,0.70)' ></box-icon>
+            <p class="mr-8 w-[100px] text-gray-700 hover:text-[#009432]">0327644604</p>
+        </div>
+
+        <div class="flex flex-row">
+            <box-icon name='envelope' color='rgba(0,0,0,0.70)' ></box-icon>
+            <a target="_blank" class="mr-8 w-[280px] text-gray-700 hover:text-[#009432]" href="https://mail.google.com/mail/u/0/?pli=1#inbox">nguyentienhung04042004gmail.com</a>
+        </div>
+
+        <div class="flex flex-row">
+            <box-icon name='instagram' type='logo' color='rgba(0,0,0,0.70)' ></box-icon>
+            <a target="_blank" class="w-[150px] text-gray-700 hover:text-[#009432]" href="https://www.instagram.com/holahuliba/">Nguyễn Tiến Hưng</a>
         </div>
     </div>
+</div>
 
-    <script>
-<!--        document.getElementById("gotoPage1").addEventListener("click", function() {-->
-<!--            window.location.href = "trangchu.html";-->
-<!--        });-->
-<!--        document.getElementById("gotoPage2").addEventListener("click", function() {-->
-<!--            window.location.href = "giohang.html";-->
-<!--        });-->
-<!--        document.getElementById("gotoPage3").addEventListener("click", function() {-->
-<!--            window.location.href = "lichsu.html";-->
-<!--        });-->
-<!--        document.getElementById("gotoPage4").addEventListener("click", function() {-->
-<!--            window.location.href = "thongtin.html";-->
-<!--        });-->
-    </script>
+<script>
+    <!--        document.getElementById("gotoPage1").addEventListener("click", function() {-->
+    <!--            window.location.href = "trangchu.html";-->
+    <!--        });-->
+    <!--        document.getElementById("gotoPage2").addEventListener("click", function() {-->
+    <!--            window.location.href = "giohang.html";-->
+    <!--        });-->
+    <!--        document.getElementById("gotoPage3").addEventListener("click", function() {-->
+    <!--            window.location.href = "lichsu.html";-->
+    <!--        });-->
+    <!--        document.getElementById("gotoPage4").addEventListener("click", function() {-->
+    <!--            window.location.href = "thongtin.html";-->
+    <!--        });-->
+</script>
 <div th:replace="~{fragments/chatbox :: chatbox}"></div>
 </body>
 </html>

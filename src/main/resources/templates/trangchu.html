@@ -124,7 +124,7 @@
                                             <a id="gotoPage2" class="cursor-pointer" href="/user/cart">Giỏ hàng</a>
                                             <a id="gotoPage3" class="cursor-pointer" href="/user/history">Lịch sử</a>
                                             <a id="gotoPage4" class="cursor-pointer" href="/user/about">Thông tin</a>
-                                            <a id="gotoPage5" class="cursor-pointer" href="/logout">Đăng xuất</a>
+                                            <a id="gotoPage5" class="cursor-pointer" href="/logout" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất không?')">Đăng xuất</a>
                                         </div>
                                     </div>
                                 </div>
@@ -287,9 +287,9 @@
 
                                                     <div class="overflow-hidden rounded-t-lg">
                                                         <img class="w-[210px] h-[210px]
-                            cursor-pointer object-cover
-                            transition-transform duration-300
-                            hover:scale-110"
+                                                                    cursor-pointer object-cover
+                                                                    transition-transform duration-300
+                                                                    hover:scale-110"
                                                              th:src="@{${product.imageUrl}}"
                                                              alt="Product image">
                                                     </div>
@@ -330,10 +330,10 @@
                                                            value="1">
 
                                                     <button class="bg-[#cc8e35] hover:bg-[#ffa801]
-                           w-[210px] h-[40px]
-                           font-medium text-lg text-center text-white
-                           rounded-b-lg absolute bottom-0
-                           cursor-pointer transition duration-300"
+                                                                   w-[210px] h-[40px]
+                                                                   font-medium text-lg text-center text-white
+                                                                   rounded-b-lg absolute bottom-0
+                                                                   cursor-pointer transition duration-300"
                                                             type="submit">
 
                                                         Thêm vào giỏ hàng
@@ -344,22 +344,55 @@
 
                                             </div>
                                         </div>
-
-
-
                                     </div>
-                                    <div class="pagination mt-4 text-lg font-medium">
-            <span th:if="${currentPage > 0}">
-                <a th:href="@{/user/home(page=${currentPage - 1}, size=${size})}">Previous</a>
-            </span>
+<!--                                    <div class="pagination mt-4 text-lg font-medium">-->
+<!--                                        <span th:if="${currentPage > 0}">-->
+<!--                                            <a th:href="@{/user/home(page=${currentPage - 1}, size=${size})}">Previous</a>-->
+<!--                                        </span>-->
+<!--                                                                    <span th:each="i : ${#numbers.sequence(0, totalPages-1)}">-->
+<!--                                            <a th:href="@{/user/home( page=${i}, size=${size})}"-->
+<!--                                               th:text="${i + 1}" th:classappend="${i == currentPage} ? 'active'"></a>-->
+<!--                                        </span>-->
+<!--                                                                    <span th:if="${currentPage < totalPages - 1}">-->
+<!--                                            <a th:href="@{/user/home( page=${currentPage + 1}, size=${size})}">Next</a>-->
+<!--                                        </span>-->
+<!--                                    </div>-->
+
+
+                                    <div class="pagination flex items-center justify-center gap-2 mt-6 text-base font-medium">
+
+                                        <!-- Previous -->
+                                        <span th:if="${currentPage > 0}">
+                                            <a th:href="@{/user/home(page=${currentPage - 1}, size=${size})}"
+                                               class="px-4 py-2 rounded-xl border border-gray-300 bg-white text-gray-700
+                                                      hover:bg-black hover:text-white transition duration-200 shadow-sm">
+                                                Previous
+                                            </a>
+                                        </span>
+
+                                        <!-- Page Number -->
                                         <span th:each="i : ${#numbers.sequence(0, totalPages-1)}">
-                <a th:href="@{/user/home( page=${i}, size=${size})}"
-                   th:text="${i + 1}" th:classappend="${i == currentPage} ? 'active'"></a>
-            </span>
+                                            <a th:href="@{/user/home(page=${i}, size=${size})}"
+                                               th:text="${i + 1}"
+                                               th:classappend="${i == currentPage}
+                                               ? 'bg-black text-white border-black'
+                                               : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'"
+                                               class="px-4 py-2 rounded-xl border transition duration-200 shadow-sm">
+                                            </a>
+                                        </span>
+
+                                        <!-- Next -->
                                         <span th:if="${currentPage < totalPages - 1}">
-                <a th:href="@{/user/home( page=${currentPage + 1}, size=${size})}">Next</a>
-            </span>
+                                            <a th:href="@{/user/home(page=${currentPage + 1}, size=${size})}"
+                                               class="px-4 py-2 rounded-xl border border-gray-300 bg-white text-gray-700
+                                                      hover:bg-black hover:text-white transition duration-200 shadow-sm">
+                                                Next
+                                            </a>
+                                        </span>
+
                                     </div>
+
+
                                     <!--        <button onclick="window.location.href='/user/home/products'"-->
                                     <!--                class="border border-[#01ac50] w-[150px] h-[50px] text-[#01ac50] text-xl font-normal rounded-lg cursor-pointer mt-8 absolute left-[50%] -translate-x-[50%]">-->
                                     <!--            Xem thêm-->
